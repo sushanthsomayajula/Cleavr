@@ -1,0 +1,90 @@
+[
+  {
+    "gene": "POLD1",
+    "tcga_kruskal_p_fdr_adjusted": 0.030981902874533368,
+    "tcga_subtype_significant_after_fdr": true,
+    "tcga_n": 115,
+    "metabric_kruskal_p": 6.967771462742559e-18,
+    "metabric_subtype_significant": true,
+    "metabric_n": 320,
+    "metabric_survival_logrank_p": 0.3828938035951973,
+    "replicated_in_both_cohorts": true
+  },
+  {
+    "gene": "RRM1",
+    "tcga_kruskal_p_fdr_adjusted": 0.04180891680081455,
+    "tcga_subtype_significant_after_fdr": true,
+    "tcga_n": 115,
+    "metabric_kruskal_p": 4.766665132893561e-15,
+    "metabric_subtype_significant": true,
+    "metabric_n": 320,
+    "metabric_survival_logrank_p": 0.2840409247719809,
+    "replicated_in_both_cohorts": true
+  },
+  {
+    "gene": "POLD2",
+    "tcga_kruskal_p_fdr_adjusted": 0.008601995660261373,
+    "tcga_subtype_significant_after_fdr": true,
+    "tcga_n": 115,
+    "metabric_kruskal_p": 1.654365892382247e-14,
+    "metabric_subtype_significant": true,
+    "metabric_n": 320,
+    "metabric_survival_logrank_p": 0.47293000446062583,
+    "replicated_in_both_cohorts": true
+  },
+  {
+    "gene": "TYMS",
+    "tcga_kruskal_p_fdr_adjusted": 0.008139867006137518,
+    "tcga_subtype_significant_after_fdr": true,
+    "tcga_n": 115,
+    "metabric_kruskal_p": 5.406487264205113e-14,
+    "metabric_subtype_significant": true,
+    "metabric_n": 320,
+    "metabric_survival_logrank_p": 0.7183283658078605,
+    "replicated_in_both_cohorts": true
+  },
+  {
+    "gene": "POLE",
+    "tcga_kruskal_p_fdr_adjusted": 0.027723569353631173,
+    "tcga_subtype_significant_after_fdr": true,
+    "tcga_n": 115,
+    "metabric_kruskal_p": 6.823250859872255e-14,
+    "metabric_subtype_significant": true,
+    "metabric_n": 320,
+    "metabric_survival_logrank_p": 0.9912047660708311,
+    "replicated_in_both_cohorts": true
+  },
+  {
+    "gene": "PRIM2",
+    "tcga_kruskal_p_fdr_adjusted": 0.008139867006137518,
+    "tcga_subtype_significant_after_fdr": true,
+    "tcga_n": 115,
+    "metabric_kruskal_p": 2.0169681153340786e-05,
+    "metabric_subtype_significant": true,
+    "metabric_n": 320,
+    "metabric_survival_logrank_p": 0.200542306752645,
+    "replicated_in_both_cohorts": true
+  },
+  {
+    "gene": "FTO",
+    "tcga_kruskal_p_fdr_adjusted": 0.030981902874533368,
+    "tcga_subtype_significant_after_fdr": true,
+    "tcga_n": 115,
+    "metabric_kruskal_p": 0.000674620281539557,
+    "metabric_subtype_significant": true,
+    "metabric_n": 320,
+    "metabric_survival_logrank_p": 0.4741851097686377,
+    "replicated_in_both_cohorts": true
+  },
+  {
+    "gene": "RRM2",
+    "tcga_kruskal_p_fdr_adjusted": 0.008139867006137518,
+    "tcga_subtype_significant_after_fdr": true,
+    "tcga_n": 115,
+    "metabric_kruskal_p": 0.23377742751888167,
+    "metabric_subtype_significant": false,
+    "metabric_n": 320,
+    "metabric_survival_logrank_p": 0.11890089403494923,
+    "replicated_in_both_cohorts": false
+  }
+]

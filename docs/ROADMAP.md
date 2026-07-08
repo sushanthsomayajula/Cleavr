@@ -8,7 +8,7 @@ Working notes on what turns Case Study 01 (one gene, one dataset) into an actual
 
 ## 2. Cross-cohort validation
 
-Right now every finding rests on one TCGA study (Firehose Legacy BRCA). The next credibility step is running the same pipeline against a second, independent cohort — METABRIC is the natural choice: also public via cBioPortal, large TNBC-relevant sample size, different sequencing platform. A finding that replicates across both TCGA and METABRIC is much stronger evidence than either alone. Needs: harmonizing clinical field names (survival status/time, receptor status fields differ between studies), and deciding how to handle the fact that METABRIC uses microarray, not RNA-seq (different expression units — z-score or rank-based comparison, not raw value comparison, across cohorts).
+**Done.** `code/fetch_metabric.py` pulls METABRIC clinical + expression data directly from the public cBioPortal REST API (320 TNBC patients by ER-/PR-/HER2-, all with expression data — nearly 3x the TCGA TNBC cohort of 115). `code/cross_cohort_validation.py` independently re-derives Lehmann subtype within METABRIC's own expression distribution (same marker-gene proxy, not reused from TCGA) and re-tests the 8 genes that were significant after FDR correction in the TCGA screen. Result: 7 of 8 replicated (significant in both cohorts, on two different platforms — RNA-seq V2 RSEM vs. Illumina microarray). RRM2 did not replicate (p=0.23 in METABRIC) despite being significant in TCGA, and is reported as such rather than dropped. FTO — the standout candidate from the original screen — replicated (METABRIC p=0.0007), and the direction of its subtype pattern (BL1 lowest) held in both cohorts, though the exact subtype ranking wasn't identical between cohorts. Output: `results/cross_cohort_results.json`.
 
 ## 3. A real candidate gene list
 
@@ -32,5 +32,6 @@ The current site is precomputed static HTML — fine for one gene, not for "look
 
 1. ~~Refactor `run_gnrhr_analysis.py` into a `gene -> results` function.~~ Done — see `code/biomarker_pipeline.py`.
 2. ~~Pick one more gene and run it through the refactored pipeline.~~ Done — AR, see `results/ar_analysis_results.json`.
-3. Pull METABRIC and get the two cohorts' clinical fields harmonized enough to run the same pipeline on both.
-4. Once a few more genes exist: build the FDR-corrected multi-gene comparison view.
+3. ~~Pull METABRIC and get the two cohorts' clinical fields harmonized enough to run the same pipeline on both.~~ Done — see `code/fetch_metabric.py` and `code/cross_cohort_validation.py`.
+4. ~~Once a few more genes exist: build the FDR-corrected multi-gene comparison view.~~ Done — see `code/screen_candidates.py`.
+5. Next: decide what (if anything) from the cross-cohort result is ready to publish on the site. FTO replicating across cohort + platform is the strongest single finding so far, but "strongest so far" isn't the same as "validated" — still no wet-lab confirmation.
