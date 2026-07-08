@@ -185,6 +185,13 @@
 
   abbr[title] { text-decoration: underline dotted; text-decoration-color: var(--text-faint); cursor: help; }
 
+  sup a { color: var(--accent-2); text-decoration: none; font-size: 11px; }
+  sup a:hover { text-decoration: underline; }
+  ol.ref-list { margin: 0; padding-left: 22px; color: var(--text-dim); font-size: 13px; }
+  ol.ref-list li { margin-bottom: 12px; padding-left: 4px; }
+  ol.ref-list li:target { color: var(--text); }
+  ol.ref-list em { color: var(--text); font-style: italic; }
+
   @media (max-width: 600px) {
     body { padding: 20px 16px 60px; font-size: 13.5px; }
     h1 { font-size: 18px; }
@@ -220,7 +227,8 @@
     <a href="#frame">04 Interpretation</a><span class="sep">/</span>
     <a href="#limits">05 Limitations</a><span class="sep">/</span>
     <a href="#context">06 Related tools</a><span class="sep">/</span>
-    <a href="#files">07 Data &amp; code</a>
+    <a href="#files">07 Data &amp; code</a><span class="sep">/</span>
+    <a href="#references">08 References</a>
   </nav>
 
   <div class="stats">
@@ -232,7 +240,7 @@
   <p><a href="explorer.html">&rarr; Open the interactive explorer</a> — select a subtype, inspect expression data and the GNRHR receptor structure in 3D.</p>
 
   <h2 id="why"><span class="idx">01</span>Rationale</h2>
-  <p>LHRH-conjugated nanoparticle constructs — including PEG-coated magnetite and triptorelin-conjugated gold nanoparticle formulations — are an active strategy for TNBC targeting, binding the LHRH/GnRH receptor (GNRHR) on the tumor cell surface. Published work on these constructs establishes the targeting mechanism but does not resolve whether receptor expression is uniform across TNBC's molecular subtypes. If expression varies meaningfully by subtype, that has direct implications for how consistently LHRH-nanoparticle constructs could target different TNBC tumors. This analysis checks that question directly against TCGA sequencing data.</p>
+  <p>LHRH-conjugated nanoparticle constructs — including PEG-coated magnetite and triptorelin-conjugated gold nanoparticle formulations — are an active strategy for TNBC targeting, binding the LHRH/GnRH receptor (GNRHR) on the tumor cell surface. This work is grounded in nanoparticle-targeting research from Dr. Jingjie Hu's lab (Assistant Professor, Mechanical and Aerospace Engineering, NC State University)<sup><a href="#ref1">1</a>,<a href="#ref2">2</a></sup>, which establishes the targeting mechanism but does not resolve whether receptor expression is uniform across TNBC's molecular subtypes. If expression varies meaningfully by subtype, that has direct implications for how consistently LHRH-nanoparticle constructs could target different TNBC tumors. This analysis checks that question directly against TCGA sequencing data.</p>
 
   <h2 id="method"><span class="idx">02</span>Method</h2>
   <p>
@@ -282,6 +290,12 @@
     <code>docs/UNDERSTANDING_THE_FINDINGS.txt</code> — plain-language walkthrough of every concept and every number, no statistics background assumed<br>
     <code>data/</code> — where the raw TCGA data lives (see README)
   </p>
+
+  <h2 id="references"><span class="idx">08</span>References</h2>
+  <ol class="ref-list">
+    <li id="ref1">Hu J, Obayemi JD, Malatesta K, Košmrlj A, Soboyejo WO. Enhanced cellular uptake of LHRH-conjugated PEG-coated magnetite nanoparticles for specific targeting of triple negative breast cancer cells. <em>Mater Sci Eng C Mater Biol Appl</em>. 2018;88:32&ndash;45. <a href="https://doi.org/10.1016/j.msec.2018.02.017" target="_blank" rel="noopener">doi:10.1016/j.msec.2018.02.017</a></li>
+    <li id="ref2">Uzonwanne VO, Navabi A, Obayemi JD, Hu J, Salifu AA, Ghahremani S, Ndahiro N, Rahbar N, Soboyejo W. Triptorelin-functionalized PEG-coated biosynthesized gold nanoparticles: effects of receptor-ligand interactions on adhesion to triple negative breast cancer cells. <em>Biomater Adv</em>. 2022;136:212801. <a href="https://doi.org/10.1016/j.bioadv.2022.212801" target="_blank" rel="noopener">doi:10.1016/j.bioadv.2022.212801</a></li>
+  </ol>
 
   <footer>Data: TCGA Breast Invasive Carcinoma (Firehose Legacy), retrieved via cBioPortal. All figures independently re-derived from raw source files. Static page — no server required. &middot; <a href="index.html">&larr; Back to Cleavr</a></footer>
 
