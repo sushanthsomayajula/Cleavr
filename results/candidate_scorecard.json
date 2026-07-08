@@ -1,0 +1,102 @@
+[
+  {
+    "gene": "GNRHR",
+    "statistical_signal": {
+      "subtype_kruskal_p": 0.7110576779028315,
+      "subtype_significant": false,
+      "survival_logrank_p": 0.9834066531465471,
+      "survival_significant": false,
+      "n_samples": 115
+    },
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL1855",
+      "chembl_target_name": "Gonadotropin-releasing hormone receptor",
+      "n_potent_ligands": 2575,
+      "n_known_mechanisms": 10,
+      "known_action_types": [
+        "AGONIST",
+        "ANTAGONIST"
+      ],
+      "example_molecule_chembl_ids": [
+        "CHEMBL2103735",
+        "CHEMBL1200671",
+        "CHEMBL1200511",
+        "CHEMBL1252",
+        "CHEMBL2028987"
+      ]
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 4,
+      "category": "under-explored in TNBC",
+      "query_used": "GNRHR[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    }
+  },
+  {
+    "gene": "AR",
+    "statistical_signal": {
+      "subtype_kruskal_p": 1.8670500968626546e-09,
+      "subtype_significant": true,
+      "survival_logrank_p": 0.8813810909722297,
+      "survival_significant": false,
+      "n_samples": 115
+    },
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL1871",
+      "chembl_target_name": "Androgen receptor",
+      "n_potent_ligands": 4178,
+      "n_known_mechanisms": 10,
+      "known_action_types": [
+        "AGONIST",
+        "ANTAGONIST"
+      ],
+      "example_molecule_chembl_ids": [
+        "CHEMBL1200585",
+        "CHEMBL806",
+        "CHEMBL1274",
+        "CHEMBL1201048",
+        "CHEMBL409"
+      ]
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 466,
+      "category": "well-studied in TNBC",
+      "query_used": "AR[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    }
+  },
+  {
+    "gene": "CXCR4",
+    "statistical_signal": {
+      "subtype_kruskal_p": 0.6721837685350691,
+      "subtype_significant": false,
+      "survival_logrank_p": 0.27769199785030935,
+      "survival_significant": false,
+      "n_samples": 115
+    },
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL2107",
+      "chembl_target_name": "C-X-C chemokine receptor type 4",
+      "n_potent_ligands": 1122,
+      "n_known_mechanisms": 8,
+      "known_action_types": [
+        "ANTAGONIST",
+        "INHIBITOR",
+        "PARTIAL AGONIST"
+      ],
+      "example_molecule_chembl_ids": [
+        "CHEMBL18442",
+        "CHEMBL3545330",
+        "CHEMBL3545224",
+        "CHEMBL5095030",
+        "CHEMBL4802129"
+      ]
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 116,
+      "category": "well-studied in TNBC",
+      "query_used": "CXCR4[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    }
+  }
+]
