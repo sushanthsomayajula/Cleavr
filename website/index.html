@@ -305,6 +305,7 @@
   <div class="section-eyebrow"><span class="idx">04</span>Updates</div>
   <h2 class="section-headline">Milestones, as they happen.</h2>
   <ul class="updates">
+    <li><span class="date">2026-07-08</span><span class="desc"><strong>Screening pipeline shipped.</strong> The GNRHR analysis is now a reusable, gene-agnostic pipeline: candidates sourced systematically (Open Targets), tested for subtype- and survival-association with Benjamini&ndash;Hochberg correction applied across every gene tested together, and cross-referenced against known druggability (ChEMBL) and existing TNBC-specific literature coverage (PubMed). Run against a 15-gene candidate set as a first test &mdash; results are internal for now, pending the same cross-cohort verification Case Study 01 went through before anything gets published as a finding.</span></li>
     <li><span class="date">2026-07-08</span><span class="desc"><strong>Cleavr goes public.</strong> Site live on GitHub Pages — full methodology, code, and data open for review.</span></li>
     <li><span class="date">2026-07-07</span><span class="desc"><strong>Case Study 01 published.</strong> GNRHR expression tested across TNBC molecular subtypes using TCGA data (n=116), independently re-derived and literature-checked.</span></li>
   </ul>
@@ -312,9 +313,8 @@
   <div class="section-eyebrow"><span class="idx">05</span>Roadmap</div>
   <h2 class="section-headline">From one gene to a real discovery pipeline.</h2>
   <ul class="roadmap">
-    <li><strong>Parameterized pipeline</strong> — test any candidate gene against TNBC subtype data, not just GNRHR.</li>
     <li><strong>Cross-cohort validation</strong> — check findings against a second dataset (METABRIC) so results don't rest on one cohort.</li>
-    <li><strong>Literature cross-referencing built in</strong> — automate the primary-source verification step instead of doing it by hand per gene.</li>
+    <li><strong>Literature cross-referencing, deeper</strong> — current pipeline checks how much TNBC-specific coverage a gene already has; next step is surfacing the actual relevant papers per candidate, not just a count.</li>
     <li><strong>Queryable biomarker index</strong> — one place to check any gene's subtype-level expression and survival association, not a one-off write-up per gene.</li>
   </ul>
 
