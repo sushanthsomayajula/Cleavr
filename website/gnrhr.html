@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cleavr — GNRHR expression across TNBC subtypes</title>
+<title>Cleavr: GNRHR expression across TNBC subtypes</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
   :root {
@@ -209,13 +209,13 @@
     <a class="brand" href="index.html"><span class="cursor">&gt;</span> CLEAVR</a>
     <span class="links">
       <a href="index.html">Home</a>
-      <a href="gnrhr.html" class="current">GNRHR Study</a>
+      <a href="studies.html" class="current">Studies</a>
       <a href="explorer.html">Explorer</a>
       <a href="mailto:sushanthsomayajula@gmail.com" class="btn-ghost">Get in touch</a>
     </span>
   </div>
 
-  <div class="breadcrumb"><a href="index.html">Cleavr</a> / Case Study 01</div>
+  <div class="breadcrumb"><a href="index.html">Cleavr</a> / <a href="studies.html">Studies</a> / Case Study 01</div>
   <h1>GNRHR expression across TNBC molecular subtypes</h1>
   <div class="subtitle">Public exploratory analysis · TCGA Breast Invasive Carcinoma (Firehose Legacy)</div>
 
@@ -238,10 +238,10 @@
     <div class="stat-card"><div class="stat-value">p = 0.98</div><div class="stat-label">survival, log-rank</div></div>
   </div>
 
-  <p><a href="explorer.html">&rarr; Open the interactive explorer</a> — select a subtype, inspect expression data and the GNRHR receptor structure in 3D.</p>
+  <p><a href="explorer.html">&rarr; Open the interactive explorer</a>: select a subtype, inspect expression data and the GNRHR receptor structure in 3D.</p>
 
   <h2 id="why"><span class="idx">01</span>Rationale</h2>
-  <p>LHRH-conjugated nanoparticle constructs — including PEG-coated magnetite and triptorelin-conjugated gold nanoparticle formulations — are an active strategy for TNBC targeting, binding the LHRH/GnRH receptor (GNRHR) on the tumor cell surface. This work is grounded in nanoparticle-targeting research from Dr. Jingjie Hu's lab (Assistant Professor, Mechanical and Aerospace Engineering, NC State University)<sup><a href="#ref1">1</a>,<a href="#ref2">2</a></sup>, which establishes the targeting mechanism but does not resolve whether receptor expression is uniform across TNBC's molecular subtypes. If expression varies meaningfully by subtype, that has direct implications for how consistently LHRH-nanoparticle constructs could target different TNBC tumors. This analysis checks that question directly against TCGA sequencing data.</p>
+  <p>LHRH-conjugated nanoparticle constructs, including PEG-coated magnetite and triptorelin-conjugated gold nanoparticle formulations, are an active strategy for TNBC targeting, binding the LHRH/GnRH receptor (GNRHR) on the tumor cell surface. This work is grounded in nanoparticle-targeting research from Dr. Jingjie Hu's lab (Assistant Professor, Mechanical and Aerospace Engineering, NC State University)<sup><a href="#ref1">1</a>,<a href="#ref2">2</a></sup>, which establishes the targeting mechanism but does not resolve whether receptor expression is uniform across TNBC's molecular subtypes. If expression varies meaningfully by subtype, that has direct implications for how consistently LHRH-nanoparticle constructs could target different TNBC tumors. This analysis checks that question directly against TCGA sequencing data.</p>
 
   <h2 id="method"><span class="idx">02</span>Method</h2>
   <p>
@@ -249,7 +249,7 @@
     <span class="tag">n = 116 TNBC patients</span>
     <span class="tag">cBioPortal</span>
   </p>
-  <p>TNBC was defined as ER-negative, PR-negative, HER2-negative by <abbr title="Immunohistochemistry — a lab test that stains tumor tissue to detect specific proteins">IHC</abbr> (116 patients; 115 had usable RNA-seq expression data). This TCGA study does not ship Lehmann subtype calls, so subtype (BL1, BL2, M, LAR) was approximated with a marker-gene z-score proxy — CCNE1/CDC6 for BL1, EGFR/MET for BL2, VIM/ZEB1 for M, AR/FOXA1 for LAR — assigning each patient to their highest-scoring pair. GNRHR (the receptor gene, distinct from GNRH1, the ligand gene) expression was compared across subtypes with a <abbr title="A statistical test that compares ranks across 3+ groups without assuming a normal distribution — better suited to skewed gene-expression data than a plain average comparison">Kruskal-Wallis test</abbr> and pairwise <abbr title="The two-group version of the same rank-based test">Mann-Whitney tests</abbr>, then cross-checked against overall survival with a median-split log-rank test.</p>
+  <p>TNBC was defined as ER-negative, PR-negative, HER2-negative by <abbr title="Immunohistochemistry: a lab test that stains tumor tissue to detect specific proteins">IHC</abbr> (116 patients; 115 had usable RNA-seq expression data). This TCGA study does not ship Lehmann subtype calls, so subtype (BL1, BL2, M, LAR) was approximated with a marker-gene z-score proxy: CCNE1/CDC6 for BL1, EGFR/MET for BL2, VIM/ZEB1 for M, AR/FOXA1 for LAR, assigning each patient to their highest-scoring pair. GNRHR (the receptor gene, distinct from GNRH1, the ligand gene) expression was compared across subtypes with a <abbr title="A statistical test that compares ranks across 3+ groups without assuming a normal distribution, better suited to skewed gene-expression data than a plain average comparison">Kruskal-Wallis test</abbr> and pairwise <abbr title="The two-group version of the same rank-based test">Mann-Whitney tests</abbr>, then cross-checked against overall survival with a median-split log-rank test.</p>
 
   <h2 id="findings"><span class="idx">03</span>Findings</h2>
 
@@ -263,7 +263,7 @@
   </figure>
 
   <div class="callout">
-    <strong>GNRHR expression does not predict overall survival</strong> in this cohort. Splitting patients into GNRHR-high (n=58) and GNRHR-low (n=57) groups shows no difference in survival (log-rank p = 0.98). Only 18 of 115 patients (15.7%) had a recorded death, so this comparison is underpowered — treat it as inconclusive rather than a confident negative.
+    <strong>GNRHR expression does not predict overall survival</strong> in this cohort. Splitting patients into GNRHR-high (n=58) and GNRHR-low (n=57) groups shows no difference in survival (log-rank p = 0.98). Only 18 of 115 patients (15.7%) had a recorded death, so this comparison is underpowered: treat it as inconclusive rather than a confident negative.
   </div>
 
   <figure>
@@ -275,21 +275,21 @@
   <p>This is a null result: GNRHR expression does not differ meaningfully across the four modeled subtypes, and does not predict survival in this cohort. Read as a targeting-relevant signal, receptor transcript availability does not appear to be a factor that would systematically favor or disadvantage LHRH-nanoparticle targeting in any one TNBC subtype. The result does not resolve a separate, mechanistic question: whether receptor trafficking, internalization, or downstream signaling vary by subtype independent of transcript level. Transcriptomic data alone cannot answer that.</p>
 
   <h2 id="limits"><span class="idx">05</span>Limitations</h2>
-  <p>Subtype assignment here is a two-marker-gene proxy, not the full Lehmann PAM50-based classifier — TCGA's Firehose Legacy BRCA study doesn't include Lehmann or PAM50 calls directly. The TNBC cohort is defined by IHC receptor status only. The BL2 (n=14) and LAR (n=15) groups are small, which limits statistical power to detect moderate effect sizes. The six pairwise subtype comparisons are uncorrected for multiple testing; after Bonferroni correction, every pairwise p-value is 1.0, so there is no hidden pairwise signal being masked by the non-significant overall test.</p>
+  <p>Subtype assignment here is a two-marker-gene proxy, not the full Lehmann PAM50-based classifier: TCGA's Firehose Legacy BRCA study doesn't include Lehmann or PAM50 calls directly. The TNBC cohort is defined by IHC receptor status only. The BL2 (n=14) and LAR (n=15) groups are small, which limits statistical power to detect moderate effect sizes. The six pairwise subtype comparisons are uncorrected for multiple testing; after Bonferroni correction, every pairwise p-value is 1.0, so there is no hidden pairwise signal being masked by the non-significant overall test.</p>
 
   <h2 id="context"><span class="idx">06</span>Related tools</h2>
-  <p>Cleavr does not replace general-purpose portals such as <a href="https://www.cbioportal.org/" target="_blank" rel="noopener">cBioPortal</a>, <a href="http://gepia2.cancer-pku.cn/" target="_blank" rel="noopener">GEPIA2</a>, <a href="https://ualcan.path.uab.edu/" target="_blank" rel="noopener">UALCAN</a>, the <a href="https://gtexportal.org/" target="_blank" rel="noopener">GTEx Portal</a>, or <a href="https://xenabrowser.net/" target="_blank" rel="noopener">UCSC Xena</a>. It is a narrow, single-question companion analysis — one gene, one cohort, one hypothesis — with every number independently re-derived from raw source files and cross-checked against the literature. The general portals are the right place to explore broadly; this case study is scoped to answer this one question end to end.</p>
+  <p>Cleavr does not replace general-purpose portals such as <a href="https://www.cbioportal.org/" target="_blank" rel="noopener">cBioPortal</a>, <a href="http://gepia2.cancer-pku.cn/" target="_blank" rel="noopener">GEPIA2</a>, <a href="https://ualcan.path.uab.edu/" target="_blank" rel="noopener">UALCAN</a>, the <a href="https://gtexportal.org/" target="_blank" rel="noopener">GTEx Portal</a>, or <a href="https://xenabrowser.net/" target="_blank" rel="noopener">UCSC Xena</a>. It is a narrow, single-question companion analysis (one gene, one cohort, one hypothesis) with every number independently re-derived from raw source files and cross-checked against the literature. The general portals are the right place to explore broadly; this case study is scoped to answer this one question end to end.</p>
 
   <h2 id="files"><span class="idx">07</span>Data &amp; code</h2>
-  <p>Paths below are relative to the project root (one level up from this page — see <code>../README.md</code>):</p>
+  <p>Paths below are relative to the project root (one level up from this page, see <code>../README.md</code>):</p>
   <p>
-    <code>code/tnbc-analysis.ipynb</code> — full analysis notebook (open in Jupyter)<br>
-    <code>results/gnrhr/gnrhr_tnbc_final.csv</code> — per-patient data table<br>
-    <code>results/gnrhr/gnrhr_analysis_results.json</code> — all stats in raw form<br>
-    <code>code/biomarker_pipeline.py</code> — script that reproduces this (or any other gene) from scratch<br>
-    <code>docs/</code> — extended write-ups<br>
-    <code>docs/UNDERSTANDING_THE_FINDINGS.txt</code> — plain-language walkthrough of every concept and every number, no statistics background assumed<br>
-    <code>brca_tcga/</code> — where the raw TCGA data lives (see README)
+    <code>code/tnbc-analysis.ipynb</code>: full analysis notebook (open in Jupyter)<br>
+    <code>results/gnrhr/gnrhr_tnbc_final.csv</code>: per-patient data table<br>
+    <code>results/gnrhr/gnrhr_analysis_results.json</code>: all stats in raw form<br>
+    <code>code/biomarker_pipeline.py</code>: script that reproduces this (or any other gene) from scratch<br>
+    <code>docs/</code>: extended write-ups<br>
+    <code>docs/UNDERSTANDING_THE_FINDINGS.txt</code>: plain-language walkthrough of every concept and every number, no statistics background assumed<br>
+    <code>brca_tcga/</code>: where the raw TCGA data lives (see README)
   </p>
 
   <h2 id="references"><span class="idx">08</span>References</h2>
@@ -298,7 +298,7 @@
     <li id="ref2">Uzonwanne VO, Navabi A, Obayemi JD, Hu J, Salifu AA, Ghahremani S, Ndahiro N, Rahbar N, Soboyejo W. Triptorelin-functionalized PEG-coated biosynthesized gold nanoparticles: effects of receptor-ligand interactions on adhesion to triple negative breast cancer cells. <em>Biomater Adv</em>. 2022;136:212801. <a href="https://doi.org/10.1016/j.bioadv.2022.212801" target="_blank" rel="noopener">doi:10.1016/j.bioadv.2022.212801</a></li>
   </ol>
 
-  <footer>Data: TCGA Breast Invasive Carcinoma (Firehose Legacy), retrieved via cBioPortal. All figures independently re-derived from raw source files. Static page — no server required. &middot; <a href="index.html">&larr; Back to Cleavr</a></footer>
+  <footer>Data: TCGA Breast Invasive Carcinoma (Firehose Legacy), retrieved via cBioPortal. All figures independently re-derived from raw source files. Static page, no server required. &middot; <a href="index.html">&larr; Back to Cleavr</a></footer>
 
 </body>
 </html>

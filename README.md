@@ -6,7 +6,7 @@ Systematic biomarker discovery for triple-negative breast cancer (TNBC), subtype
 
 Cleavr tests candidate TNBC biomarkers against public, patient-level sequencing data, broken out by molecular subtype, and cross-checks every claim against the primary literature before publishing it. Every number is independently re-derived from raw source files in a second pass. Null results are reported as directly as positive ones.
 
-This repo currently holds **Case Study 01**: does GNRHR (the LHRH/GnRH receptor — the target of an active TNBC nanoparticle-targeting strategy) express differently across TNBC's molecular subtypes? Result: no statistically significant difference (Kruskal-Wallis p = 0.71), and no relationship to survival (log-rank p = 0.98) in this cohort (n = 116).
+This repo currently holds two studies. **Case Study 01** asks whether GNRHR (the LHRH/GnRH receptor, the target of an active TNBC nanoparticle-targeting strategy) expresses differently across TNBC's molecular subtypes: no statistically significant difference (Kruskal-Wallis p = 0.71), and no relationship to survival (log-rank p = 0.98) in this cohort (n = 116). **Case Study 02** is a systematic 15-gene screen with FDR correction, cross-validated against a second cohort (METABRIC): 7 of 8 FDR-significant genes replicated. See `website/studies.html` for both.
 
 ## Structure
 
@@ -16,6 +16,7 @@ Cleavr/
 ├── index.html                  <- redirects to website/index.html (GitHub Pages entry point)
 ├── website/
 │   ├── index.html               <- home / project pitch
+│   ├── studies.html              <- index of every case study and screen
 │   ├── gnrhr.html                <- Case Study 01: full write-up + figures
 │   ├── explorer.html             <- interactive tool: pick a subtype, see expression data + a live 3D receptor structure
 │   └── README.md                 <- short note about this subfolder
@@ -44,30 +45,30 @@ Cleavr/
 └── brca_tcga/                    <- gitignored; full raw TCGA download (~1.3 GB), not pushed
 ```
 
-The large raw cohort data (`brca_tcga/`, ~1.3 GB, and `brca_metabric/`) is intentionally excluded from this repo (see `.gitignore`) — it's re-downloadable from cBioPortal and doesn't belong in git. `code/biomarker_pipeline.py` and `code/tnbc-analysis.ipynb` expect `../brca_tcga` to exist locally if you want to reproduce the analysis from scratch:
+The large raw cohort data (`brca_tcga/`, ~1.3 GB, and `brca_metabric/`) is intentionally excluded from this repo (see `.gitignore`): it's re-downloadable from cBioPortal and doesn't belong in git. `code/biomarker_pipeline.py` and `code/tnbc-analysis.ipynb` expect `../brca_tcga` to exist locally if you want to reproduce the analysis from scratch:
 
 ```
 cd code
 python3 biomarker_pipeline.py GNRHR AR
 ```
 
-Pass any gene symbol(s) present in the expression matrix — the cohort and subtype assignment are built once and reused, only the target gene changes.
+Pass any gene symbol(s) present in the expression matrix; the cohort and subtype assignment are built once and reused, only the target gene changes.
 
 ## Methodology notes (see `docs/` for the full write-up)
 
 - TNBC cohort (n=116) = ER-negative, PR-negative, HER2-negative by IHC. 115 had usable RNA-seq data.
-- Subtype (BL1/BL2/M/LAR) is a **marker-gene proxy**, not the validated Lehmann classifier — this TCGA study doesn't ship real subtype calls.
+- Subtype (BL1/BL2/M/LAR) is a **marker-gene proxy**, not the validated Lehmann classifier: this TCGA study doesn't ship real subtype calls.
 - Kruskal-Wallis across subtypes: p = 0.71 (not significant). Pairwise comparisons remain non-significant even after Bonferroni correction (all p = 1.0).
-- Survival analysis (log-rank p = 0.98) is based on only 18 deaths out of 115 patients (15.7% event rate) — underpowered, treat as inconclusive rather than a confident null.
-- All numbers above were independently re-derived from the raw TCGA files in a second pass and cross-checked against the saved results — they match exactly.
+- Survival analysis (log-rank p = 0.98) is based on only 18 deaths out of 115 patients (15.7% event rate), underpowered, treat as inconclusive rather than a confident null.
+- All numbers above were independently re-derived from the raw TCGA files in a second pass and cross-checked against the saved results; they match exactly.
 
 ## Roadmap
 
-**Done:** parameterized pipeline (`code/biomarker_pipeline.py`, any gene, not just GNRHR); systematic candidate sourcing from Open Targets (`code/source_candidates.py`); batch screening with Benjamini–Hochberg FDR correction across all genes tested together (`code/screen_candidates.py`); druggability (ChEMBL) and TNBC-specific literature-gap (PubMed) scoring per candidate (`code/candidate_scoring.py`). See `docs/ROADMAP.md` for the full writeup, including honest caveats on the first 15-gene screen.
+**Done:** parameterized pipeline (`code/biomarker_pipeline.py`, any gene, not just GNRHR); systematic candidate sourcing from Open Targets (`code/source_candidates.py`); batch screening with Benjamini-Hochberg FDR correction across all genes tested together (`code/screen_candidates.py`); druggability (ChEMBL) and TNBC-specific literature-gap (PubMed) scoring per candidate (`code/candidate_scoring.py`); cross-cohort validation against METABRIC (`code/fetch_metabric.py`, `code/cross_cohort_validation.py`), 7 of 8 FDR-significant genes replicated. See `docs/ROADMAP.md` for the full writeup, including honest caveats on the screen and validation.
 
 **Still open:**
-- Cross-cohort validation against a second dataset (METABRIC) so results don't rest on one cohort.
-- Literature cross-referencing, deeper — surface the actual relevant papers per candidate, not just a count.
+- Wet-lab validation of the top candidate (FTO) at the protein level via flow cytometry.
+- Literature cross-referencing, deeper: surface the actual relevant papers per candidate, not just a count.
 - A queryable biomarker index across genes and subtypes.
 
 ## Related public tools
@@ -76,8 +77,8 @@ Cleavr doesn't try to replace general-purpose portals like [cBioPortal](https://
 
 ## License
 
-No license yet — code and data here are visible for reference, but not licensed for reuse. Open to revisiting this as the project matures.
+No license yet: code and data here are visible for reference, but not licensed for reuse. Open to revisiting this as the project matures.
 
 ## Contact
 
-Sushanth Somayajula — [sushanthsomayajula@gmail.com](mailto:sushanthsomayajula@gmail.com)
+Sushanth Somayajula: [sushanthsomayajula@gmail.com](mailto:sushanthsomayajula@gmail.com)

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cleavr — GNRHR Explorer</title>
+<title>Cleavr: GNRHR Explorer</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.0.4/3Dmol-min.js"></script>
 <style>
@@ -176,15 +176,15 @@
     <a class="brand" href="index.html"><span class="cursor">&gt;</span> CLEAVR</a>
     <span class="links">
       <a href="index.html">Home</a>
-      <a href="gnrhr.html">GNRHR Study</a>
+      <a href="studies.html">Studies</a>
       <a href="explorer.html" class="current">Explorer</a>
       <a href="mailto:sushanthsomayajula@gmail.com" class="btn-ghost">Get in touch</a>
     </span>
   </div>
 
   <h1>GNRHR Explorer</h1>
-  <div class="subtitle">Select a TNBC subtype — expression data, receptor structure, and survival, cross-referenced</div>
-  <p class="lede">This tool walks through one question: does GNRHR — the receptor LHRH-conjugated nanoparticle constructs are designed to bind — show similar expression levels across TNBC's molecular subtypes? Select a subtype below; each panel updates with that subtype's data. Unfamiliar terms are underlined — hover for a definition. For a full walkthrough, see the <a href="../docs/UNDERSTANDING_THE_FINDINGS.txt">plain-language reference</a>.</p>
+  <div class="subtitle">Select a TNBC subtype: expression data, receptor structure, and survival, cross-referenced</div>
+  <p class="lede">This tool walks through one question: does GNRHR, the receptor LHRH-conjugated nanoparticle constructs are designed to bind, show similar expression levels across TNBC's molecular subtypes? Select a subtype below; each panel updates with that subtype's data. Unfamiliar terms are underlined, hover for a definition. For a full walkthrough, see the <a href="../docs/UNDERSTANDING_THE_FINDINGS.txt">plain-language reference</a>.</p>
 
   <div class="panel">
     <h2><span class="idx">01</span>Select a subtype</h2>
@@ -195,7 +195,7 @@
     <h2><span class="idx">02</span>GNRHR expression in this subtype</h2>
     <div class="stats-row" id="statsRow"></div>
     <svg id="stripplot"></svg>
-    <div class="plot-note">Each dot is one patient's GNRHR expression (RNA-seq, <abbr title="RNA-Seq by Expectation-Maximization — an algorithm that estimates how much a gene is being transcribed from sequencing reads. Higher value = more of the gene's message being produced.">RSEM</abbr> units). Selected subtype highlighted; all 115 patients shown for context.</div>
+    <div class="plot-note">Each dot is one patient's GNRHR expression (RNA-seq, <abbr title="RNA-Seq by Expectation-Maximization: an algorithm that estimates how much a gene is being transcribed from sequencing reads. Higher value = more of the gene's message being produced.">RSEM</abbr> units). Selected subtype highlighted; all 115 patients shown for context.</div>
     <div class="callout" id="compareNote"></div>
   </div>
 
@@ -207,10 +207,10 @@
         <div id="viewerStatus" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#666; font-size:12px; pointer-events:none; text-align:center; padding:0 20px;">Loading structure from rcsb.org&hellip;</div>
       </div>
       <div class="viewer-info">
-        <p><strong>This structure does not change between subtypes.</strong> It is the same receptor protein regardless of which subtype is selected above — what changes is how much of it that subtype's cells make (the numbers in panel 02), not what it looks like.</p>
+        <p><strong>This structure does not change between subtypes.</strong> It is the same receptor protein regardless of which subtype is selected above; what changes is how much of it that subtype's cells make (the numbers in panel 02), not what it looks like.</p>
         <p>This is <strong>PDB entry 7BR3</strong>, the solved crystal structure of the human GNRHR, published in <em>Nature Communications</em> (Yan et al., 2020). Yellow spheres = <strong>elagolix</strong>, a small-molecule antagonist bound in the binding pocket.</p>
         <div class="callout">
-          Caveats, per the PDB file's own DBREF records: (1) elagolix is a small-molecule <em>antagonist</em>, not a peptide agonist such as triptorelin — the molecule LHRH-conjugated nanoparticle constructs use. No structure of GNRHR bound to a peptide agonist has been solved; these are substantially harder to crystallize. (2) This is an engineered fusion construct: PDB residues 1&ndash;242 and 257&ndash;328 (<span style="color:#2dd4bf; font-weight:600;">teal</span> below) are human GNRHR (UniProt P30968). PDB residues 1001&ndash;1196 (<span style="color:#9aa0a6; font-weight:600;">gray</span> below) are a bacterial (<em>Pyrococcus abyssi</em>) glycogen synthase domain, inserted to stabilize the receptor for crystallization — a standard GPCR crystallography technique, not part of the native receptor.
+          Caveats, per the PDB file's own DBREF records: (1) elagolix is a small-molecule <em>antagonist</em>, not a peptide agonist such as triptorelin, the molecule LHRH-conjugated nanoparticle constructs use. No structure of GNRHR bound to a peptide agonist has been solved; these are substantially harder to crystallize. (2) This is an engineered fusion construct: PDB residues 1&ndash;242 and 257&ndash;328 (<span style="color:#2dd4bf; font-weight:600;">teal</span> below) are human GNRHR (UniProt P30968). PDB residues 1001&ndash;1196 (<span style="color:#9aa0a6; font-weight:600;">gray</span> below) are a bacterial (<em>Pyrococcus abyssi</em>) glycogen synthase domain, inserted to stabilize the receptor for crystallization, a standard GPCR crystallography technique, not part of the native receptor.
         </div>
         <div class="legend">
           <span><span class="swatch" style="background:#2dd4bf"></span>GNRHR</span>
@@ -227,9 +227,9 @@
       <img src="../results/gnrhr/gnrhr_survival_km.png" alt="Kaplan-Meier survival curves, GNRHR-high vs GNRHR-low" style="max-width:480px; width:100%; border-radius:4px; border:1px solid var(--border-bright); background:#fff;">
       <div class="viewer-info">
         <p>Patients were split into GNRHR-high (n=58) and GNRHR-low (n=57) groups at the median, independent of subtype, and compared on overall survival.</p>
-        <p><strong>No detectable difference</strong> (log-rank p=0.98) — the two curves sit almost exactly on top of each other.</p>
+        <p><strong>No detectable difference</strong> (log-rank p=0.98): the two curves sit almost exactly on top of each other.</p>
         <div class="callout">
-          Caveat: only <strong>18 of 115 patients</strong> (15.7%) had a recorded death. That is a small number of events to detect anything but a very large effect — this result is <strong>inconclusive</strong>, not evidence that GNRHR has no relationship to survival.
+          Caveat: only <strong>18 of 115 patients</strong> (15.7%) had a recorded death. That is a small number of events to detect anything but a very large effect: this result is <strong>inconclusive</strong>, not evidence that GNRHR has no relationship to survival.
         </div>
       </div>
     </div>
@@ -277,7 +277,7 @@ function render() {
   const rank = medians.findIndex(m => m[0] === current) + 1;
   document.getElementById("compareNote").innerHTML =
     `${subtypeInfo[current].name} (${current}) ranks <strong>#${rank} of 4</strong> subtypes by median GNRHR expression. ` +
-    `The overall difference across all four subtypes is <strong>not statistically significant</strong> (Kruskal-Wallis p=0.71) &mdash; ` +
+    `The overall difference across all four subtypes is <strong>not statistically significant</strong> (Kruskal-Wallis p=0.71); ` +
     `this ranking is descriptive, not evidence of a real biological difference.`;
 
   drawStrip();
@@ -341,7 +341,7 @@ function drawStrip() {
 render();
 window.addEventListener("resize", drawStrip);
 
-// 3Dmol viewer — fetches PDB 7BR3 live from RCSB
+// 3Dmol viewer: fetches PDB 7BR3 live from RCSB
 // Residue ranges below come straight from 7BR3's own DBREF records:
 //   PDB resi 1-242 and 257-328   = human GNRHR (UniProt P30968)
 //   PDB resi 1001-1196           = bacterial GlgA glycogen synthase fusion domain (not GNRHR)
@@ -351,7 +351,7 @@ let viewerLoaded = false;
 
 const loadTimeout = setTimeout(() => {
   if (!viewerLoaded) {
-    viewerStatus.innerHTML = "Couldn't load the structure &mdash; this needs an internet connection to fetch live from rcsb.org. Check your connection and reload the page.";
+    viewerStatus.innerHTML = "Couldn't load the structure: this needs an internet connection to fetch live from rcsb.org. Check your connection and reload the page.";
   }
 }, 10000);
 
