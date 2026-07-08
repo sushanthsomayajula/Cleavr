@@ -25,63 +25,124 @@
     font-family: var(--mono);
     max-width: 860px;
     margin: 0 auto;
-    padding: 32px 24px 100px;
+    padding: 32px 24px 0;
     color: var(--text);
     line-height: 1.65;
     background: var(--bg);
     font-size: 14px;
   }
-  h1 { font-size: 26px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; }
-  .subtitle { color: var(--text-dim); font-size: 14px; margin-bottom: 18px; }
-  h2 {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-dim);
-    margin-top: 48px;
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  h2 .idx { color: var(--accent); margin-right: 8px; }
-  h3 { font-size: 14px; font-weight: 600; color: var(--text); margin: 0 0 6px; }
-  p { font-size: 14px; margin: 0 0 14px; color: var(--text); }
   a { color: var(--accent-2); }
   a:hover { color: #6ee7de; }
-  ul.roadmap { list-style: none; margin: 0; padding: 0; }
-  ul.roadmap li {
-    padding: 10px 0 10px 22px;
+  p { font-size: 14px; margin: 0 0 14px; color: var(--text); }
+
+  /* nav */
+  .sitenav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    margin-bottom: 20px;
     border-bottom: 1px solid var(--border);
-    position: relative;
-    font-size: 13.5px;
-    color: var(--text-dim);
-  }
-  ul.roadmap li:last-child { border-bottom: none; }
-  ul.roadmap li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--accent-2);
-  }
-  ul.roadmap li strong { color: var(--text); }
-  .callout {
-    background: var(--bg-inset);
-    border: 1px solid var(--border);
-    border-left: 2px solid var(--accent);
-    padding: 16px 18px;
-    border-radius: 3px;
-    margin: 16px 0;
     font-size: 13px;
+  }
+  .sitenav .brand { font-weight: 700; color: var(--text); letter-spacing: 0.02em; text-decoration: none; }
+  .sitenav .brand .cursor { color: var(--accent); }
+  .sitenav .links { display: flex; align-items: center; gap: 4px; }
+  .sitenav .links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-left: 18px;
+    padding: 4px 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .sitenav .links a.current { color: var(--accent); border-bottom: 1px solid var(--accent); }
+  .sitenav .links a:hover { color: var(--text); }
+
+  /* buttons */
+  .btn {
+    display: inline-block;
+    padding: 9px 16px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: background .15s, color .15s;
+  }
+  .btn:hover { background: var(--accent); color: #0a0b0d; }
+  .btn-ghost { border-color: var(--border-bright); color: var(--text-dim); }
+  .btn-ghost:hover { border-color: var(--accent-2); color: var(--accent-2); background: transparent; }
+  .btn-sm { padding: 5px 12px; font-size: 11px; margin-left: 18px; }
+
+  /* hero */
+  .hero { padding: 28px 0 8px; }
+  .hero-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-faint); margin-bottom: 14px; }
+  .hero h1 { font-size: 32px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 18px; max-width: 640px; }
+  .hero-sub { font-size: 15px; color: var(--text-dim); max-width: 560px; margin-bottom: 26px; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+
+  /* ticker */
+  .ticker-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    margin: 26px calc(50% - 50vw) 0;
+    background: var(--bg-inset);
+  }
+  .ticker-track {
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+    animation: ticker 26s linear infinite;
+  }
+  .ticker-track span {
+    padding: 0 20px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--text-dim);
   }
-  .callout strong { color: var(--text); }
+  .ticker-track span::after { content: "·"; margin-left: 20px; color: var(--border-bright); }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* section pattern */
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-top: 60px;
+  }
+  .section-eyebrow .idx { color: var(--accent); }
+  .section-headline {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.35;
+    margin: 10px 0 14px;
+    max-width: 620px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* case card */
   .case-card {
     background: var(--bg-panel);
     border: 1px solid var(--border);
     border-radius: 4px;
-    padding: 20px 22px;
-    margin: 18px 0;
+    padding: 22px 24px;
+    margin: 4px 0;
   }
   .case-card .status {
     display: inline-block;
@@ -94,6 +155,7 @@
     padding: 2px 8px;
     margin-bottom: 10px;
   }
+  .case-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin: 0 0 6px; }
   .stats {
     display: flex;
     flex-wrap: wrap;
@@ -107,47 +169,81 @@
   .stat-card { background: var(--bg-inset); padding: 12px 16px; flex: 1; min-width: 130px; }
   .stat-value { font-size: 17px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
   .stat-label { font-size: 10px; color: var(--text-dim); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
-  .case-links a { margin-right: 18px; font-size: 13px; }
-  footer {
-    margin-top: 64px;
-    padding-top: 18px;
-    border-top: 1px solid var(--border);
-    font-size: 11px;
-    color: var(--text-faint);
-  }
-  .sitenav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 0;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-  .sitenav .brand { font-weight: 700; color: var(--text); letter-spacing: 0.02em; text-decoration: none; }
-  .sitenav .brand .cursor { color: var(--accent); }
-  .sitenav .links a {
-    color: var(--text-dim);
-    text-decoration: none;
-    margin-left: 22px;
-    padding: 4px 2px;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .sitenav .links a.current { color: var(--accent); border-bottom: 1px solid var(--accent); }
-  .sitenav .links a:hover { color: var(--text); }
+  .case-links { margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; }
 
-  .hero { margin: 8px 0 8px; }
-  .hero .tagline { font-size: 15px; color: var(--text); max-width: 620px; margin-bottom: 4px; }
+  /* updates */
+  ul.updates { list-style: none; margin: 0; padding: 0; }
+  ul.updates li {
+    display: flex;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+  }
+  ul.updates li:last-child { border-bottom: none; }
+  ul.updates .date { color: var(--accent-2); font-size: 11px; white-space: nowrap; padding-top: 2px; min-width: 84px; }
+  ul.updates .desc { color: var(--text-dim); }
+  ul.updates .desc strong { color: var(--text); }
+
+  /* roadmap */
+  ul.roadmap { list-style: none; margin: 0; padding: 0; }
+  ul.roadmap li {
+    padding: 10px 0 10px 22px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    font-size: 13.5px;
+    color: var(--text-dim);
+  }
+  ul.roadmap li:last-child { border-bottom: none; }
+  ul.roadmap li::before { content: "→"; position: absolute; left: 0; color: var(--accent-2); }
+  ul.roadmap li strong { color: var(--text); }
+
+  /* closing CTA */
+  .closing-cta {
+    text-align: left;
+    padding: 32px 0 8px;
+  }
+
+  /* footer */
+  .site-footer {
+    margin: 60px calc(50% - 50vw) 0;
+    padding: 40px calc(50vw - 50%) 24px;
+    background: var(--bg-inset);
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .footer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .footer-brand { font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .footer-tagline { color: var(--text-faint); font-size: 12px; max-width: 220px; }
+  .footer-col { min-width: 120px; }
+  .footer-col-title { color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; font-size: 10px; margin-bottom: 10px; }
+  .footer-col a { display: block; color: var(--text-faint); text-decoration: none; margin-bottom: 8px; font-size: 12.5px; }
+  .footer-col a:hover { color: var(--accent-2); }
+  .footer-bottom {
+    max-width: 860px;
+    margin: 32px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+    font-size: 11px;
+  }
 
   @media (max-width: 600px) {
-    body { padding: 20px 16px 60px; font-size: 13.5px; }
-    h1 { font-size: 22px; }
+    body { padding: 20px 16px 0; font-size: 13.5px; }
+    .hero h1 { font-size: 24px; }
     .sitenav { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .sitenav .links { flex-wrap: wrap; }
     .sitenav .links a { margin-left: 0; margin-right: 16px; }
+    .btn-sm { margin-left: 0; margin-right: 16px; }
     .stats { flex-direction: column; }
     .stat-card { min-width: 0; }
+    .section-headline { font-size: 18px; }
   }
 </style>
 </head>
@@ -159,22 +255,37 @@
       <a href="index.html" class="current">Home</a>
       <a href="gnrhr.html">GNRHR Study</a>
       <a href="explorer.html">Explorer</a>
+      <a href="mailto:sushanthsomayajula@gmail.com" class="btn btn-ghost btn-sm">Get in touch</a>
     </span>
   </div>
 
   <div class="hero">
-    <h1>Cleavr</h1>
-    <div class="hero tagline">Systematic biomarker discovery for triple-negative breast cancer, subtype by subtype.</div>
-    <div class="subtitle">Early-stage · building in public · one verified case study live</div>
+    <div class="hero-eyebrow">Cleavr · Early stage · Building in public</div>
+    <h1>Systematic biomarker discovery for triple-negative breast cancer.</h1>
+    <p class="hero-sub">Cleavr tests candidate TNBC biomarkers against public sequencing data, subtype by subtype — with every claim independently re-derived and checked against the literature before it's published.</p>
+    <div class="hero-ctas">
+      <a class="btn" href="gnrhr.html">View Case Study 01 →</a>
+      <a class="btn btn-ghost" href="explorer.html">Open the explorer →</a>
+    </div>
   </div>
 
-  <h2><span class="idx">01</span>Problem</h2>
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span>TCGA-Verified</span><span>Subtype-Level Analysis</span><span>Independently Re-Derived</span><span>Literature Cross-Checked</span><span>Open Methodology</span><span>Case Study 01 — GNRHR</span>
+      <span>TCGA-Verified</span><span>Subtype-Level Analysis</span><span>Independently Re-Derived</span><span>Literature Cross-Checked</span><span>Open Methodology</span><span>Case Study 01 — GNRHR</span>
+    </div>
+  </div>
+
+  <div class="section-eyebrow"><span class="idx">01</span>Problem</div>
+  <h2 class="section-headline">TNBC isn't one disease — but it's still targeted like one.</h2>
   <p>Triple-negative breast cancer (TNBC) is not one disease. Lehmann's 2011 classification split TNBC into distinct molecular subtypes — basal-like, mesenchymal, luminal androgen receptor, and others — each with different biology and different drug sensitivities. Despite that, candidate biomarker and targeting studies are still mostly done one gene, one paper, one lab at a time, without systematically checking whether a target behaves consistently across subtypes before it gets built into a therapeutic strategy.</p>
 
-  <h2><span class="idx">02</span>Approach</h2>
+  <div class="section-eyebrow"><span class="idx">02</span>Approach</div>
+  <h2 class="section-headline">Test it against real data before it becomes a strategy.</h2>
   <p>Cleavr tests candidate TNBC biomarkers against public, patient-level sequencing data — starting with TCGA — broken out by molecular subtype, and cross-checks every claim against the primary literature before it's published. Every number is independently re-derived from raw source files in a second pass, not computed once and trusted. Null results get reported exactly as directly as positive ones.</p>
 
-  <h2><span class="idx">03</span>Status</h2>
+  <div class="section-eyebrow"><span class="idx">03</span>Status</div>
+  <h2 class="section-headline">One case study live. Independently verified, start to finish.</h2>
   <div class="case-card">
     <span class="status">Case Study 01 · Complete</span>
     <h3>GNRHR expression across TNBC molecular subtypes</h3>
@@ -185,13 +296,21 @@
       <div class="stat-card"><div class="stat-value">p = 0.98</div><div class="stat-label">survival, log-rank</div></div>
     </div>
     <p style="margin-bottom:0;">Result: no statistically significant difference across subtypes, and no relationship to survival in this cohort — a real, well-caveated null result.</p>
-    <div class="case-links" style="margin-top:14px;">
-      <a href="gnrhr.html">Read the full case study →</a>
-      <a href="explorer.html">Open the interactive explorer →</a>
+    <div class="case-links">
+      <a class="btn" href="gnrhr.html">Read the case study →</a>
+      <a class="btn btn-ghost" href="explorer.html">Open the explorer →</a>
     </div>
   </div>
 
-  <h2><span class="idx">04</span>Roadmap</h2>
+  <div class="section-eyebrow"><span class="idx">04</span>Updates</div>
+  <h2 class="section-headline">Milestones, as they happen.</h2>
+  <ul class="updates">
+    <li><span class="date">2026-07-08</span><span class="desc"><strong>Cleavr goes public.</strong> Site live on GitHub Pages — full methodology, code, and data open for review.</span></li>
+    <li><span class="date">2026-07-07</span><span class="desc"><strong>Case Study 01 published.</strong> GNRHR expression tested across TNBC molecular subtypes using TCGA data (n=116), independently re-derived and literature-checked.</span></li>
+  </ul>
+
+  <div class="section-eyebrow"><span class="idx">05</span>Roadmap</div>
+  <h2 class="section-headline">From one gene to a real discovery pipeline.</h2>
   <ul class="roadmap">
     <li><strong>Parameterized pipeline</strong> — test any candidate gene against TNBC subtype data, not just GNRHR.</li>
     <li><strong>Cross-cohort validation</strong> — check findings against a second dataset (METABRIC) so results don't rest on one cohort.</li>
@@ -199,10 +318,39 @@
     <li><strong>Queryable biomarker index</strong> — one place to check any gene's subtype-level expression and survival association, not a one-off write-up per gene.</li>
   </ul>
 
-  <h2><span class="idx">05</span>About</h2>
-  <p>Built by Sushanth Somayajula. Full methodology, data, and code for every case study are public. <a href="https://github.com/sushanthsomayajula/Cleavr" target="_blank" rel="noopener">View the repository on GitHub</a> or <a href="mailto:sushanthsomayajula@gmail.com">get in touch</a>.</p>
+  <div class="section-eyebrow"><span class="idx">06</span>Contact</div>
+  <div class="closing-cta">
+    <h2 class="section-headline" style="border-bottom:none; padding-bottom:0;">Have a biomarker in mind?</h2>
+    <p>Built by Sushanth Somayajula. Full methodology, data, and code for every case study are public.</p>
+    <div class="hero-ctas">
+      <a class="btn" href="mailto:sushanthsomayajula@gmail.com">Get in touch →</a>
+      <a class="btn btn-ghost" href="https://github.com/sushanthsomayajula/Cleavr" target="_blank" rel="noopener">View on GitHub →</a>
+    </div>
+  </div>
 
-  <footer>Cleavr is an early-stage, independently verified research project — not a diagnostic or clinical tool. All findings are exploratory.</footer>
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand"><span class="cursor" style="color:var(--accent);">&gt;</span> CLEAVR</div>
+        <div class="footer-tagline">Systematic biomarker discovery for TNBC, subtype by subtype.</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Case Studies</div>
+        <a href="gnrhr.html">GNRHR Study</a>
+        <a href="explorer.html">Explorer</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Project</div>
+        <a href="https://github.com/sushanthsomayajula/Cleavr" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/sushanthsomayajula/Cleavr/blob/main/docs/ROADMAP.md" target="_blank" rel="noopener">Roadmap</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <a href="mailto:sushanthsomayajula@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">Cleavr is an early-stage, independently verified research project — not a diagnostic or clinical tool. All findings are exploratory.</div>
+  </footer>
 
 </body>
 </html>
