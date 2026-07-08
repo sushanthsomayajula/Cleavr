@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Cleavr</title>
+<meta name="description" content="Who's building Cleavr, and why — an independent, early-stage TNBC biomarker discovery project.">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --bg-panel: #101215;
+    --bg-inset: #0d0f12;
+    --border: #23262b;
+    --border-bright: #33373d;
+    --text: #d7dadd;
+    --text-dim: #82898f;
+    --text-faint: #52585e;
+    --accent: #e5484d;
+    --accent-dim: #7a2b2e;
+    --accent-2: #2dd4bf;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, "Courier New", monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: var(--mono);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px 0;
+    color: var(--text);
+    line-height: 1.65;
+    background: var(--bg);
+    font-size: 14px;
+  }
+  a { color: var(--accent-2); }
+  a:hover { color: #6ee7de; }
+  p { font-size: 14px; margin: 0 0 14px; color: var(--text); }
+
+  .sitenav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .sitenav .brand { font-weight: 700; color: var(--text); letter-spacing: 0.02em; text-decoration: none; }
+  .sitenav .brand .cursor { color: var(--accent); }
+  .sitenav .links { display: flex; align-items: center; gap: 4px; }
+  .sitenav .links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-left: 18px;
+    padding: 4px 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .sitenav .links a.current { color: var(--accent); border-bottom: 1px solid var(--accent); }
+  .sitenav .links a:hover { color: var(--text); }
+
+  .btn {
+    display: inline-block;
+    padding: 9px 16px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: background .15s, color .15s;
+  }
+  .btn:hover { background: var(--accent); color: #0a0b0d; }
+  .btn-ghost { border-color: var(--border-bright); color: var(--text-dim); }
+  .btn-ghost:hover { border-color: var(--accent-2); color: var(--accent-2); background: transparent; }
+  .btn-sm { padding: 5px 12px; font-size: 11px; margin-left: 18px; }
+
+  .hero { padding: 28px 0 8px; }
+  .hero-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-faint); margin-bottom: 14px; }
+  .hero h1 { font-size: 30px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 18px; max-width: 640px; }
+  .hero-sub { font-size: 15px; color: var(--text-dim); max-width: 580px; margin-bottom: 26px; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-top: 56px;
+  }
+  .section-eyebrow .idx { color: var(--accent); }
+  .section-headline {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.35;
+    margin: 10px 0 14px;
+    max-width: 620px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .fact-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 20px;
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .fact-card div { padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .fact-card div:last-child { border-bottom: none; }
+  .fact-card strong { color: var(--text); font-weight: 600; }
+
+  .closing-cta { text-align: left; padding: 32px 0 8px; }
+
+  .site-footer {
+    margin: 60px calc(50% - 50vw) 0;
+    padding: 40px calc(50vw - 50%) 24px;
+    background: var(--bg-inset);
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .footer-grid { display: flex; flex-wrap: wrap; gap: 32px; max-width: 860px; margin: 0 auto; }
+  .footer-brand { font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .footer-tagline { color: var(--text-faint); font-size: 12px; max-width: 220px; }
+  .footer-col { min-width: 120px; }
+  .footer-col-title { color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; font-size: 10px; margin-bottom: 10px; }
+  .footer-col a { display: block; color: var(--text-faint); text-decoration: none; margin-bottom: 8px; font-size: 12.5px; }
+  .footer-col a:hover { color: var(--accent-2); }
+  .footer-bottom {
+    max-width: 860px;
+    margin: 32px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+    font-size: 11px;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 20px 16px 0; font-size: 13.5px; }
+    .hero h1 { font-size: 22px; }
+    .sitenav { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .sitenav .links { flex-wrap: wrap; }
+    .sitenav .links a { margin-left: 0; margin-right: 16px; }
+    .btn-sm { margin-left: 0; margin-right: 16px; }
+    .section-headline { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="sitenav">
+    <a class="brand" href="index.html"><span class="cursor">&gt;</span> CLEAVR</a>
+    <span class="links">
+      <a href="index.html">Home</a>
+      <a href="gnrhr.html">GNRHR Study</a>
+      <a href="explorer.html">Explorer</a>
+      <a href="about.html" class="current">About</a>
+      <a href="mailto:sushanthsomayajula@gmail.com" class="btn btn-ghost btn-sm">Get in touch</a>
+    </span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Cleavr · About</div>
+    <h1>One person, testing one claim at a time — in the open.</h1>
+    <p class="hero-sub">Cleavr isn't a lab, a company, or a funded team yet. It's an independent project, and this page exists so that's never hidden.</p>
+  </div>
+
+  <div class="section-eyebrow"><span class="idx">01</span>Why this exists</div>
+  <h2 class="section-headline">One question that didn't have a systematic answer.</h2>
+  <p>TNBC subtype-specific biomarker testing is usually done ad hoc — one gene, one paper, one lab, as it comes up. Cleavr started from a single, narrow question: does GNRHR, the target of an active TNBC nanoparticle-targeting strategy, actually express differently across TNBC's molecular subtypes? Answering that properly — independently re-deriving the numbers, checking them against the literature, reporting the null result honestly — turned into the case study this site opened with. Building the tooling to ask the same question about any gene, not just that one, is what turned it into Cleavr.</p>
+
+  <div class="section-eyebrow"><span class="idx">02</span>Who's building it</div>
+  <h2 class="section-headline">Independent, early-stage, and upfront about both.</h2>
+  <p>Cleavr is built by Sushanth Somayajula, a college sophomore, as an independent project — not affiliated with a university lab, company, or research group. That's precisely why every claim on this site is independently re-derived from public data (TCGA, ChEMBL, PubMed, Open Targets) and cross-checked against the literature before it's published: the site's credibility has to come from the methodology being auditable, not from institutional reputation it doesn't have yet.</p>
+  <div class="fact-card">
+    <div><strong>Role</strong> — Founder, sole contributor</div>
+    <div><strong>Status</strong> — Independent, unaffiliated, pre-funding</div>
+    <div><strong>Contact</strong> — <a href="mailto:sushanthsomayajula@gmail.com">sushanthsomayajula@gmail.com</a></div>
+  </div>
+
+  <div class="section-eyebrow"><span class="idx">03</span>How it's built</div>
+  <h2 class="section-headline">Same rules as the rest of the site.</h2>
+  <p>Every number is independently re-derived from raw source files in a second pass, not computed once and trusted. Every citation is checked against the primary source before it's used. Null results are reported as directly as positive ones. Code, data processing steps, and full methodology are public on GitHub — nothing here is meant to be taken on reputation alone.</p>
+
+  <div class="section-eyebrow"><span class="idx">04</span>Contact</div>
+  <div class="closing-cta">
+    <h2 class="section-headline" style="border-bottom:none; padding-bottom:0;">Questions, corrections, or a biomarker in mind?</h2>
+    <p>Reach out directly — including if you think something on this site is wrong. That's the fastest way to make it better.</p>
+    <div class="hero-ctas">
+      <a class="btn" href="mailto:sushanthsomayajula@gmail.com">Get in touch →</a>
+      <a class="btn btn-ghost" href="https://github.com/sushanthsomayajula/Cleavr" target="_blank" rel="noopener">View on GitHub →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand"><span class="cursor" style="color:var(--accent);">&gt;</span> CLEAVR</div>
+        <div class="footer-tagline">Systematic biomarker discovery for TNBC, subtype by subtype.</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Case Studies</div>
+        <a href="gnrhr.html">GNRHR Study</a>
+        <a href="explorer.html">Explorer</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Project</div>
+        <a href="https://github.com/sushanthsomayajula/Cleavr" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/sushanthsomayajula/Cleavr/blob/main/docs/ROADMAP.md" target="_blank" rel="noopener">Roadmap</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <a href="mailto:sushanthsomayajula@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">Cleavr is an early-stage, independently verified research project — not a diagnostic or clinical tool. All findings are exploratory.</div>
+  </footer>
+
+</body>
+</html>
