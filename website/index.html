@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cleavr — GNRHR expression across TNBC subtypes</title>
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --bg-panel: #101215;
+    --bg-inset: #0d0f12;
+    --border: #23262b;
+    --border-bright: #33373d;
+    --text: #d7dadd;
+    --text-dim: #82898f;
+    --text-faint: #52585e;
+    --accent: #e5484d;
+    --accent-dim: #7a2b2e;
+    --accent-2: #2dd4bf;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, "Courier New", monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: var(--mono);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px 100px;
+    color: var(--text);
+    line-height: 1.65;
+    background: var(--bg);
+    font-size: 14px;
+  }
+  h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .subtitle { color: var(--text-dim); font-size: 13px; margin-bottom: 18px; }
+  h2 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-top: 44px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h2 .idx { color: var(--accent); margin-right: 8px; }
+  p { font-size: 14px; margin: 0 0 14px; color: var(--text); }
+  a { color: var(--accent-2); }
+  a:hover { color: #6ee7de; }
+  .callout {
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    padding: 14px 16px;
+    border-radius: 3px;
+    margin: 16px 0;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .callout strong { color: var(--text); }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    margin: 20px 0;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .stat-card {
+    background: var(--bg-panel);
+    padding: 14px 18px;
+    flex: 1;
+    min-width: 140px;
+  }
+  .stat-value { font-size: 19px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .stat-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  figure { margin: 20px 0; text-align: center; }
+  figure img {
+    max-width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: #fff;
+  }
+  figcaption { font-size: 11px; color: var(--text-faint); margin-top: 8px; }
+  code {
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12.5px;
+    color: var(--accent-2);
+  }
+  .tag {
+    display: inline-block;
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 3px;
+    margin-right: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .sitenav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .sitenav .brand {
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+  .sitenav .brand .cursor { color: var(--accent); }
+  .sitenav .links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-left: 22px;
+    padding: 4px 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .sitenav .links a.current { color: var(--accent); border-bottom: 1px solid var(--accent); }
+  .sitenav .links a:hover { color: var(--text); }
+
+  .lede {
+    font-size: 13px;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    border-radius: 3px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .lede strong { color: var(--text); }
+
+  .pagenav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    font-size: 11px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .pagenav a { color: var(--text-dim); text-decoration: none; }
+  .pagenav a:hover { color: var(--accent-2); }
+  .pagenav .sep { color: var(--border-bright); }
+
+  abbr[title] { text-decoration: underline dotted; text-decoration-color: var(--text-faint); cursor: help; }
+
+  @media (max-width: 600px) {
+    body { padding: 20px 16px 60px; font-size: 13.5px; }
+    h1 { font-size: 18px; }
+    .sitenav { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .sitenav .links a { margin-left: 0; margin-right: 16px; }
+    .stats { flex-direction: column; }
+    .stat-card { min-width: 0; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="sitenav">
+    <span class="brand"><span class="cursor">&gt;</span> CLEAVR</span>
+    <span class="links">
+      <a href="index.html" class="current">Atlas</a>
+      <a href="explorer.html">Explorer</a>
+    </span>
+  </div>
+
+  <h1>GNRHR expression across TNBC molecular subtypes</h1>
+  <div class="subtitle">Public exploratory analysis · TCGA Breast Invasive Carcinoma (Firehose Legacy)</div>
+
+  <div class="lede"><strong>Summary.</strong> Cleavr cross-references GNRHR (LHRH/GnRH receptor) transcript expression against triple-negative breast cancer (TNBC) molecular subtype, receptor structure, and survival outcome, using TCGA sequencing data.</div>
+
+  <nav class="pagenav">
+    <a href="#why">01 Rationale</a><span class="sep">/</span>
+    <a href="#method">02 Method</a><span class="sep">/</span>
+    <a href="#findings">03 Findings</a><span class="sep">/</span>
+    <a href="#frame">04 Interpretation</a><span class="sep">/</span>
+    <a href="#limits">05 Limitations</a><span class="sep">/</span>
+    <a href="#context">06 Related tools</a><span class="sep">/</span>
+    <a href="#files">07 Data &amp; code</a>
+  </nav>
+
+  <div class="stats">
+    <div class="stat-card"><div class="stat-value">116</div><div class="stat-label">TNBC patients</div></div>
+    <div class="stat-card"><div class="stat-value">p = 0.71</div><div class="stat-label">across subtypes</div></div>
+    <div class="stat-card"><div class="stat-value">p = 0.98</div><div class="stat-label">survival, log-rank</div></div>
+  </div>
+
+  <p><a href="explorer.html">&rarr; Open the interactive explorer</a> — select a subtype, inspect expression data and the GNRHR receptor structure in 3D.</p>
+
+  <h2 id="why"><span class="idx">01</span>Rationale</h2>
+  <p>LHRH-conjugated nanoparticle constructs — including PEG-coated magnetite and triptorelin-conjugated gold nanoparticle formulations — are an active strategy for TNBC targeting, binding the LHRH/GnRH receptor (GNRHR) on the tumor cell surface. Published work on these constructs establishes the targeting mechanism but does not resolve whether receptor expression is uniform across TNBC's molecular subtypes. If expression varies meaningfully by subtype, that has direct implications for how consistently LHRH-nanoparticle constructs could target different TNBC tumors. This analysis checks that question directly against TCGA sequencing data.</p>
+
+  <h2 id="method"><span class="idx">02</span>Method</h2>
+  <p>
+    <span class="tag">TCGA BRCA, Firehose Legacy</span>
+    <span class="tag">n = 116 TNBC patients</span>
+    <span class="tag">cBioPortal</span>
+  </p>
+  <p>TNBC was defined as ER-negative, PR-negative, HER2-negative by <abbr title="Immunohistochemistry — a lab test that stains tumor tissue to detect specific proteins">IHC</abbr> (116 patients; 115 had usable RNA-seq expression data). This TCGA study does not ship Lehmann subtype calls, so subtype (BL1, BL2, M, LAR) was approximated with a marker-gene z-score proxy — CCNE1/CDC6 for BL1, EGFR/MET for BL2, VIM/ZEB1 for M, AR/FOXA1 for LAR — assigning each patient to their highest-scoring pair. GNRHR (the receptor gene, distinct from GNRH1, the ligand gene) expression was compared across subtypes with a <abbr title="A statistical test that compares ranks across 3+ groups without assuming a normal distribution — better suited to skewed gene-expression data than a plain average comparison">Kruskal-Wallis test</abbr> and pairwise <abbr title="The two-group version of the same rank-based test">Mann-Whitney tests</abbr>, then cross-checked against overall survival with a median-split log-rank test.</p>
+
+  <h2 id="findings"><span class="idx">03</span>Findings</h2>
+
+  <div class="callout">
+    <strong>GNRHR expression does not differ significantly across TNBC subtypes</strong> (Kruskal-Wallis H = 1.38, p = 0.71). LAR trends numerically highest (median 4.55 vs. 2.55–3.08 for the others) but no pairwise comparison reaches significance.
+  </div>
+
+  <figure>
+    <img src="../results/gnrhr_by_subtype.png" alt="GNRHR expression across TNBC subtypes violin plot">
+    <figcaption>GNRHR expression by Lehmann-proxy subtype (n: BL1=44, BL2=14, M=42, LAR=15)</figcaption>
+  </figure>
+
+  <div class="callout">
+    <strong>GNRHR expression does not predict overall survival</strong> in this cohort. Splitting patients into GNRHR-high (n=58) and GNRHR-low (n=57) groups shows no difference in survival (log-rank p = 0.98). Only 18 of 115 patients (15.7%) had a recorded death, so this comparison is underpowered — treat it as inconclusive rather than a confident negative.
+  </div>
+
+  <figure>
+    <img src="../results/gnrhr_survival_km.png" alt="Kaplan-Meier survival curve by GNRHR expression">
+    <figcaption>Kaplan-Meier overall survival, GNRHR-high vs. GNRHR-low</figcaption>
+  </figure>
+
+  <h2 id="frame"><span class="idx">04</span>Interpretation</h2>
+  <p>This is a null result: GNRHR expression does not differ meaningfully across the four modeled subtypes, and does not predict survival in this cohort. Read as a targeting-relevant signal, receptor transcript availability does not appear to be a factor that would systematically favor or disadvantage LHRH-nanoparticle targeting in any one TNBC subtype. The result does not resolve a separate, mechanistic question: whether receptor trafficking, internalization, or downstream signaling vary by subtype independent of transcript level. Transcriptomic data alone cannot answer that.</p>
+
+  <h2 id="limits"><span class="idx">05</span>Limitations</h2>
+  <p>Subtype assignment here is a two-marker-gene proxy, not the full Lehmann PAM50-based classifier — TCGA's Firehose Legacy BRCA study doesn't include Lehmann or PAM50 calls directly. The TNBC cohort is defined by IHC receptor status only. The BL2 (n=14) and LAR (n=15) groups are small, which limits statistical power to detect moderate effect sizes. The six pairwise subtype comparisons are uncorrected for multiple testing; after Bonferroni correction, every pairwise p-value is 1.0, so there is no hidden pairwise signal being masked by the non-significant overall test.</p>
+
+  <h2 id="context"><span class="idx">06</span>Related tools</h2>
+  <p>Cleavr does not replace general-purpose portals such as <a href="https://www.cbioportal.org/" target="_blank" rel="noopener">cBioPortal</a>, <a href="http://gepia2.cancer-pku.cn/" target="_blank" rel="noopener">GEPIA2</a>, <a href="https://ualcan.path.uab.edu/" target="_blank" rel="noopener">UALCAN</a>, the <a href="https://gtexportal.org/" target="_blank" rel="noopener">GTEx Portal</a>, or <a href="https://xenabrowser.net/" target="_blank" rel="noopener">UCSC Xena</a>. It is a narrow, single-question companion analysis — one gene, one cohort, one hypothesis — with every number independently re-derived from raw source files and cross-checked against the literature. The general portals are the right place to explore broadly; Cleavr is scoped to answer this one question end to end.</p>
+
+  <h2 id="files"><span class="idx">07</span>Data &amp; code</h2>
+  <p>Paths below are relative to the project root (one level up from this page — see <code>../README.md</code>):</p>
+  <p>
+    <code>code/tnbc-analysis.ipynb</code> — full analysis notebook (open in Jupyter)<br>
+    <code>results/gnrhr_tnbc_final.csv</code> — per-patient data table<br>
+    <code>results/analysis_results.json</code> — all stats in raw form<br>
+    <code>code/run_gnrhr_analysis.py</code> — script that reproduces everything from scratch<br>
+    <code>docs/</code> — extended write-ups<br>
+    <code>docs/UNDERSTANDING_THE_FINDINGS.txt</code> — plain-language walkthrough of every concept and every number, no statistics background assumed<br>
+    <code>data/</code> — where the raw TCGA data lives (see README)
+  </p>
+
+  <footer>Data: TCGA Breast Invasive Carcinoma (Firehose Legacy), retrieved via cBioPortal. All figures independently re-derived from raw source files. Static page — no server required.</footer>
+
+</body>
+</html>

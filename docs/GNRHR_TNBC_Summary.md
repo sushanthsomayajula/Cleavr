@@ -1,0 +1,27 @@
+# Cleavr — GNRHR (LHRH receptor) expression across TNBC subtypes
+
+## Rationale
+
+LHRH-conjugated nanoparticle constructs — including PEG-coated magnetite and triptorelin-conjugated gold nanoparticle formulations — are an active strategy for TNBC targeting, binding the LHRH/GnRH receptor (GNRHR) on the tumor cell surface. Published work on these constructs establishes the targeting mechanism but does not resolve whether receptor expression is uniform across TNBC's molecular subtypes. If expression varies meaningfully by subtype, that has direct implications for how consistently LHRH-nanoparticle constructs could target different TNBC tumors. This analysis checks that question directly against TCGA data.
+
+## Method
+
+Data: TCGA Breast Invasive Carcinoma (Firehose Legacy, 1,108 samples), retrieved via cBioPortal. TNBC was defined as ER-negative, PR-negative, HER2-negative by IHC (n = 116 patients; 115 had usable RNA-seq expression data). This TCGA study does not ship Lehmann subtype calls, so subtype (BL1, BL2, M, LAR) was approximated with a marker-gene z-score proxy — CCNE1/CDC6 for BL1, EGFR/MET for BL2, VIM/ZEB1 for M, AR/FOXA1 for LAR — assigning each patient to their highest-scoring pair. GNRHR (the receptor gene, distinct from GNRH1, the ligand gene) expression was compared across subtypes with a Kruskal-Wallis test and pairwise Mann-Whitney tests, and cross-checked against overall survival with a median-split log-rank test.
+
+## Findings
+
+**GNRHR expression does not differ significantly across TNBC subtypes** (Kruskal-Wallis H = 1.38, p = 0.71; n = 44 BL1, 14 BL2, 42 M, 15 LAR). Median expression: BL1 2.55, BL2 2.89, M 3.08, LAR 4.55. LAR trends numerically highest — consistent with its known hormone-receptor-driven biology (it is also AR/FOXA1-high by definition here) — but no pairwise comparison reaches significance (all p > 0.3), likely reflecting the small LAR/BL2 groups (n = 14–15) as much as a true absence of effect.
+
+**GNRHR expression does not predict overall survival** in this cohort. Splitting patients into GNRHR-high (n = 58) and GNRHR-low (n = 57) groups shows no difference in overall survival (log-rank p = 0.98). Only 18 of 115 patients (15.7%) had a recorded death, so this comparison is underpowered — treat it as inconclusive rather than a confident negative.
+
+See `gnrhr_by_subtype.png` (expression by subtype) and `gnrhr_survival_km.png` (Kaplan-Meier curves).
+
+## Interpretation
+
+This is a null result: GNRHR expression does not differ meaningfully across the four modeled subtypes, and does not predict survival in this cohort. Read as a targeting-relevant signal, receptor transcript availability does not appear to be a factor that would systematically favor or disadvantage LHRH-nanoparticle targeting in any one TNBC subtype. The result does not resolve a separate, mechanistic question: whether receptor trafficking, internalization, or downstream signaling vary by subtype independent of transcript level. Transcriptomic data alone cannot answer that.
+
+## Limitations
+
+Subtype assignment here is a two-marker-gene proxy, not the full Lehmann PAM50-based classifier — TCGA's Firehose Legacy BRCA study doesn't include Lehmann or PAM50 calls directly. The TNBC cohort is defined by IHC receptor status only, not confirmed by additional molecular criteria. The BL2 (n = 14) and LAR (n = 15) groups are small, which limits statistical power to detect moderate effect sizes. The six pairwise subtype comparisons are uncorrected for multiple testing; after Bonferroni correction, every pairwise p-value is 1.0, so there is no meaningful pairwise signal hiding behind the non-significant overall test.
+
+All numbers in this document were independently re-derived from the raw TCGA files in a second, separate pass and matched the original results exactly — no discrepancies found.

@@ -1,0 +1,187 @@
+CLEAVR - UNDERSTANDING THE GNRHR / TNBC ANALYSIS
+A plain-language walkthrough of every concept and every number
+
+This document explains, from the ground up, what was measured, what each
+statistical test actually does, and what every number in the results means.
+No prior stats background assumed.
+
+
+PART 1: THE BIOLOGY
+
+What is TNBC?
+Breast cancer is often classified by three receptors on the tumor cell surface:
+estrogen receptor (ER), progesterone receptor (PR), and HER2. Most breast
+cancers are positive for at least one of these, which matters because there
+are good targeted drugs for each. "Triple-negative breast cancer" (TNBC) means
+a tumor is negative for all three - so those targeted drugs don't work, and
+treatment options are more limited. That's the clinical reason TNBC is a hard
+problem and why new targeting strategies, like LHRH-conjugated
+nanoparticle constructs, matter.
+
+What are "Lehmann subtypes"?
+Even though all TNBC tumors share the "triple-negative" label, they are not
+biologically identical. In 2011, a researcher named Lehmann and colleagues
+analyzed gene expression across hundreds of TNBC tumors and found they cluster
+into distinct molecular groups, each with different biology and different drug
+sensitivities. The subtypes are usually named:
+  BL1  - basal-like 1 (proliferation/cell-cycle genes turned up)
+  BL2  - basal-like 2 (growth factor signaling turned up)
+  M    - mesenchymal (genes for cell motility/invasion turned up)
+  MSL  - mesenchymal stem-like
+  IM   - immunomodulatory (immune-related genes turned up)
+  LAR  - luminal androgen receptor (driven by the androgen receptor pathway,
+         more hormone-like biology than the others)
+This analysis only modeled four of the six (BL1, BL2, M, LAR) - see Part 3 for
+why.
+
+What is GNRHR, and why does it matter here?
+Every gene has a symbol. GNRHR is the gene that contains the instructions for
+building the LHRH receptor (also called the GnRH receptor) - the actual
+protein sitting on the surface of a cell that LHRH (a hormone) or an
+LHRH-mimicking drug can grab onto. LHRH-conjugated nanoparticle constructs are
+decorated with LHRH (or triptorelin, a synthetic LHRH-like molecule)
+specifically so they stick to and get pulled into any cell displaying this
+receptor. If a tumor cell doesn't have much of this receptor on its surface,
+the nanoparticle has less to grab onto.
+
+Important distinction: GNRH1 vs GNRHR
+GNRH1 is a different gene - it contains the instructions for the hormone
+itself (the key). GNRHR contains the instructions for the receptor (the lock).
+LHRH-nanoparticle constructs supply their own synthetic key (LHRH/triptorelin
+on the nanoparticle surface) and are looking for the tumor cell's lock. So the
+receptor gene, GNRHR, is the one that matters for this targeting strategy -
+this analysis measures GNRHR specifically, not GNRH1.
+
+What does "GNRHR expression" mean, numerically?
+Cells don't just have or not have a gene - genes get "read" and turned into
+protein at different rates in different cells. RNA-sequencing measures how
+often a gene's instructions are being actively read in a given tumor sample,
+producing a number (here, from an algorithm called RSEM) that's roughly
+proportional to how much of that receptor the cell is likely making. Higher
+number = more of the gene's message being produced = generally more receptor
+on the cell surface. This is a proxy, not a direct photograph of receptor
+protein count on the cell surface, which is worth remembering.
+
+
+PART 2: THE STATISTICS, IN PLAIN TERMS
+
+What is a p-value?
+A p-value answers one narrow question: "if there were truly no real
+difference between these groups, how likely is it we'd see a difference this
+big just by random chance in our sample?" A small p-value (conventionally
+below 0.05) means the pattern is unlikely to be random noise. A large p-value
+(like the 0.71 and 0.98 in this analysis) means what we observed is entirely
+consistent with there being no real difference. It does NOT prove there's no
+difference - it means we don't have evidence of one in this dataset.
+
+Why Kruskal-Wallis instead of a simple average comparison?
+The straightforward approach - compare average GNRHR expression across the
+four subtypes - assumes the data is shaped like a normal bell curve. Gene
+expression data is usually skewed (a few very high outlier values pull the
+average around), so instead this analysis used the Kruskal-Wallis test, which
+converts every value to a rank (1st lowest, 2nd lowest, etc.) and compares
+the ranks across groups instead of the raw numbers. This makes it more robust
+to those outliers and skew. The result was H = 1.38, p = 0.71: essentially, no
+detectable difference in GNRHR ranks across the four subtypes.
+
+What are the Mann-Whitney tests?
+After the four-way Kruskal-Wallis test, this analysis also ran six follow-up
+tests, one for each possible pair of subtypes (BL1 vs BL2, BL1 vs M, and so
+on), using the two-group version of the same rank-based idea (Mann-Whitney U).
+Every single pair came back non-significant (p > 0.3).
+
+What's this "Bonferroni correction" mentioned in the limitations?
+If you run six statistical tests instead of one, you have six chances to get
+a false positive by pure luck - so the more tests you run, the more you should
+raise your bar for what counts as "significant." Bonferroni correction is the
+simplest way to do that: multiply each p-value by the number of tests (6
+here). When that's applied, every pairwise p-value becomes 1.0 - confirming
+there's no real pairwise signal being missed. This is a good-practice check to
+run whenever you see multiple p-values reported side by side in any study,
+including published ones.
+
+What is a "median split," and why is it a weaker approach?
+GNRHR expression is a continuous number - it doesn't come in "high" and "low"
+boxes naturally. To ask "does expression relate to survival," patients were
+sorted by GNRHR expression and split into the top half ("high") and bottom
+half ("low") at the median. This is simple and interpretable but throws away
+information - two patients right next to each other on either side of the
+midpoint get treated as categorically different, and the specific cutoff
+point is arbitrary. It's a common quick-analysis technique, but a more
+rigorous version would model GNRHR as a continuous variable directly (a Cox
+proportional-hazards model) rather than splitting it in two.
+
+What is a Kaplan-Meier curve?
+It's a way of plotting "percent of patients still alive" over time, for a
+group of patients, that correctly handles patients who left the study
+partway through (called "censoring" - e.g., they were still alive when the
+data was last collected, so we know they survived at least that long, but not
+how much longer). The plot in this project shows two such curves - one for
+GNRHR-high patients, one for GNRHR-low - and they sit almost exactly on top of
+each other, visually showing there's no separation between the groups.
+
+What is the log-rank test?
+It's the standard statistical test for asking "are these two Kaplan-Meier
+curves actually different, or could they plausibly be the same underlying
+survival pattern?" Here it returned p = 0.98 - about as clean a "no detectable
+difference" as a statistical test can report.
+
+Why is the survival result flagged as "underpowered" rather than a strong
+negative?
+Of the 115 patients with survival data, only 18 had died by the time TCGA
+recorded outcomes (a 15.7% event rate). Statistical tests on survival data get
+their power mostly from the number of events (deaths), not the number of
+patients - 18 events is a small number to detect anything but a very large
+effect. So "no significant difference" here means "we didn't find a strong
+signal with the limited events available," not "we've proven there's no
+relationship." This distinction matters and is worth stating explicitly if
+asked.
+
+
+PART 3: WHAT THIS ANALYSIS CAN AND CANNOT CLAIM
+
+Can claim: In this specific cohort of 115-116 TCGA TNBC patients, GNRHR
+(receptor) expression does not show a statistically detectable difference
+across four marker-gene-defined TNBC subtype groups, and does not show a
+statistically detectable relationship with overall survival.
+
+Cannot claim: That GNRHR expression is definitely uniform across true Lehmann
+subtypes (the subtyping here is an approximation, not the validated
+classifier - TCGA's Firehose Legacy dataset doesn't include real Lehmann or
+PAM50 calls). Cannot claim survival is definitely unrelated to GNRHR (too few
+events to rule that out confidently). Cannot claim anything about receptor
+protein levels, receptor accessibility, or nanoparticle uptake specifically -
+this measures gene transcription, several biological steps removed from "how
+much LHRH-nanoparticle would actually stick to this cell."
+
+Why this is still useful, scientifically: null results with clearly stated
+limitations are legitimate science, not a failure to find something. The
+honest, well-caveated version of this finding is more credible in a
+scientific conversation than an overstated one - and it naturally sets up a
+better question ("does receptor trafficking or downstream signaling differ by
+subtype even when raw transcript levels don't?") than a false positive would
+have.
+
+
+PART 4: EVERY NUMBER, LOCATED
+
+Cohort size: 116 TNBC patients total, 115 with usable GNRHR expression data
+(1 patient has no primary-tumor RNA-seq sample in TCGA at all - not an error).
+
+Subtype group sizes: BL1 n=44, M n=42, LAR n=15, BL2 n=14.
+
+Kruskal-Wallis: H = 1.38 (the test statistic - larger means more separation
+between group ranks), p = 0.71 (not significant).
+
+Group medians (RSEM units): BL1 = 2.55, BL2 = 2.89, M = 3.08, LAR = 4.55.
+
+Pairwise Mann-Whitney p-values: all between 0.31 and 0.81 (all non-
+significant; all become p = 1.0 after Bonferroni correction).
+
+Median GNRHR value used for the high/low survival split: 2.88.
+
+Survival comparison: 58 patients "high," 57 "low," 18 total deaths across
+both groups, log-rank p = 0.98.
+
+All of the above were independently recomputed from the raw TCGA files in a
+second pass, separate from the original run, and matched exactly.

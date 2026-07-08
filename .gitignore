@@ -1,0 +1,10 @@
+# Raw TCGA data — large, publicly re-downloadable from cBioPortal, not needed to serve the site
+brca_tcga/
+data/
+
+# macOS junk
+._*
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
