@@ -1,0 +1,131 @@
+{
+  "source": "Open Targets Platform API (disease=MONDO_0005494, triple-negative breast carcinoma)",
+  "filters_applied": [
+    "tractable (small molecule or antibody)",
+    "excludes Lehmann marker genes",
+    "excludes already-tested genes",
+    "present in local TCGA RNA-seq matrix"
+  ],
+  "n_candidates": 15,
+  "candidates": [
+    {
+      "gene": "TACSTD2",
+      "name": "tumor associated calcium signal transducer 2",
+      "open_targets_score": 0.5509177891316739,
+      "target_class": [
+        "Unclassified protein"
+      ]
+    },
+    {
+      "gene": "TOP1",
+      "name": "DNA topoisomerase I",
+      "open_targets_score": 0.5460837196314002,
+      "target_class": [
+        "Isomerase",
+        "Enzyme"
+      ]
+    },
+    {
+      "gene": "FTO",
+      "name": "FTO alpha-ketoglutarate dependent dioxygenase",
+      "open_targets_score": 0.48813045820183565,
+      "target_class": [
+        "Enzyme",
+        "Oxidoreductase"
+      ]
+    },
+    {
+      "gene": "BRCA1",
+      "name": "BRCA1 DNA repair associated",
+      "open_targets_score": 0.476667108218935,
+      "target_class": [
+        "Enzyme"
+      ]
+    },
+    {
+      "gene": "CD274",
+      "name": "CD274 molecule",
+      "open_targets_score": 0.42146368470137463,
+      "target_class": [
+        "Unclassified protein"
+      ]
+    },
+    {
+      "gene": "TCF7L2",
+      "name": "transcription factor 7 like 2",
+      "open_targets_score": 0.4188861621006169,
+      "target_class": []
+    },
+    {
+      "gene": "TYMS",
+      "name": "thymidylate synthetase",
+      "open_targets_score": 0.414057561483518,
+      "target_class": [
+        "Enzyme",
+        "Transferase"
+      ]
+    },
+    {
+      "gene": "TERT",
+      "name": "telomerase reverse transcriptase",
+      "open_targets_score": 0.4122004016627913,
+      "target_class": [
+        "Enzyme",
+        "Transferase"
+      ]
+    },
+    {
+      "gene": "POLD2",
+      "name": "DNA polymerase delta 2, accessory subunit",
+      "open_targets_score": 0.405423494502241,
+      "target_class": [
+        "Enzyme"
+      ]
+    },
+    {
+      "gene": "RRM2",
+      "name": "ribonucleotide reductase regulatory subunit M2",
+      "open_targets_score": 0.4046554870319921,
+      "target_class": [
+        "Enzyme",
+        "Oxidoreductase"
+      ]
+    },
+    {
+      "gene": "POLD1",
+      "name": "DNA polymerase delta 1, catalytic subunit",
+      "open_targets_score": 0.4042223599745157,
+      "target_class": [
+        "Enzyme",
+        "Transferase"
+      ]
+    },
+    {
+      "gene": "RRM1",
+      "name": "ribonucleotide reductase catalytic subunit M1",
+      "open_targets_score": 0.40376038515615986,
+      "target_class": [
+        "Enzyme",
+        "Oxidoreductase"
+      ]
+    },
+    {
+      "gene": "POLA2",
+      "name": "DNA polymerase alpha 2, accessory subunit",
+      "open_targets_score": 0.4033908053014752,
+      "target_class": []
+    },
+    {
+      "gene": "PRIM2",
+      "name": "DNA primase subunit 2",
+      "open_targets_score": 0.4033908053014752,
+      "target_class": []
+    },
+    {
+      "gene": "POLE",
+      "name": "DNA polymerase epsilon, catalytic subunit",
+      "open_targets_score": 0.4033908053014752,
+      "target_class": []
+    }
+  ]
+}

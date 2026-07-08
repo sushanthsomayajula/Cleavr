@@ -1,0 +1,16 @@
+gene,kruskal_p,kruskal_p_fdr_adjusted,subtype_sig_raw,subtype_sig_after_fdr,survival_logrank_p,n_potent_ligands,chembl_target_found,tnbc_paper_count,literature_category
+PRIM2,0.001628,0.00814,True,True,0.384,0,False,0,under-explored in TNBC
+POLD2,0.002294,0.008602,True,True,0.3116,0,True,1,under-explored in TNBC
+POLD1,0.01446,0.03098,True,True,0.4048,0,True,5,under-explored in TNBC
+RRM1,0.0223,0.04181,True,True,0.9379,0,True,4,under-explored in TNBC
+TYMS,0.000967,0.00814,True,True,0.008562,491,True,11,moderately studied in TNBC
+RRM2,0.001472,0.00814,True,True,0.2099,4,True,11,moderately studied in TNBC
+POLE,0.009241,0.02772,True,True,0.8879,0,False,11,moderately studied in TNBC
+FTO,0.01305,0.03098,True,True,0.307,91,True,14,moderately studied in TNBC
+TCF7L2,0.1143,0.1715,False,False,0.4078,0,False,5,under-explored in TNBC
+POLA2,0.4903,0.6129,False,False,0.5223,0,False,0,under-explored in TNBC
+TOP1,0.07885,0.1314,False,False,0.9685,226,True,10,moderately studied in TNBC
+TERT,0.6605,0.7621,False,False,0.4905,319,True,30,moderately studied in TNBC
+TACSTD2,0.8637,0.8637,False,False,0.3148,0,True,10,moderately studied in TNBC
+CD274,0.8337,0.8637,False,False,0.8578,783,True,48,moderately studied in TNBC
+BRCA1,0.1515,0.2065,False,False,0.6497,27,True,1244,well-studied in TNBC

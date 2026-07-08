@@ -1,0 +1,372 @@
+[
+  {
+    "gene": "PRIM2",
+    "kruskal_p": 0.0016279734012275035,
+    "survival_logrank_p": 0.383964276375544,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": false,
+      "n_potent_ligands": 0,
+      "has_approved_drug": false
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 0,
+      "category": "under-explored in TNBC",
+      "query_used": "PRIM2[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.008139867006137518,
+    "subtype_significant_raw": true,
+    "subtype_significant_after_fdr": true
+  },
+  {
+    "gene": "POLD2",
+    "kruskal_p": 0.0022938655094030327,
+    "survival_logrank_p": 0.3115721920171903,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL2763",
+      "chembl_target_name": "DNA polymerase delta subunit 2",
+      "n_potent_ligands": 0,
+      "n_known_mechanisms": 0,
+      "known_action_types": [],
+      "example_molecule_chembl_ids": []
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 1,
+      "category": "under-explored in TNBC",
+      "query_used": "POLD2[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.008601995660261373,
+    "subtype_significant_raw": true,
+    "subtype_significant_after_fdr": true
+  },
+  {
+    "gene": "POLD1",
+    "kruskal_p": 0.014458221341448906,
+    "survival_logrank_p": 0.4048394622913706,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL2735",
+      "chembl_target_name": "DNA polymerase delta catalytic subunit",
+      "n_potent_ligands": 0,
+      "n_known_mechanisms": 0,
+      "known_action_types": [],
+      "example_molecule_chembl_ids": []
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 5,
+      "category": "under-explored in TNBC",
+      "query_used": "POLD1[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.030981902874533368,
+    "subtype_significant_raw": true,
+    "subtype_significant_after_fdr": true
+  },
+  {
+    "gene": "RRM1",
+    "kruskal_p": 0.022298088960434427,
+    "survival_logrank_p": 0.9378815541918326,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL1830",
+      "chembl_target_name": "Ribonucleoside-diphosphate reductase large subunit",
+      "n_potent_ligands": 0,
+      "n_known_mechanisms": 0,
+      "known_action_types": [],
+      "example_molecule_chembl_ids": []
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 4,
+      "category": "under-explored in TNBC",
+      "query_used": "RRM1[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.04180891680081455,
+    "subtype_significant_raw": true,
+    "subtype_significant_after_fdr": true
+  },
+  {
+    "gene": "TYMS",
+    "kruskal_p": 0.0009669556502353486,
+    "survival_logrank_p": 0.008562138345835206,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL1952",
+      "chembl_target_name": "Thymidylate synthase",
+      "n_potent_ligands": 491,
+      "n_known_mechanisms": 10,
+      "known_action_types": [
+        "ANTAGONIST",
+        "INHIBITOR"
+      ],
+      "example_molecule_chembl_ids": [
+        "CHEMBL917",
+        "CHEMBL2360464",
+        "CHEMBL1773",
+        "CHEMBL185",
+        "CHEMBL225071"
+      ]
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 11,
+      "category": "moderately studied in TNBC",
+      "query_used": "TYMS[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.008139867006137518,
+    "subtype_significant_raw": true,
+    "subtype_significant_after_fdr": true
+  },
+  {
+    "gene": "RRM2",
+    "kruskal_p": 0.0014720667605618335,
+    "survival_logrank_p": 0.2099411594667528,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL1954",
+      "chembl_target_name": "Ribonucleoside-diphosphate reductase subunit M2",
+      "n_potent_ligands": 4,
+      "n_known_mechanisms": 0,
+      "known_action_types": [],
+      "example_molecule_chembl_ids": []
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 11,
+      "category": "moderately studied in TNBC",
+      "query_used": "RRM2[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.008139867006137518,
+    "subtype_significant_raw": true,
+    "subtype_significant_after_fdr": true
+  },
+  {
+    "gene": "POLE",
+    "kruskal_p": 0.009241189784543724,
+    "survival_logrank_p": 0.8879059221177927,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": false,
+      "n_potent_ligands": 0,
+      "has_approved_drug": false
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 11,
+      "category": "moderately studied in TNBC",
+      "query_used": "POLE[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.027723569353631173,
+    "subtype_significant_raw": true,
+    "subtype_significant_after_fdr": true
+  },
+  {
+    "gene": "FTO",
+    "kruskal_p": 0.01304826201406818,
+    "survival_logrank_p": 0.3070407891863696,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL2331065",
+      "chembl_target_name": "Alpha-ketoglutarate-dependent dioxygenase FTO",
+      "n_potent_ligands": 91,
+      "n_known_mechanisms": 1,
+      "known_action_types": [
+        "INHIBITOR"
+      ],
+      "example_molecule_chembl_ids": [
+        "CHEMBL25336"
+      ]
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 14,
+      "category": "moderately studied in TNBC",
+      "query_used": "FTO[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.030981902874533368,
+    "subtype_significant_raw": true,
+    "subtype_significant_after_fdr": true
+  },
+  {
+    "gene": "TCF7L2",
+    "kruskal_p": 0.11433295095231413,
+    "survival_logrank_p": 0.4078312926168568,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": false,
+      "n_potent_ligands": 0,
+      "has_approved_drug": false
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 5,
+      "category": "under-explored in TNBC",
+      "query_used": "TCF7L2[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.1714994264284712,
+    "subtype_significant_raw": false,
+    "subtype_significant_after_fdr": false
+  },
+  {
+    "gene": "POLA2",
+    "kruskal_p": 0.490318114245369,
+    "survival_logrank_p": 0.522257415249773,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": false,
+      "n_potent_ligands": 0,
+      "has_approved_drug": false
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 0,
+      "category": "under-explored in TNBC",
+      "query_used": "POLA2[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.6128976428067112,
+    "subtype_significant_raw": false,
+    "subtype_significant_after_fdr": false
+  },
+  {
+    "gene": "TOP1",
+    "kruskal_p": 0.07885490946629303,
+    "survival_logrank_p": 0.9685457022500601,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL1781",
+      "chembl_target_name": "DNA topoisomerase 1",
+      "n_potent_ligands": 226,
+      "n_known_mechanisms": 10,
+      "known_action_types": [
+        "INHIBITOR"
+      ],
+      "example_molecule_chembl_ids": [
+        "CHEMBL3989514",
+        "CHEMBL1607",
+        "CHEMBL2107313",
+        "CHEMBL3039558",
+        "CHEMBL5314381"
+      ]
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 10,
+      "category": "moderately studied in TNBC",
+      "query_used": "TOP1[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.13142484911048838,
+    "subtype_significant_raw": false,
+    "subtype_significant_after_fdr": false
+  },
+  {
+    "gene": "TERT",
+    "kruskal_p": 0.6604548318211929,
+    "survival_logrank_p": 0.4904826821668351,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL2916",
+      "chembl_target_name": "Telomerase reverse transcriptase",
+      "n_potent_ligands": 319,
+      "n_known_mechanisms": 2,
+      "known_action_types": [
+        "INHIBITOR"
+      ],
+      "example_molecule_chembl_ids": [
+        "CHEMBL2107856",
+        "CHEMBL2108702"
+      ]
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 30,
+      "category": "moderately studied in TNBC",
+      "query_used": "TERT[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.7620632674859918,
+    "subtype_significant_raw": false,
+    "subtype_significant_after_fdr": false
+  },
+  {
+    "gene": "TACSTD2",
+    "kruskal_p": 0.8636608207223593,
+    "survival_logrank_p": 0.31484838295075,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL3856163",
+      "chembl_target_name": "Tumor-associated calcium signal transducer 2",
+      "n_potent_ligands": 0,
+      "n_known_mechanisms": 2,
+      "known_action_types": [
+        "BINDING AGENT"
+      ],
+      "example_molecule_chembl_ids": [
+        "CHEMBL3545262",
+        "CHEMBL4297939"
+      ]
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 10,
+      "category": "moderately studied in TNBC",
+      "query_used": "TACSTD2[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.8636608207223593,
+    "subtype_significant_raw": false,
+    "subtype_significant_after_fdr": false
+  },
+  {
+    "gene": "CD274",
+    "kruskal_p": 0.8336878793015582,
+    "survival_logrank_p": 0.857849405860165,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL3580522",
+      "chembl_target_name": "Programmed cell death 1 ligand 1",
+      "n_potent_ligands": 783,
+      "n_known_mechanisms": 10,
+      "known_action_types": [
+        "BINDING AGENT",
+        "INHIBITOR",
+        "OTHER"
+      ],
+      "example_molecule_chembl_ids": [
+        "CHEMBL3707227",
+        "CHEMBL3301587",
+        "CHEMBL3833373",
+        "CHEMBL4594535",
+        "CHEMBL4298024"
+      ]
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 48,
+      "category": "moderately studied in TNBC",
+      "query_used": "CD274[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.8636608207223593,
+    "subtype_significant_raw": false,
+    "subtype_significant_after_fdr": false
+  },
+  {
+    "gene": "BRCA1",
+    "kruskal_p": 0.15145208578782468,
+    "survival_logrank_p": 0.6497030148372209,
+    "n_samples": 115,
+    "druggability": {
+      "chembl_target_found": true,
+      "chembl_target_id": "CHEMBL5990",
+      "chembl_target_name": "Breast cancer type 1 susceptibility protein",
+      "n_potent_ligands": 27,
+      "n_known_mechanisms": 0,
+      "known_action_types": [],
+      "example_molecule_chembl_ids": []
+    },
+    "literature_gap": {
+      "tnbc_specific_paper_count": 1244,
+      "category": "well-studied in TNBC",
+      "query_used": "BRCA1[Title/Abstract] AND \"triple negative breast\"[Title/Abstract]"
+    },
+    "kruskal_p_fdr_adjusted": 0.20652557152885184,
+    "subtype_significant_raw": false,
+    "subtype_significant_after_fdr": false
+  }
+]
