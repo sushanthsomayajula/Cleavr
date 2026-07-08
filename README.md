@@ -56,9 +56,11 @@ Pass any gene symbol(s) present in the expression matrix — the cohort and subt
 
 ## Roadmap
 
-- Parameterized pipeline — test any candidate gene, not just GNRHR.
+**Done:** parameterized pipeline (`code/biomarker_pipeline.py`, any gene, not just GNRHR); systematic candidate sourcing from Open Targets (`code/source_candidates.py`); batch screening with Benjamini–Hochberg FDR correction across all genes tested together (`code/screen_candidates.py`); druggability (ChEMBL) and TNBC-specific literature-gap (PubMed) scoring per candidate (`code/candidate_scoring.py`). See `docs/ROADMAP.md` for the full writeup, including honest caveats on the first 15-gene screen.
+
+**Still open:**
 - Cross-cohort validation against a second dataset (METABRIC) so results don't rest on one cohort.
-- Literature cross-referencing built into the pipeline instead of done by hand per gene.
+- Literature cross-referencing, deeper — surface the actual relevant papers per candidate, not just a count.
 - A queryable biomarker index across genes and subtypes.
 
 ## Related public tools
