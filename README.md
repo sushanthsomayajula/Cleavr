@@ -27,7 +27,13 @@ Cleavr/
 │   ├── screen_candidates.py    <- batch screen with Benjamini-Hochberg FDR correction
 │   ├── fetch_metabric.py       <- pulls the METABRIC cohort (cBioPortal API) for cross-cohort validation
 │   ├── cross_cohort_validation.py  <- re-tests TCGA-significant genes against METABRIC
+│   ├── flow_cytometry_validation.py  <- compares protein-level (flow) signal against the RNA-level result
+│   ├── receptor_quantification.py    <- converts flow MFI into absolute receptors/cell via bead calibration
 │   └── tnbc-analysis.ipynb     <- original Case Study 01 analysis as a notebook, with narration
+├── flow_cytometry/
+│   ├── measurements.csv        <- hand-entered flow cytometry data, one row per cell line x gene x replicate
+│   ├── calibration_beads.csv   <- bead standard data for absolute quantification
+│   └── README.md               <- column docs + cell-line-to-subtype table, sourced from literature
 ├── results/
 │   ├── <gene>/                 <- one folder per gene tested (e.g. results/gnrhr/, results/fto/), each with
 │   │                              <gene>_by_subtype.png, <gene>_survival_km.png, <gene>_tnbc_final.csv,
@@ -64,10 +70,10 @@ Pass any gene symbol(s) present in the expression matrix; the cohort and subtype
 
 ## Roadmap
 
-**Done:** parameterized pipeline (`code/biomarker_pipeline.py`, any gene, not just GNRHR); systematic candidate sourcing from Open Targets (`code/source_candidates.py`); batch screening with Benjamini-Hochberg FDR correction across all genes tested together (`code/screen_candidates.py`); druggability (ChEMBL) and TNBC-specific literature-gap (PubMed) scoring per candidate (`code/candidate_scoring.py`); cross-cohort validation against METABRIC (`code/fetch_metabric.py`, `code/cross_cohort_validation.py`), 7 of 8 FDR-significant genes replicated. See `docs/ROADMAP.md` for the full writeup, including honest caveats on the screen and validation.
+**Done:** parameterized pipeline (`code/biomarker_pipeline.py`, any gene, not just GNRHR); systematic candidate sourcing from Open Targets (`code/source_candidates.py`); batch screening with Benjamini-Hochberg FDR correction across all genes tested together (`code/screen_candidates.py`); druggability (ChEMBL) and TNBC-specific literature-gap (PubMed) scoring per candidate (`code/candidate_scoring.py`); cross-cohort validation against METABRIC (`code/fetch_metabric.py`, `code/cross_cohort_validation.py`), 7 of 8 FDR-significant genes replicated; flow cytometry wet-lab validation path, both relative signal (`code/flow_cytometry_validation.py`) and absolute receptors-per-cell via bead calibration (`code/receptor_quantification.py`). See `docs/ROADMAP.md` for the full writeup, including honest caveats on the screen and validation.
 
 **Still open:**
-- Wet-lab validation of the top candidate (FTO) at the protein level via flow cytometry.
+- Actually running the first real flow cytometry experiment on the top candidate (FTO): the tooling is built and tested against synthetic data, but no real measurements exist yet.
 - Literature cross-referencing, deeper: surface the actual relevant papers per candidate, not just a count.
 - A queryable biomarker index across genes and subtypes.
 

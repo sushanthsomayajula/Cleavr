@@ -2,13 +2,18 @@
 
 Raw wet-lab flow cytometry measurements, hand-entered after each experiment. This is the protein-level validation step for Cleavr's computational predictions (RNA-level expression differences across TNBC subtypes).
 
+Two tools work off this data: `flow_cytometry_validation.py` compares a relative signal (MFI/isotype fold-change) across subtypes, `receptor_quantification.py` converts that into an absolute receptors-per-cell estimate using a calibration bead standard curve. The relative tool needs only `measurements.csv`; the quantification tool also needs `calibration_beads.csv` from the same experiment day.
+
 ## How to use
 
-1. After each flow cytometry run, add one row per cell line x gene x replicate to `measurements.csv`.
-2. Run `python3 ../code/flow_cytometry_validation.py` from `code/`. It normalizes MFI against the isotype control, groups by subtype, and compares the protein-level pattern against Cleavr's existing RNA-level result for that gene (if `biomarker_pipeline.py` has already been run for it).
-3. Output lands in `../results/flow_cytometry_validation.json` and `.csv`.
+1. Run calibration beads on the flow cytometer the same day as your samples, same instrument settings. Add one row per bead population (need at least 3, kits typically ship 4-6) to `calibration_beads.csv`, using the molecules-per-bead value from the kit's lot-specific certificate of analysis, not a measured value.
+2. After each flow cytometry run, add one row per cell line x gene x replicate to `measurements.csv`.
+3. Run `python3 ../code/receptor_quantification.py` from `code/`. It fits a calibration curve (linear or log-log, whichever fits better) per date and converts each sample's MFI into a background-subtracted receptors-per-cell estimate. Output lands in `../results/receptor_quantification.json` and `.csv`.
+4. Run `python3 ../code/flow_cytometry_validation.py`. It normalizes MFI against the isotype control (or uses the absolute receptor count when available), groups by subtype, and compares the protein-level pattern against Cleavr's existing RNA-level result for that gene (if `biomarker_pipeline.py` has already been run for it).
 
 ## Columns
+
+**`measurements.csv`**
 
 | Column | Meaning |
 |---|---|
@@ -20,6 +25,16 @@ Raw wet-lab flow cytometry measurements, hand-entered after each experiment. Thi
 | `pct_positive` | Percent positive cells (recorded, not currently used in the comparison) |
 | `replicate` | Replicate number, for averaging |
 | `notes` | Free text |
+
+**`calibration_beads.csv`**
+
+| Column | Meaning |
+|---|---|
+| `date` | Calibration run date, must match the `measurements.csv` date it calibrates |
+| `bead_lot` | Bead kit lot number |
+| `population` | Bead population label (e.g. peak1, peak2) |
+| `molecules_per_bead` | Certified antibody-binding capacity for this population, from the kit's certificate of analysis |
+| `mfi` | Measured MFI for this bead population |
 
 ## Why cell lines need their own subtype table
 
