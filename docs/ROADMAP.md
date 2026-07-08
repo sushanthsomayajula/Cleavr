@@ -4,7 +4,7 @@ Working notes on what turns Case Study 01 (one gene, one dataset) into an actual
 
 ## 1. Parameterize the pipeline
 
-`code/run_gnrhr_analysis.py` currently hardcodes GNRHR. The first real engineering step is refactoring it into something that takes a gene symbol (or list of symbols) as input and produces the same outputs (subtype comparison, survival split, figures, JSON stats) for any gene, not just this one. Concretely: pull the TNBC cohort construction, marker-gene subtype assignment, and survival-split logic into a reusable module; keep only "which gene(s) to test" as the variable input.
+**Done.** `code/biomarker_pipeline.py` (formerly `run_gnrhr_analysis.py`) now splits into `build_tnbc_cohort()` — cohort construction + marker-gene subtype assignment, gene-independent, runs once — and `analyze_gene(gene_symbol, cohort_df)` — subtype comparison, figure, survival split, JSON/CSV output, runs per gene. Validated by running AR (LAR-subtype marker) alongside GNRHR through the same pipeline; GNRHR numbers matched the original script exactly.
 
 ## 2. Cross-cohort validation
 
@@ -28,7 +28,7 @@ The current site is precomputed static HTML — fine for one gene, not for "look
 
 ## Immediate next steps (rough order)
 
-1. Refactor `run_gnrhr_analysis.py` into a `gene -> results` function.
-2. Pick one more gene (ideally one with a clear TNBC subtype-specific hypothesis in the literature) and run it through the refactored pipeline as a real test of the parameterization, not just GNRHR again.
+1. ~~Refactor `run_gnrhr_analysis.py` into a `gene -> results` function.~~ Done — see `code/biomarker_pipeline.py`.
+2. ~~Pick one more gene and run it through the refactored pipeline.~~ Done — AR, see `results/ar_analysis_results.json`.
 3. Pull METABRIC and get the two cohorts' clinical fields harmonized enough to run the same pipeline on both.
-4. Only after 2–3 genes exist: build the FDR-corrected multi-gene comparison view.
+4. Once a few more genes exist: build the FDR-corrected multi-gene comparison view.

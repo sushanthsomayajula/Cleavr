@@ -20,14 +20,15 @@ Cleavr/
 │   ├── explorer.html             <- interactive tool: pick a subtype, see expression data + a live 3D receptor structure
 │   └── README.md                 <- short note about this subfolder
 ├── code/
-│   ├── run_gnrhr_analysis.py   <- run this to reproduce everything from scratch
+│   ├── biomarker_pipeline.py   <- run this to reproduce/extend the analysis for any gene
 │   └── tnbc-analysis.ipynb     <- same analysis as a notebook (Jupyter), with narration
 ├── results/
-│   ├── gnrhr_by_subtype.png    <- main figure
-│   ├── gnrhr_survival_km.png   <- survival figure
-│   ├── gnrhr_tnbc_final.csv    <- one row per patient, all variables
+│   ├── gnrhr_by_subtype.png    <- main figure (GNRHR)
+│   ├── gnrhr_survival_km.png   <- survival figure (GNRHR)
+│   ├── gnrhr_tnbc_final.csv    <- one row per patient, all variables (GNRHR)
+│   ├── gnrhr_analysis_results.json   <- every stat, machine-readable (GNRHR)
 │   ├── ghrhr_tnbc_final.csv    <- side investigation into a different, unrelated gene (GHRHR) — see docs
-│   └── analysis_results.json   <- every stat, machine-readable
+│   └── ar_*                    <- same set of outputs for AR (2nd gene, validates the pipeline works generically)
 ├── docs/
 │   ├── GNRHR_TNBC_Summary.txt  <- plain text write-up
 │   ├── GNRHR_TNBC_Summary.md   <- same write-up, Markdown formatted
@@ -36,12 +37,14 @@ Cleavr/
 └── brca_tcga/                   <- gitignored; full raw TCGA download (~1.3 GB), not pushed
 ```
 
-The large raw TCGA data (`brca_tcga/`, ~1.3 GB) and `data/` are intentionally excluded from this repo (see `.gitignore`) — they're re-downloadable from cBioPortal and don't belong in git. `code/run_gnrhr_analysis.py` and `code/tnbc-analysis.ipynb` expect `../brca_tcga` to exist locally if you want to reproduce the analysis from scratch:
+The large raw TCGA data (`brca_tcga/`, ~1.3 GB) and `data/` are intentionally excluded from this repo (see `.gitignore`) — they're re-downloadable from cBioPortal and don't belong in git. `code/biomarker_pipeline.py` and `code/tnbc-analysis.ipynb` expect `../brca_tcga` to exist locally if you want to reproduce the analysis from scratch:
 
 ```
 cd code
-python3 run_gnrhr_analysis.py
+python3 biomarker_pipeline.py GNRHR AR
 ```
+
+Pass any gene symbol(s) present in the expression matrix — the cohort and subtype assignment are built once and reused, only the target gene changes.
 
 ## Methodology notes (see `docs/` for the full write-up)
 

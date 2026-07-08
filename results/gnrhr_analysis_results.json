@@ -1,5 +1,5 @@
 {
-  "n_tnbc_patients": 116,
+  "gene": "GNRHR",
   "n_tnbc_with_expression": 115,
   "subtype_counts": {
     "BL1": 44,
@@ -55,7 +55,7 @@
       "p": 0.806698964973157
     }
   },
-  "median_gnrhr_split": 2.8818,
+  "median_split": 2.8818,
   "survival_mannwhitney_p": 0.10296962379394495,
   "survival_logrank_p": 0.9834066531465471,
   "n_survival_evaluable": 115
