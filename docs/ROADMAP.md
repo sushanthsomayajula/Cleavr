@@ -35,4 +35,5 @@ The current site is precomputed static HTML, fine for one gene, not for "look up
 3. ~~Pull METABRIC and get the two cohorts' clinical fields harmonized enough to run the same pipeline on both.~~ Done: see `code/fetch_metabric.py` and `code/cross_cohort_validation.py`.
 4. ~~Once a few more genes exist: build the FDR-corrected multi-gene comparison view.~~ Done: see `code/screen_candidates.py`.
 5. ~~Decide what from the cross-cohort result is ready to publish on the site.~~ Done: Case Study 02 published, see `website/studies.html`. FTO replicating across cohort and platform is the strongest single finding so far, but "strongest so far" isn't the same as "validated"; still no wet-lab confirmation.
-6. Next: wet-lab flow cytometry validation of FTO at the protein level.
+6. ~~Build the flow cytometry ingestion + comparison path.~~ Done: `code/flow_cytometry_validation.py` reads `flow_cytometry/measurements.csv`, maps cell lines to Lehmann subtype from literature (Lehmann et al. 2011, PMID 21633166; Espinosa Fernandez et al. 2020, PMID 32353087), normalizes MFI against isotype control, and compares the protein-level subtype pattern against the existing RNA-level result. Tested end-to-end with synthetic data; no real measurements yet.
+7. Next: run the first real flow cytometry experiment and see whether FTO's protein-level pattern matches its RNA-level pattern.
