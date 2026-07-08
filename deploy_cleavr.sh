@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Deploys Cleavr to GitHub Pages. Run this from Terminal on your own Mac:
-#   cd /Volumes/sushanthusb/tnbc-project
+#   cd ~/Desktop/tnbc-project
 #   bash deploy_cleavr.sh
 #
 # What it does: installs the GitHub CLI if missing, logs you into GitHub in

@@ -8,3 +8,6 @@ data/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Local transfer/operational logs
+tnbc_transfer.log
