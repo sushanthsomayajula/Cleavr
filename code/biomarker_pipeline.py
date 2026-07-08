@@ -15,7 +15,7 @@ HOW TO RUN:
      python3 biomarker_pipeline.py GNRHR AR
    (defaults to GNRHR alone if you don't pass any gene symbols)
 
-OUTPUT (written into ../results/, one set per gene):
+OUTPUT (written into ../results/<gene>/, one folder per gene):
   - <gene>_by_subtype.png       <- expression by TNBC subtype
   - <gene>_survival_km.png      <- survival curve, high vs low expression
   - <gene>_analysis_results.json <- all the stats numbers
@@ -27,6 +27,7 @@ runs multiple genes, every output is prefixed with the gene name so runs
 don't overwrite each other.
 """
 import json
+import os
 import subprocess
 import sys
 from itertools import combinations
@@ -136,6 +137,9 @@ def analyze_gene(gene_symbol, cohort_df):
         print(f"SKIPPING {gene_symbol}: not found in expression matrix")
         return None
 
+    gene_dir = f"{RESULTS_DIR}/{gene_symbol.lower()}"
+    os.makedirs(gene_dir, exist_ok=True)
+
     df = cohort_df.copy()
     df[gene_symbol] = pd.to_numeric(df[gene_symbol], errors="coerce")
 
@@ -168,9 +172,9 @@ def analyze_gene(gene_symbol, cohort_df):
     ax.text(0.02, 0.98, f"Kruskal-Wallis p = {kw_p:.3f}", transform=ax.transAxes,
             va="top", fontsize=10, style="italic")
     plt.tight_layout()
-    plt.savefig(f"{RESULTS_DIR}/{gene_symbol.lower()}_by_subtype.png", dpi=150)
+    plt.savefig(f"{gene_dir}/{gene_symbol.lower()}_by_subtype.png", dpi=150)
     plt.close()
-    print(f"Saved {gene_symbol.lower()}_by_subtype.png")
+    print(f"Saved {gene_symbol.lower()}/{gene_symbol.lower()}_by_subtype.png")
 
     # Survival: high vs low (median split)
     median_val = df[gene_symbol].median()
@@ -203,9 +207,9 @@ def analyze_gene(gene_symbol, cohort_df):
     ax.set_ylabel("Overall survival probability")
     ax.set_title(f"TNBC overall survival by {gene_symbol} expression (log-rank p={lr.p_value:.3f})")
     plt.tight_layout()
-    plt.savefig(f"{RESULTS_DIR}/{gene_symbol.lower()}_survival_km.png", dpi=150)
+    plt.savefig(f"{gene_dir}/{gene_symbol.lower()}_survival_km.png", dpi=150)
     plt.close()
-    print(f"Saved {gene_symbol.lower()}_survival_km.png")
+    print(f"Saved {gene_symbol.lower()}/{gene_symbol.lower()}_survival_km.png")
 
     results = {
         "gene": gene_symbol,
@@ -221,11 +225,11 @@ def analyze_gene(gene_symbol, cohort_df):
         "survival_logrank_p": float(lr.p_value),
         "n_survival_evaluable": int(len(surv_df)),
     }
-    with open(f"{RESULTS_DIR}/{gene_symbol.lower()}_analysis_results.json", "w") as f:
+    with open(f"{gene_dir}/{gene_symbol.lower()}_analysis_results.json", "w") as f:
         json.dump(results, f, indent=2)
 
     out_df = df.drop(columns=["expr_group"], errors="ignore")
-    out_df.to_csv(f"{RESULTS_DIR}/{gene_symbol.lower()}_tnbc_final.csv", index=False)
+    out_df.to_csv(f"{gene_dir}/{gene_symbol.lower()}_tnbc_final.csv", index=False)
 
     print(f"\n=== DONE: {gene_symbol} ===")
     return results

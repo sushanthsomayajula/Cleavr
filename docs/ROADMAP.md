@@ -31,7 +31,7 @@ The current site is precomputed static HTML — fine for one gene, not for "look
 ## Immediate next steps (rough order)
 
 1. ~~Refactor `run_gnrhr_analysis.py` into a `gene -> results` function.~~ Done — see `code/biomarker_pipeline.py`.
-2. ~~Pick one more gene and run it through the refactored pipeline.~~ Done — AR, see `results/ar_analysis_results.json`.
+2. ~~Pick one more gene and run it through the refactored pipeline.~~ Done — AR, see `results/ar/ar_analysis_results.json`.
 3. ~~Pull METABRIC and get the two cohorts' clinical fields harmonized enough to run the same pipeline on both.~~ Done — see `code/fetch_metabric.py` and `code/cross_cohort_validation.py`.
 4. ~~Once a few more genes exist: build the FDR-corrected multi-gene comparison view.~~ Done — see `code/screen_candidates.py`.
 5. Next: decide what (if anything) from the cross-cohort result is ready to publish on the site. FTO replicating across cohort + platform is the strongest single finding so far, but "strongest so far" isn't the same as "validated" — still no wet-lab confirmation.

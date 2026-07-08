@@ -2,7 +2,7 @@
 Cleavr candidate-gene scoring -- run locally, after biomarker_pipeline.py.
 
 Takes a gene that's already been run through biomarker_pipeline.py (so
-../results/<gene>_analysis_results.json exists) and adds two more axes of
+../results/<gene>/<gene>_analysis_results.json exists) and adds two more axes of
 evidence, pulled live from public APIs (no API key needed):
 
   1. STATISTICAL SIGNAL   -- already computed: does expression differ by
@@ -55,7 +55,7 @@ HEADERS = {"User-Agent": "Cleavr-TNBC-biomarker-tool (research use, contact: sus
 
 def get_stats_signal(gene_symbol):
     """Read the stats this gene already has from biomarker_pipeline.py's output."""
-    path = f"{RESULTS_DIR}/{gene_symbol.lower()}_analysis_results.json"
+    path = f"{RESULTS_DIR}/{gene_symbol.lower()}/{gene_symbol.lower()}_analysis_results.json"
     try:
         with open(path) as f:
             r = json.load(f)

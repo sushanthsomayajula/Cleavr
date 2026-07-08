@@ -1,5 +1,6 @@
-# Raw TCGA data — large, publicly re-downloadable from cBioPortal, not needed to serve the site
+# Raw cohort data — large, publicly re-downloadable from cBioPortal, not needed to serve the site
 brca_tcga/
+brca_metabric/
 data/
 
 # macOS junk
@@ -8,6 +9,10 @@ data/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
 
 # Local transfer/operational logs
 tnbc_transfer.log

@@ -98,9 +98,9 @@ Cleavr/
 │   ├── UNDERSTANDING_THE_FINDINGS.txt  ← every statistical concept, explained plainly
 │   └── GNRHR_TNBC_Summary.md/.txt      ← condensed one-page write-up
 ├── website/                     ← the live site's source (index/gnrhr/explorer .html)
-├── code/                        ← the actual analysis (Python script + notebook)
-├── results/                     ← every number and figure the site displays
-└── brca_tcga/, data/            ← raw TCGA data (not in the public repo — too large)
+├── code/                        ← the actual analysis (pipeline, scoring, screening, cross-cohort validation)
+├── results/                     ← every number and figure the site displays, one folder per gene tested
+└── brca_tcga/, brca_metabric/   ← raw cohort data (not in the public repo — too large, re-fetchable)
 ```
 
 ## 8. A short glossary, for anything above that wasn't obvious

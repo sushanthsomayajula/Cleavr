@@ -2,7 +2,7 @@
 
 Systematic biomarker discovery for triple-negative breast cancer (TNBC), subtype by subtype.
 
-**Live site:** https://sushanthsomayajula.github.io/Cleavr/
+**Live site:** https://cleavr.bio
 
 Cleavr tests candidate TNBC biomarkers against public, patient-level sequencing data, broken out by molecular subtype, and cross-checks every claim against the primary literature before publishing it. Every number is independently re-derived from raw source files in a second pass. Null results are reported as directly as positive ones.
 
@@ -21,23 +21,30 @@ Cleavr/
 │   └── README.md                 <- short note about this subfolder
 ├── code/
 │   ├── biomarker_pipeline.py   <- run this to reproduce/extend the analysis for any gene
-│   └── tnbc-analysis.ipynb     <- same analysis as a notebook (Jupyter), with narration
+│   ├── source_candidates.py    <- systematic candidate-gene sourcing (Open Targets)
+│   ├── candidate_scoring.py    <- druggability (ChEMBL) + literature-gap (PubMed) scoring
+│   ├── screen_candidates.py    <- batch screen with Benjamini-Hochberg FDR correction
+│   ├── fetch_metabric.py       <- pulls the METABRIC cohort (cBioPortal API) for cross-cohort validation
+│   ├── cross_cohort_validation.py  <- re-tests TCGA-significant genes against METABRIC
+│   └── tnbc-analysis.ipynb     <- original Case Study 01 analysis as a notebook, with narration
 ├── results/
-│   ├── gnrhr_by_subtype.png    <- main figure (GNRHR)
-│   ├── gnrhr_survival_km.png   <- survival figure (GNRHR)
-│   ├── gnrhr_tnbc_final.csv    <- one row per patient, all variables (GNRHR)
-│   ├── gnrhr_analysis_results.json   <- every stat, machine-readable (GNRHR)
-│   ├── ghrhr_tnbc_final.csv    <- side investigation into a different, unrelated gene (GHRHR) — see docs
-│   └── ar_*                    <- same set of outputs for AR (2nd gene, validates the pipeline works generically)
+│   ├── <gene>/                 <- one folder per gene tested (e.g. results/gnrhr/, results/fto/), each with
+│   │                              <gene>_by_subtype.png, <gene>_survival_km.png, <gene>_tnbc_final.csv,
+│   │                              <gene>_analysis_results.json
+│   ├── candidate_gene_list.json    <- systematically sourced candidate list
+│   ├── candidate_scorecard.json    <- druggability + literature-gap scores
+│   ├── screen_results.json/.csv    <- full 15-gene screen, FDR-corrected
+│   └── cross_cohort_results.json/.csv  <- TCGA vs. METABRIC replication results
 ├── docs/
 │   ├── GNRHR_TNBC_Summary.txt  <- plain text write-up
 │   ├── GNRHR_TNBC_Summary.md   <- same write-up, Markdown formatted
+│   ├── ROADMAP.md              <- technical roadmap, what's done and what's next
 │   └── UNDERSTANDING_THE_FINDINGS.txt  <- plain-language walkthrough of every concept and number
-├── data/                        <- gitignored; small reference files only, not pushed
-└── brca_tcga/                   <- gitignored; full raw TCGA download (~1.3 GB), not pushed
+├── brca_metabric/                <- gitignored; METABRIC cohort data, re-fetchable via code/fetch_metabric.py
+└── brca_tcga/                    <- gitignored; full raw TCGA download (~1.3 GB), not pushed
 ```
 
-The large raw TCGA data (`brca_tcga/`, ~1.3 GB) and `data/` are intentionally excluded from this repo (see `.gitignore`) — they're re-downloadable from cBioPortal and don't belong in git. `code/biomarker_pipeline.py` and `code/tnbc-analysis.ipynb` expect `../brca_tcga` to exist locally if you want to reproduce the analysis from scratch:
+The large raw cohort data (`brca_tcga/`, ~1.3 GB, and `brca_metabric/`) is intentionally excluded from this repo (see `.gitignore`) — it's re-downloadable from cBioPortal and doesn't belong in git. `code/biomarker_pipeline.py` and `code/tnbc-analysis.ipynb` expect `../brca_tcga` to exist locally if you want to reproduce the analysis from scratch:
 
 ```
 cd code
