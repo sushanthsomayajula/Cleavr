@@ -2,218 +2,110 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cleavr: GNRHR expression across TNBC subtypes</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
-  :root {
-    --bg: #0a0b0d;
-    --bg-panel: #101215;
-    --bg-inset: #0d0f12;
-    --border: #23262b;
-    --border-bright: #33373d;
-    --text: #d7dadd;
-    --text-dim: #82898f;
-    --text-faint: #52585e;
-    --accent: #e5484d;
-    --accent-dim: #7a2b2e;
-    --accent-2: #2dd4bf;
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, "Courier New", monospace;
-  }
-  * { box-sizing: border-box; }
-  body {
-    font-family: var(--mono);
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 32px 24px 100px;
-    color: var(--text);
-    line-height: 1.65;
-    background: var(--bg);
-    font-size: 14px;
-  }
-  h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; letter-spacing: -0.01em; }
-  .subtitle { color: var(--text-dim); font-size: 13px; margin-bottom: 18px; }
-  .breadcrumb { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
-  .breadcrumb a { color: var(--text-faint); }
-  .breadcrumb a:hover { color: var(--accent-2); }
-  h2 {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-dim);
-    margin-top: 44px;
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  h2 .idx { color: var(--accent); margin-right: 8px; }
-  p { font-size: 14px; margin: 0 0 14px; color: var(--text); }
-  a { color: var(--accent-2); }
-  a:hover { color: #6ee7de; }
-  .callout {
-    background: var(--bg-inset);
-    border: 1px solid var(--border);
-    border-left: 2px solid var(--accent);
-    padding: 14px 16px;
-    border-radius: 3px;
-    margin: 16px 0;
-    font-size: 13px;
-    color: var(--text-dim);
-  }
-  .callout strong { color: var(--text); }
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-    margin: 20px 0;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .stat-card {
-    background: var(--bg-panel);
-    padding: 14px 18px;
-    flex: 1;
-    min-width: 140px;
-  }
-  .stat-value { font-size: 19px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
-  .stat-label {
-    font-size: 10px;
-    color: var(--text-dim);
-    margin-top: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  figure { margin: 20px 0; text-align: center; }
-  figure img {
-    max-width: 100%;
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    background: #fff;
-  }
-  figcaption { font-size: 11px; color: var(--text-faint); margin-top: 8px; }
-  code {
-    background: var(--bg-inset);
-    border: 1px solid var(--border);
-    padding: 1px 6px;
-    border-radius: 3px;
-    font-size: 12.5px;
-    color: var(--accent-2);
-  }
-  .tag {
-    display: inline-block;
-    background: var(--bg-inset);
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    font-size: 11px;
-    padding: 3px 9px;
-    border-radius: 3px;
-    margin-right: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  footer {
-    margin-top: 64px;
-    padding-top: 18px;
-    border-top: 1px solid var(--border);
-    font-size: 11px;
-    color: var(--text-faint);
-  }
-  .sitenav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 0;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-  .sitenav .brand {
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: 0.02em;
-    text-decoration: none;
-  }
-  .sitenav .brand .cursor { color: var(--accent); }
-  .sitenav .links a {
-    color: var(--text-dim);
-    text-decoration: none;
-    margin-left: 22px;
-    padding: 4px 2px;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .sitenav .links a.current { color: var(--accent); border-bottom: 1px solid var(--accent); }
-  .sitenav .links a:hover { color: var(--text); }
-  .btn-ghost {
-    border: 1px solid var(--border-bright);
-    color: var(--text-dim);
-    border-radius: 3px;
-    padding: 5px 12px;
-    margin-left: 18px !important;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 11px !important;
-  }
-  .btn-ghost:hover { border-color: var(--accent-2); color: var(--accent-2); }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-  .lede {
-    font-size: 13px;
-    color: var(--text-dim);
-    border: 1px solid var(--border);
-    background: var(--bg-panel);
-    border-radius: 3px;
-    padding: 14px 16px;
-    margin-bottom: 20px;
-  }
-  .lede strong { color: var(--text); }
+:root{
+  --bg:#0A0A0B;
+  --charcoal:#242224;
+  --charcoal-2:#3A3739;
+  --pink:#E7A9C0;
+  --pink-strong:#F2B8CE;
+  --pink-dim:#9C6E80;
+  --cream:#EDEAE6;
+  --muted:#8A8781;
+  --line:#232024;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ background:var(--bg); color:var(--cream); font-family:'Inter', sans-serif; }
+body{ line-height:1.7; font-size:15px; padding-bottom:100px; }
+a{ color:var(--pink); text-decoration:none; }
+a:hover{ color:var(--pink-strong); }
 
-  .pagenav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 18px;
-    font-size: 11px;
-    margin-bottom: 28px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .pagenav a { color: var(--text-dim); text-decoration: none; }
-  .pagenav a:hover { color: var(--accent-2); }
-  .pagenav .sep { color: var(--border-bright); }
+/* nav */
+.nav{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:26px 56px; background:var(--bg); border-bottom:0.5px solid var(--line); }
+.logo{ font-size:19px; font-weight:700; letter-spacing:-0.01em; color:var(--pink); }
+.nav-links{ display:flex; align-items:center; gap:40px; font-size:14px; color:var(--muted); }
+.nav-links a{ color:var(--muted); }
+.nav-links a:hover{ color:var(--cream); }
+.nav-links a.current{ color:var(--cream); }
+.nav-cta{ border:0.5px solid var(--charcoal-2); border-radius:100px; padding:9px 18px; font-size:13px; color:var(--cream) !important; }
 
-  abbr[title] { text-decoration: underline dotted; text-decoration-color: var(--text-faint); cursor: help; }
+/* article column */
+.article{ max-width:760px; margin:0 auto; padding:48px 32px 0; }
 
-  sup a { color: var(--accent-2); text-decoration: none; font-size: 11px; }
-  sup a:hover { text-decoration: underline; }
-  ol.ref-list { margin: 0; padding-left: 22px; color: var(--text-dim); font-size: 13px; }
-  ol.ref-list li { margin-bottom: 12px; padding-left: 4px; }
-  ol.ref-list li:target { color: var(--text); }
-  ol.ref-list em { color: var(--text); font-style: italic; }
+.breadcrumb{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px; }
+.breadcrumb a{ color:var(--muted); }
+.breadcrumb a:hover{ color:var(--pink); }
 
-  @media (max-width: 600px) {
-    body { padding: 20px 16px 60px; font-size: 13.5px; }
-    h1 { font-size: 18px; }
-    .sitenav { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .sitenav .links a { margin-left: 0; margin-right: 16px; }
-    .stats { flex-direction: column; }
-    .stat-card { min-width: 0; }
-  }
+h1{ font-size:clamp(26px,3.2vw,36px); font-weight:600; letter-spacing:-0.02em; margin-bottom:10px; color:var(--cream); }
+.subtitle{ color:var(--muted); font-size:14px; margin-bottom:24px; }
+
+h2{ font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-top:56px; margin-bottom:18px; padding-bottom:12px; border-bottom:0.5px solid var(--line); display:flex; align-items:center; gap:10px; }
+h2 .idx{ color:var(--pink); }
+
+p{ font-size:15px; margin:0 0 16px; color:var(--cream); line-height:1.75; }
+
+.callout{ background:var(--charcoal); border-left:2px solid var(--pink); padding:18px 22px; border-radius:0 12px 12px 0; margin:20px 0; font-size:14.5px; line-height:1.7; color:var(--muted); }
+.callout strong{ color:var(--cream); }
+
+.stats{ display:flex; flex-wrap:wrap; gap:1px; margin:24px 0; background:var(--line); border:0.5px solid var(--line); border-radius:12px; overflow:hidden; }
+.stat-card{ background:var(--bg); padding:16px 18px; flex:1; min-width:140px; }
+.stat-value{ font-size:20px; font-weight:600; color:var(--pink); font-variant-numeric:tabular-nums; }
+.stat-label{ font-size:11px; color:var(--muted); margin-top:6px; text-transform:uppercase; letter-spacing:0.06em; }
+
+figure{ margin:24px 0; text-align:center; }
+figure img{ max-width:100%; border:0.5px solid var(--line); border-radius:12px; background:#fff; }
+figcaption{ font-size:12px; color:var(--muted); margin-top:10px; }
+
+code{ background:var(--charcoal); border:0.5px solid var(--line); padding:2px 8px; border-radius:6px; font-size:13px; color:var(--pink); font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+
+.tag{ display:inline-block; background:var(--charcoal); border:0.5px solid var(--line); color:var(--muted); font-size:12px; padding:5px 12px; border-radius:100px; margin-right:8px; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.04em; }
+
+footer{ margin-top:64px; padding-top:24px; border-top:0.5px solid var(--line); font-size:12.5px; color:var(--muted); }
+
+.lede{ font-size:14.5px; color:var(--muted); border:0.5px solid var(--line); background:var(--charcoal); border-radius:12px; padding:18px 22px; margin-bottom:24px; line-height:1.7; }
+.lede strong{ color:var(--cream); }
+
+.pagenav{ display:flex; flex-wrap:wrap; gap:6px 20px; font-size:12px; margin-bottom:32px; text-transform:uppercase; letter-spacing:0.05em; }
+.pagenav a{ color:var(--muted); text-decoration:none; }
+.pagenav a:hover{ color:var(--pink); }
+.pagenav .sep{ color:var(--line); }
+
+abbr[title]{ text-decoration:underline dotted; text-decoration-color:var(--charcoal-2); cursor:help; }
+
+sup a{ color:var(--pink); text-decoration:none; font-size:12px; }
+sup a:hover{ text-decoration:underline; }
+ol.ref-list{ margin:0; padding-left:22px; color:var(--muted); font-size:14px; line-height:1.7; }
+ol.ref-list li{ margin-bottom:14px; padding-left:4px; }
+ol.ref-list li:target{ color:var(--cream); }
+ol.ref-list em{ color:var(--cream); font-style:italic; }
+
+@media (max-width:700px){
+  .nav{ padding:22px 24px; }
+  .nav-links{ gap:20px; font-size:12px; }
+  .article{ padding:36px 20px 0; }
+  .stats{ flex-direction:column; }
+  .stat-card{ min-width:0; }
+}
 </style>
 </head>
 <body>
 
-  <div class="sitenav">
-    <a class="brand" href="index.html"><span class="cursor">&gt;</span> CLEAVR</a>
-    <span class="links">
+  <div class="nav">
+    <a class="logo" href="index.html">cleavr</a>
+    <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="studies.html" class="current">Studies</a>
       <a href="explorer.html">Explorer</a>
-      <a href="mailto:sushanthsomayajula@gmail.com" class="btn-ghost">Get in touch</a>
-    </span>
+      <a class="nav-cta" href="mailto:sushanthsomayajula@gmail.com">Get in touch</a>
+    </div>
   </div>
+
+  <div class="article">
 
   <div class="breadcrumb"><a href="index.html">Cleavr</a> / <a href="studies.html">Studies</a> / Case Study 01</div>
   <h1>GNRHR expression across TNBC molecular subtypes</h1>
@@ -254,7 +146,7 @@
   <h2 id="findings"><span class="idx">03</span>Findings</h2>
 
   <div class="callout">
-    <strong>GNRHR expression does not differ significantly across TNBC subtypes</strong> (Kruskal-Wallis H = 1.38, p = 0.71). LAR trends numerically highest (median 4.55 vs. 2.55–3.08 for the others) but no pairwise comparison reaches significance.
+    <strong>GNRHR expression does not differ significantly across TNBC subtypes</strong> (Kruskal-Wallis H = 1.38, p = 0.71). LAR trends numerically highest (median 4.55 vs. 2.55&ndash;3.08 for the others) but no pairwise comparison reaches significance.
   </div>
 
   <figure>
@@ -299,6 +191,8 @@
   </ol>
 
   <footer>Data: TCGA Breast Invasive Carcinoma (Firehose Legacy), retrieved via cBioPortal. All figures independently re-derived from raw source files. Static page, no server required. &middot; <a href="index.html">&larr; Back to Cleavr</a></footer>
+
+  </div>
 
 </body>
 </html>
