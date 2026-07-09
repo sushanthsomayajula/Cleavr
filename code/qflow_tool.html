@@ -566,13 +566,18 @@ function runAnalysis(){
     const abcIsotype = applyCurve(curve, isoMfi);
     if(abcTarget===null || abcIsotype===null) return;
     const net = abcTarget - abcIsotype;
+    const negativeAbc = abcTarget<0 || abcIsotype<0;
     results.push({
       date:r.date, cell_line:r.cell_line, gene:(r.gene||'').trim().toUpperCase(),
       replicate:r.replicate, mfi, isotype_mfi:isoMfi,
       abc_target:abcTarget, abc_isotype:abcIsotype, net_receptors_per_cell:net,
       calibration_method:curve.method, calibration_r_squared:curve.r_squared,
+      negative_abc:negativeAbc,
     });
     log(`  ${r.date} ${r.cell_line} ${(r.gene||'').toUpperCase()}: ~${Math.round(net)} receptors/cell (${curve.method} fit, R^2=${curve.r_squared.toFixed(3)})`);
+    if(negativeAbc){
+      log(`  WARNING - ${r.date} ${r.cell_line} ${(r.gene||'').toUpperCase()}: calibration curve produced a negative ABC value (target=${abcTarget.toFixed(0)}, isotype=${abcIsotype.toFixed(0)}). A receptor count cannot be negative; this MFI falls outside the range the curve extrapolates reliably. Net receptors/cell for this row should not be trusted.`, 'l-bad');
+    }
   });
   lastQuantResults = results;
   renderQuant(results);
@@ -626,13 +631,25 @@ function calibrationChartSVG(points, curve){
 function renderQuant(results){
   const el = document.getElementById('quant-out');
   if(results.length===0){ el.innerHTML = '<div class="results-empty">No measurement rows converted yet. Check that dates match a fitted calibration curve.</div>'; return; }
-  const rowsHtml = results.map(r=>`<tr>
+  const negTitle = 'Calibration curve extrapolates below zero at this MFI. A receptor count cannot be negative, this value is not physically meaningful.';
+  const rowsHtml = results.map(r=>{
+    const targetCell = r.abc_target<0
+      ? `<span class="badge bad" title="${negTitle}">${Math.round(r.abc_target).toLocaleString()}</span>`
+      : Math.round(r.abc_target).toLocaleString();
+    const isoCell = r.abc_isotype<0
+      ? `<span class="badge bad" title="${negTitle}">${Math.round(r.abc_isotype).toLocaleString()}</span>`
+      : Math.round(r.abc_isotype).toLocaleString();
+    const netFlag = r.negative_abc
+      ? ` <span class="badge warn" title="Includes a negative ABC component above; this net value is unreliable, not a real receptor count.">unreliable</span>`
+      : '';
+    return `<tr>
     <td>${r.date}</td><td>${r.cell_line}</td><td>${r.gene}</td><td>${r.replicate||''}</td>
     <td>${r.mfi.toFixed(1)}</td><td>${r.isotype_mfi.toFixed(1)}</td>
-    <td>${Math.round(r.abc_target).toLocaleString()}</td><td>${Math.round(r.abc_isotype).toLocaleString()}</td>
-    <td><strong>${Math.round(r.net_receptors_per_cell).toLocaleString()}</strong></td>
+    <td>${targetCell}</td><td>${isoCell}</td>
+    <td><strong>${Math.round(r.net_receptors_per_cell).toLocaleString()}</strong>${netFlag}</td>
     <td>${r.calibration_method} (R&sup2;${r.calibration_r_squared.toFixed(3)})</td>
-  </tr>`).join('');
+  </tr>`;
+  }).join('');
   el.innerHTML = `<div class="panel">
     <table><thead><tr>
       <th>Date</th><th>Cell line</th><th>Gene</th><th>Rep</th><th>MFI</th><th>Isotype MFI</th>
@@ -667,8 +684,9 @@ function renderSubtypeComparison(quantResults){
     const info = CELL_LINE_SUBTYPE[key];
     if(!info){ unmapped.add(r.cell_line); return; }
     byKey[r.gene] = byKey[r.gene] || {};
-    byKey[r.gene][r.cell_line] = byKey[r.gene][r.cell_line] || {signals:[], subtype:info.subtype, stable:info.stable};
+    byKey[r.gene][r.cell_line] = byKey[r.gene][r.cell_line] || {signals:[], subtype:info.subtype, stable:info.stable, anyNegative:false};
     byKey[r.gene][r.cell_line].signals.push(r.net_receptors_per_cell);
+    if(r.negative_abc) byKey[r.gene][r.cell_line].anyNegative = true;
   });
 
   if(unmapped.size){
@@ -694,13 +712,13 @@ function renderSubtypeComparison(quantResults){
     const bySubtype = {};
     Object.entries(cellLines).forEach(([cl,d])=>{
       const mean = d.signals.reduce((a,b)=>a+b,0)/d.signals.length;
-      (bySubtype[d.subtype] = bySubtype[d.subtype]||[]).push({cell_line:cl, mean, n:d.signals.length, stable:d.stable});
+      (bySubtype[d.subtype] = bySubtype[d.subtype]||[]).push({cell_line:cl, mean, n:d.signals.length, stable:d.stable, anyNegative:d.anyNegative});
     });
     const subtypeAvg = {};
     Object.entries(bySubtype).forEach(([st,lines])=>{ subtypeAvg[st] = lines.reduce((a,l)=>a+l.mean,0)/lines.length; });
 
     const lineRows = Object.entries(bySubtype).map(([st,lines])=>
-      lines.map(l=>`<tr><td>${st}</td><td>${l.cell_line}${l.stable?'':' <span class="badge neutral">single-algorithm</span>'}</td><td>${Math.round(l.mean).toLocaleString()}</td><td>${l.n}</td></tr>`).join('')
+      lines.map(l=>`<tr><td>${st}</td><td>${l.cell_line}${l.stable?'':' <span class="badge neutral">single-algorithm</span>'}${l.anyNegative?' <span class="badge bad" title="At least one measurement for this cell line had a negative ABC component; treat this mean with caution.">flagged</span>':''}</td><td>${Math.round(l.mean).toLocaleString()}</td><td>${l.n}</td></tr>`).join('')
     ).join('');
 
     let concordanceHtml = '<div class="curve-meta">No RNA reference saved for this gene yet (Section 3).</div>';
