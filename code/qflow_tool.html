@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cleavr qFlow Tool</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#0A0A0B;
+  --charcoal:#1A1819;
+  --charcoal-2:#242224;
+  --charcoal-3:#3A3739;
+  --pink:#E7A9C0;
+  --pink-strong:#F2B8CE;
+  --pink-dim:#9C6E80;
+  --cream:#EDEAE6;
+  --muted:#8A8781;
+  --line:#232024;
+  --good:#8FBF9F;
+  --warn:#E0B45C;
+  --bad:#D97A7A;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+html,body{ background:var(--bg); color:var(--cream); font-family:'Inter', sans-serif; font-size:14px; }
+a{ color:var(--pink); }
+
+.wrap{ max-width:1180px; margin:0 auto; padding:40px 28px 100px; }
+header{ margin-bottom:36px; border-bottom:0.5px solid var(--line); padding-bottom:28px; }
+header .eyebrow{ font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--pink); margin-bottom:12px; font-weight:600; }
+header h1{ font-size:30px; font-weight:600; letter-spacing:-0.02em; margin-bottom:10px; }
+header p{ color:var(--muted); font-size:14.5px; max-width:720px; line-height:1.6; }
+
+.section{ margin-bottom:44px; }
+.section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:14px; flex-wrap:wrap; }
+.section-head h2{ font-size:17px; font-weight:600; }
+.section-head .sub{ color:var(--muted); font-size:13px; }
+.section-body{ color:var(--muted); font-size:13.5px; line-height:1.6; margin-bottom:16px; max-width:820px; }
+
+.panel{ background:var(--charcoal); border:0.5px solid var(--line); border-radius:12px; padding:22px; }
+
+table{ width:100%; border-collapse:collapse; font-size:13px; }
+th{ text-align:left; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.04em; font-size:10.5px; padding:6px 8px; border-bottom:0.5px solid var(--line); }
+td{ padding:4px 6px; border-bottom:0.5px solid var(--line); vertical-align:middle; }
+tr:last-child td{ border-bottom:none; }
+input[type=text], input[type=number]{
+  width:100%; background:var(--charcoal-2); border:0.5px solid var(--charcoal-3); border-radius:6px;
+  color:var(--cream); font-family:inherit; font-size:12.5px; padding:6px 8px;
+}
+input[type=text]:focus, input[type=number]:focus{ outline:1px solid var(--pink-dim); border-color:var(--pink-dim); }
+
+.btnrow{ display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+button{
+  font-family:inherit; font-size:12.5px; font-weight:600; padding:9px 16px; border-radius:100px;
+  border:0.5px solid var(--charcoal-3); background:var(--charcoal-2); color:var(--cream); cursor:pointer;
+}
+button:hover{ border-color:var(--pink-dim); }
+button.primary{ background:var(--pink); color:#1a1114; border-color:var(--pink); }
+button.primary:hover{ background:var(--pink-strong); }
+button.danger{ color:var(--bad); }
+button.small{ padding:5px 10px; font-size:11px; }
+input[type=file]{ display:none; }
+
+.del-btn{ background:transparent; border:none; color:var(--muted); font-size:15px; padding:2px 6px; cursor:pointer; }
+.del-btn:hover{ color:var(--bad); }
+
+.badge{ display:inline-block; font-size:10.5px; padding:3px 9px; border-radius:100px; font-weight:600; letter-spacing:0.02em; }
+.badge.good{ background:rgba(143,191,159,0.14); color:var(--good); }
+.badge.warn{ background:rgba(224,180,92,0.14); color:var(--warn); }
+.badge.bad{ background:rgba(217,122,122,0.14); color:var(--bad); }
+.badge.neutral{ background:var(--charcoal-2); color:var(--muted); }
+
+.curve-card{ background:var(--charcoal-2); border:0.5px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
+.curve-card-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.curve-card-head .date{ font-weight:600; font-size:13.5px; }
+.curve-meta{ color:var(--muted); font-size:12px; margin-top:6px; }
+
+.results-empty{ color:var(--muted); font-size:13px; padding:24px 0; text-align:center; }
+
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:860px){ .grid2{ grid-template-columns:1fr; } }
+
+.gene-card{ background:var(--charcoal-2); border:0.5px solid var(--line); border-radius:10px; padding:18px; margin-bottom:14px; }
+.gene-card h3{ font-size:15px; margin-bottom:10px; letter-spacing:-0.01em; }
+textarea{
+  width:100%; min-height:90px; background:var(--charcoal-2); border:0.5px solid var(--charcoal-3);
+  border-radius:8px; color:var(--cream); font-family:'SF Mono', Menlo, monospace; font-size:11.5px; padding:10px;
+  resize:vertical;
+}
+label.small-label{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:6px; }
+
+.log{ background:var(--charcoal-2); border:0.5px solid var(--line); border-radius:8px; padding:12px 14px; font-family:'SF Mono', Menlo, monospace; font-size:11.5px; color:var(--muted); white-space:pre-wrap; line-height:1.6; max-height:220px; overflow:auto; }
+.log .l-warn{ color:var(--warn); }
+.log .l-bad{ color:var(--bad); }
+.log .l-good{ color:var(--good); }
+
+footer{ margin-top:60px; padding-top:24px; border-top:0.5px solid var(--line); color:var(--muted); font-size:12px; line-height:1.6; }
+svg text{ font-family:'Inter', sans-serif; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Cleavr &middot; Internal tool</div>
+    <h1>qFlow: receptor quantification &amp; subtype validation</h1>
+    <p>Enter calibration bead runs and flow cytometry measurements below. This tool fits a per-date calibration curve (linear or log-log, whichever fits better), converts raw MFI into absolute antibody binding capacity (receptors per cell), and compares the protein-level pattern across TNBC subtypes against the RNA-level pattern from the computational screen. Same math as <code>receptor_quantification.py</code> and <code>flow_cytometry_validation.py</code>, done here so nothing has to round-trip through a spreadsheet.</p>
+  </header>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>1. Calibration beads</h2>
+      <span class="sub">one row per bead population per calibration run</span>
+    </div>
+    <p class="section-body"><code>molecules_per_bead</code> comes from the bead kit's lot-specific certificate of analysis, not measured. Need at least 3 populations per date to fit a curve.</p>
+    <div class="panel">
+      <table id="beads-table">
+        <thead><tr>
+          <th style="width:14%">Date</th>
+          <th style="width:18%">Bead lot</th>
+          <th style="width:16%">Population</th>
+          <th style="width:20%">Molecules / bead</th>
+          <th style="width:16%">MFI</th>
+          <th style="width:6%"></th>
+        </tr></thead>
+        <tbody id="beads-body"></tbody>
+      </table>
+      <div class="btnrow">
+        <button class="small" onclick="addBeadRow()">+ Add row</button>
+        <button class="small" onclick="document.getElementById('beads-file').click()">Import CSV</button>
+        <button class="small" onclick="exportCSV('beads')">Export CSV</button>
+        <input type="file" id="beads-file" accept=".csv" onchange="importCSV(event,'beads')">
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>2. Measurements</h2>
+      <span class="sub">one row per experiment: cell line &times; gene &times; replicate</span>
+    </div>
+    <p class="section-body">Cell lines are matched against the Lehmann-subtype lookup table (Lehmann et al. 2011, PMID 21633166; cross-checked by Espinosa Fernandez et al. 2020, PMID 32353087). Unrecognized cell line names are flagged, not silently dropped.</p>
+    <div class="panel">
+      <table id="meas-table">
+        <thead><tr>
+          <th style="width:11%">Date</th>
+          <th style="width:14%">Cell line</th>
+          <th style="width:9%">Gene</th>
+          <th style="width:10%">MFI</th>
+          <th style="width:12%">Isotype MFI</th>
+          <th style="width:9%">% positive</th>
+          <th style="width:9%">Replicate</th>
+          <th style="width:20%">Notes</th>
+          <th style="width:6%"></th>
+        </tr></thead>
+        <tbody id="meas-body"></tbody>
+      </table>
+      <div class="btnrow">
+        <button class="small" onclick="addMeasRow()">+ Add row</button>
+        <button class="small" onclick="document.getElementById('meas-file').click()">Import CSV</button>
+        <button class="small" onclick="exportCSV('meas')">Export CSV</button>
+        <input type="file" id="meas-file" accept=".csv" onchange="importCSV(event,'meas')">
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2>3. RNA reference (optional)</h2>
+      <span class="sub">for protein-vs-RNA subtype concordance</span>
+    </div>
+    <p class="section-body">Paste the <code>group_medians</code> block from a gene's <code>results/&lt;gene&gt;/&lt;gene&gt;_analysis_results.json</code> (produced by <code>biomarker_pipeline.py</code>), or upload the whole file. One entry per gene you're testing.</p>
+    <div class="panel">
+      <label class="small-label">Gene</label>
+      <input type="text" id="rna-gene" placeholder="e.g. GNRHR" style="max-width:200px; margin-bottom:10px;">
+      <label class="small-label">group_medians JSON, e.g. {"BL1":2.55,"BL2":2.89,"M":3.08,"LAR":4.55}</label>
+      <textarea id="rna-json" placeholder='{"BL1": 2.5539, "BL2": 2.8948, "M": 3.08135, "LAR": 4.5535}'></textarea>
+      <div class="btnrow">
+        <button class="small" onclick="document.getElementById('rna-file').click()">Upload analysis_results.json</button>
+        <button class="small" onclick="saveRnaEntry()">Save this gene's RNA data</button>
+        <input type="file" id="rna-file" accept=".json" onchange="importRnaJson(event)">
+      </div>
+      <div id="rna-saved" class="curve-meta" style="margin-top:10px;"></div>
+    </div>
+  </div>
+
+  <div class="btnrow" style="margin-bottom:36px;">
+    <button class="primary" onclick="runAnalysis()">Run analysis</button>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Calibration curves</h2></div>
+    <div id="curves-out" class="results-empty">Run analysis to fit calibration curves.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Quantification results</h2></div>
+    <div id="quant-out" class="results-empty">Run analysis to compute ABC / receptors per cell.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Subtype comparison</h2></div>
+    <div id="subtype-out" class="results-empty">Run analysis to compare protein vs. RNA patterns across subtypes.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Log</h2></div>
+    <div id="run-log" class="log">Nothing run yet.</div>
+  </div>
+
+  <footer>
+    Calibration and ABC logic mirrors <code>code/receptor_quantification.py</code> exactly (manual OLS, linear vs. log-log selection by R&sup2;). Subtype logic mirrors <code>code/flow_cytometry_validation.py</code>, but only ever uses calibrated receptors-per-cell. A measurement row without a fitted calibration curve for its date is excluded from the subtype comparison and flagged in the log, never approximated from the raw MFI/isotype ratio, since that ratio has no absolute meaning on its own. Nothing on this page is sent anywhere: all computation happens locally in your browser. CSV import/export uses the same column schema as the Python scripts, so files are interchangeable. See <a href="#methodology">Methodology</a> below for the exact equations and references.
+  </footer>
+
+  <div class="section" id="methodology" style="margin-top:8px;">
+    <div class="section-head"><h2>Methodology: equations &amp; references</h2></div>
+    <div class="panel">
+      <h3 style="font-size:14px; margin-bottom:8px;">1. Calibration curve fit</h3>
+      <p class="section-body" style="margin-bottom:10px;">For each calibration date, ordinary least squares is fit twice, once on raw values (linear model) and once on log<sub>10</sub>-transformed values (log-log model), and whichever fit has the higher R&sup2; is kept and reported. Implemented as explicit summations, not a stats library, so every step is auditable.</p>
+      <div class="log" style="white-space:pre-wrap;">Linear model:      ABC = a&middot;MFI + b
+Log-log model:     log10(ABC) = a&middot;log10(MFI) + b   =>   ABC = 10^(a&middot;log10(MFI) + b)
+
+Ordinary least squares (both models fit this way, x/y substituted accordingly):
+  mean_x = (1/n) * sum(x_i)
+  mean_y = (1/n) * sum(y_i)
+  a (slope)     = sum((x_i - mean_x)(y_i - mean_y)) / sum((x_i - mean_x)^2)
+  b (intercept) = mean_y - a * mean_x
+  R^2           = 1 - [ sum((y_i - y_pred_i)^2) / sum((y_i - mean_y)^2) ]
+
+Minimum 3 bead populations per date (kits typically ship 4-6).
+R^2 below 0.95 is flagged as noisier than kit manufacturers typically expect.</div>
+
+      <h3 style="font-size:14px; margin:18px 0 8px;">2. Antibody binding capacity (ABC) conversion</h3>
+      <div class="log" style="white-space:pre-wrap;">ABC_target  = curve applied to target-antibody MFI
+ABC_isotype = curve applied to isotype-control MFI
+Net receptors per cell = ABC_target - ABC_isotype
+
+This background-subtraction step is what makes the number a receptor count and
+not just a fluorescence readout: isotype MFI is the assay's own noise floor
+(nonspecific antibody binding), and subtracting it out is standard practice
+for antibody-binding-capacity flow cytometry (qFlow).</div>
+
+      <h3 style="font-size:14px; margin:18px 0 8px;">3. Subtype comparison</h3>
+      <p class="section-body" style="margin-bottom:6px;">Mean calibrated receptors/cell is averaged per cell line, then per subtype (BL1/BL2/M/LAR, Lehmann classification). Subtypes are ranked low-to-high on the protein side and compared against the same ranking on the RNA side (TCGA medians from <code>biomarker_pipeline.py</code>). Cell lines not in the lookup table, and measurement rows without a calibration curve for their date, are excluded and flagged in the log rather than silently dropped or approximated.</p>
+
+      <h3 style="font-size:14px; margin:18px 0 8px;">References</h3>
+      <ol style="padding-left:20px; color:var(--muted); font-size:12.5px; line-height:1.9;">
+        <li>Gratama JW, D'hautcourt JL, Mandy F, et al. Flow cytometric quantitation of immunofluorescence intensity: problems and perspectives. European Working Group on Clinical Cell Analysis. <em>Cytometry.</em> 1998;33(2):166-78. <a href="https://doi.org/10.1002/(sici)1097-0320(19981001)33:2%3C166::aid-cyto11%3E3.0.co;2-s" target="_blank" rel="noopener">DOI</a>. General ABC/MESF calibration-bead framework.</li>
+        <li>Wang L, Abbasi F, Gaigalas AK, Hoffman RA, Flagler D, Marti GE. Discrepancy in measuring CD4 expression on T-lymphocytes using fluorescein conjugates in comparison with unimolar CD4-phycoerythrin conjugates. <em>Cytometry B Clin Cytom.</em> 2007;72(6):442-9. <a href="https://doi.org/10.1002/cyto.b.20354" target="_blank" rel="noopener">DOI</a>. QuantiBRITE PE + unimolar PE-conjugate ABC methodology.</li>
+        <li>Fang Y, Malik M, England SK, Imoukhuede PI. Absolute Quantification of Plasma Membrane Receptors Via Quantitative Flow Cytometry. <em>Methods Mol Biol.</em> 2022;2475:61-77. <a href="https://doi.org/10.1007/978-1-0716-2217-9_4" target="_blank" rel="noopener">DOI</a>. qFlow protocol for RTKs/GPCRs, PE-based absolute quantification.</li>
+        <li>Chen S, Weddell J, Gupta P, Conard G, Parkin J, Imoukhuede PI. qFlow Cytometry-Based Receptoromic Screening. <em>Methods Mol Biol.</em> 2017;1570:117-138. <a href="https://doi.org/10.1007/978-1-4939-6840-4_8" target="_blank" rel="noopener">DOI</a>. Background subtraction and calibration workflow for high-throughput receptor quantification.</li>
+        <li>Lehmann BD, Bauer JA, Chen X, et al. Identification of human triple-negative breast cancer subtypes and preclinical models for selection of targeted therapies. <em>J Clin Invest.</em> 2011;121(7):2750-67. PMID <a href="https://pubmed.ncbi.nlm.nih.gov/21633166/" target="_blank" rel="noopener">21633166</a>. Original TNBCtype subtype algorithm applied to a cell line panel, source of the cell-line-to-subtype lookup table used here.</li>
+        <li>Espinosa Fernandez JR, Eckhardt BL, Lee J, et al. Identification of triple-negative breast cancer cell lines classified under the same molecular subtype using different molecular characterization techniques. <em>PLoS One.</em> 2020;15(4):e0231953. PMID <a href="https://pubmed.ncbi.nlm.nih.gov/32353087/" target="_blank" rel="noopener">32353087</a>. Cross-checked the same cell lines against a revised algorithm across 5 independent datasets; the "stable" flag in the lookup table reflects concordance here.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- data model ---------- */
+let beadRows = [];
+let measRows = [];
+let rnaData = {}; // gene -> {BL1:.., BL2:.., M:.., LAR:..}
+
+function uid(){ return Math.random().toString(36).slice(2,9); }
+
+function addBeadRow(vals){
+  const r = Object.assign({id:uid(), date:'', bead_lot:'', population:'', molecules_per_bead:'', mfi:''}, vals||{});
+  beadRows.push(r);
+  renderBeads();
+}
+function addMeasRow(vals){
+  const r = Object.assign({id:uid(), date:'', cell_line:'', gene:'', mfi:'', isotype_mfi:'', pct_positive:'', replicate:'', notes:''}, vals||{});
+  measRows.push(r);
+  renderMeas();
+}
+function delBeadRow(id){ beadRows = beadRows.filter(r=>r.id!==id); renderBeads(); }
+function delMeasRow(id){ measRows = measRows.filter(r=>r.id!==id); renderMeas(); }
+
+function cellInput(row, key, arr, width){
+  return `<input type="text" value="${escapeAttr(row[key])}" oninput="updateCell('${arr}','${row.id}','${key}',this.value)">`;
+}
+function escapeAttr(v){ return (v===undefined||v===null? '': String(v)).replace(/"/g,'&quot;'); }
+function updateCell(arr,id,key,val){
+  const list = arr==='beads' ? beadRows : measRows;
+  const row = list.find(r=>r.id===id);
+  if(row) row[key]=val;
+}
+
+function renderBeads(){
+  const body = document.getElementById('beads-body');
+  body.innerHTML = beadRows.map(r=>`<tr>
+    <td>${cellInput(r,'date','beads')}</td>
+    <td>${cellInput(r,'bead_lot','beads')}</td>
+    <td>${cellInput(r,'population','beads')}</td>
+    <td>${cellInput(r,'molecules_per_bead','beads')}</td>
+    <td>${cellInput(r,'mfi','beads')}</td>
+    <td><button class="del-btn" onclick="delBeadRow('${r.id}')">&times;</button></td>
+  </tr>`).join('');
+}
+function renderMeas(){
+  const body = document.getElementById('meas-body');
+  body.innerHTML = measRows.map(r=>`<tr>
+    <td>${cellInput(r,'date','meas')}</td>
+    <td>${cellInput(r,'cell_line','meas')}</td>
+    <td>${cellInput(r,'gene','meas')}</td>
+    <td>${cellInput(r,'mfi','meas')}</td>
+    <td>${cellInput(r,'isotype_mfi','meas')}</td>
+    <td>${cellInput(r,'pct_positive','meas')}</td>
+    <td>${cellInput(r,'replicate','meas')}</td>
+    <td>${cellInput(r,'notes','meas')}</td>
+    <td><button class="del-btn" onclick="delMeasRow('${r.id}')">&times;</button></td>
+  </tr>`).join('');
+}
+
+/* ---------- CSV import/export ---------- */
+const SCHEMAS = {
+  beads: ['date','bead_lot','population','molecules_per_bead','mfi'],
+  meas: ['date','cell_line','gene','mfi','isotype_mfi','pct_positive','replicate','notes']
+};
+
+function parseCSV(text){
+  const lines = text.replace(/\r\n/g,'\n').split('\n').filter(l=>l.length>0);
+  if(lines.length===0) return {header:[], rows:[]};
+  const header = splitCSVLine(lines[0]);
+  const rows = lines.slice(1).map(splitCSVLine);
+  return {header, rows};
+}
+function splitCSVLine(line){
+  const out=[]; let cur=''; let inQ=false;
+  for(let i=0;i<line.length;i++){
+    const c=line[i];
+    if(inQ){
+      if(c==='"'){ if(line[i+1]==='"'){cur+='"';i++;} else inQ=false; }
+      else cur+=c;
+    } else {
+      if(c===','){ out.push(cur); cur=''; }
+      else if(c==='"'){ inQ=true; }
+      else cur+=c;
+    }
+  }
+  out.push(cur);
+  return out;
+}
+function csvEscape(v){
+  v = v===undefined||v===null ? '' : String(v);
+  if(/[",\n]/.test(v)) return '"'+v.replace(/"/g,'""')+'"';
+  return v;
+}
+
+function importCSV(evt, which){
+  const file = evt.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const {header, rows} = parseCSV(reader.result);
+    const schema = SCHEMAS[which];
+    const idx = {};
+    header.forEach((h,i)=> idx[h.trim()]=i);
+    const parsed = rows.map(cols=>{
+      const obj = {id:uid()};
+      schema.forEach(key=>{ obj[key] = idx[key]!==undefined ? (cols[idx[key]]||'') : ''; });
+      return obj;
+    });
+    if(which==='beads'){ beadRows = parsed; renderBeads(); }
+    else { measRows = parsed; renderMeas(); }
+    log(`Imported ${parsed.length} rows into ${which==='beads'?'calibration beads':'measurements'}.`);
+  };
+  reader.readAsText(file);
+  evt.target.value = '';
+}
+function exportCSV(which){
+  const schema = SCHEMAS[which];
+  const rows = which==='beads' ? beadRows : measRows;
+  const lines = [schema.join(',')];
+  rows.forEach(r=> lines.push(schema.map(k=>csvEscape(r[k])).join(',')));
+  downloadText(lines.join('\n'), which==='beads' ? 'calibration_beads.csv' : 'measurements.csv', 'text/csv');
+}
+function downloadText(text, filename, type){
+  const blob = new Blob([text], {type});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function importRnaJson(evt){
+  const file = evt.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{
+      const parsed = JSON.parse(reader.result);
+      const gene = (parsed.gene || document.getElementById('rna-gene').value || '').toUpperCase();
+      const medians = parsed.group_medians || parsed;
+      if(!gene){ alert('Could not determine gene name; fill in the Gene field first.'); return; }
+      rnaData[gene] = medians;
+      renderRnaSaved();
+      log(`Loaded RNA group_medians for ${gene} from uploaded file.`);
+    } catch(e){
+      alert('Could not parse that file as JSON: ' + e.message);
+    }
+  };
+  reader.readAsText(file);
+  evt.target.value='';
+}
+function saveRnaEntry(){
+  const gene = document.getElementById('rna-gene').value.trim().toUpperCase();
+  const raw = document.getElementById('rna-json').value.trim();
+  if(!gene){ alert('Enter a gene symbol first.'); return; }
+  if(!raw){ alert('Paste the group_medians JSON first.'); return; }
+  try{
+    const medians = JSON.parse(raw);
+    rnaData[gene] = medians;
+    renderRnaSaved();
+    log(`Saved RNA group_medians for ${gene}.`);
+  } catch(e){
+    alert('That is not valid JSON: ' + e.message);
+  }
+}
+function renderRnaSaved(){
+  const genes = Object.keys(rnaData);
+  document.getElementById('rna-saved').textContent = genes.length
+    ? 'Saved RNA data for: ' + genes.join(', ')
+    : '';
+}
+
+/* ---------- calibration curve fitting (mirrors receptor_quantification.py) ---------- */
+function olsFit(x, y){
+  const n = x.length;
+  const meanX = x.reduce((a,b)=>a+b,0)/n;
+  const meanY = y.reduce((a,b)=>a+b,0)/n;
+  let num=0, den=0;
+  for(let i=0;i<n;i++){ num += (x[i]-meanX)*(y[i]-meanY); den += (x[i]-meanX)**2; }
+  if(den===0) return null;
+  const slope = num/den;
+  const intercept = meanY - slope*meanX;
+  let ssRes=0, ssTot=0;
+  for(let i=0;i<n;i++){
+    const yPred = slope*x[i]+intercept;
+    ssRes += (y[i]-yPred)**2;
+    ssTot += (y[i]-meanY)**2;
+  }
+  const r2 = ssTot>0 ? 1 - ssRes/ssTot : 0.0;
+  return {slope, intercept, r2};
+}
+
+const MIN_BEAD_POPULATIONS = 3;
+
+function fitCalibrationCurve(points){
+  // points: [[mfi, abc], ...]
+  if(points.length < MIN_BEAD_POPULATIONS) return null;
+  const mfis = points.map(p=>p[0]);
+  const abcs = points.map(p=>p[1]);
+  const candidates = [];
+  const linear = olsFit(mfis, abcs);
+  if(linear) candidates.push({method:'linear', slope:linear.slope, intercept:linear.intercept, r_squared:linear.r2});
+  if(mfis.every(v=>v>0) && abcs.every(v=>v>0)){
+    const logMfis = mfis.map(Math.log10);
+    const logAbcs = abcs.map(Math.log10);
+    const loglog = olsFit(logMfis, logAbcs);
+    if(loglog) candidates.push({method:'log-log', slope:loglog.slope, intercept:loglog.intercept, r_squared:loglog.r2});
+  }
+  if(candidates.length===0) return null;
+  return candidates.reduce((best,c)=> c.r_squared>best.r_squared ? c : best);
+}
+
+function applyCurve(curve, mfi){
+  if(mfi===null || mfi===undefined || isNaN(mfi) || mfi<=0) return null;
+  if(curve.method==='linear') return curve.slope*mfi + curve.intercept;
+  const logAbc = curve.slope*Math.log10(mfi) + curve.intercept;
+  return Math.pow(10, logAbc);
+}
+
+/* ---------- subtype lookup (mirrors flow_cytometry_validation.py) ---------- */
+const CELL_LINE_SUBTYPE = {
+  'HCC70':    {subtype:'BL2', stable:true},
+  'SUM149PT': {subtype:'BL2', stable:true},
+  'HCC1806':  {subtype:'BL2', stable:true},
+  'BT549':    {subtype:'M',   stable:true},
+  'MDAMB453': {subtype:'LAR', stable:true},
+  'HCC2157':  {subtype:'BL1', stable:true},
+  'MDAMB468': {subtype:'BL1', stable:false},
+  'HCC1937':  {subtype:'BL1', stable:false},
+  'HCC3153':  {subtype:'BL1', stable:false},
+  'SUM185PE': {subtype:'LAR', stable:false},
+};
+function normalizeCellLine(name){
+  return (name||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+}
+
+/* ---------- main run ---------- */
+let lastQuantResults = [];
+let logLines = [];
+function log(msg, cls){
+  logLines.push(cls ? `<span class="${cls}">${msg}</span>` : msg);
+  document.getElementById('run-log').innerHTML = logLines.join('\n');
+}
+function resetLog(){ logLines=[]; document.getElementById('run-log').innerHTML=''; }
+
+function runAnalysis(){
+  resetLog();
+  log('=== Fitting calibration curves ===');
+
+  // group bead rows by date
+  const byDate = {};
+  beadRows.forEach(r=>{
+    const mfi = parseFloat(r.mfi), abc = parseFloat(r.molecules_per_bead);
+    if(!r.date || isNaN(mfi) || isNaN(abc)) return;
+    (byDate[r.date] = byDate[r.date] || []).push([mfi, abc]);
+  });
+
+  const curves = {};
+  const curveLog = [];
+  Object.keys(byDate).sort().forEach(date=>{
+    const points = byDate[date];
+    const curve = fitCalibrationCurve(points);
+    if(!curve){
+      log(`WARNING - ${date}: only ${points.length} bead population(s), need >= ${MIN_BEAD_POPULATIONS}. Skipped.`, 'l-warn');
+      curveLog.push({date, points, curve:null});
+      return;
+    }
+    curves[date] = curve;
+    log(`${date}: ${curve.method} calibration curve, R^2 = ${curve.r_squared.toFixed(4)}, from ${points.length} bead populations`,
+        curve.r_squared<0.95 ? 'l-warn' : 'l-good');
+    if(curve.r_squared < 0.95){
+      log(`  WARNING - R^2 below 0.95, noisier than kit manufacturers typically expect. Re-run calibration if possible.`, 'l-warn');
+    }
+    curveLog.push({date, points, curve});
+  });
+  renderCurves(curveLog);
+
+  // quantify measurements
+  log('\n=== Converting measurements to receptors/cell ===');
+  const results = [];
+  measRows.forEach(r=>{
+    const curve = curves[r.date];
+    const mfi = parseFloat(r.mfi), isoMfi = parseFloat(r.isotype_mfi);
+    if(!curve){
+      if(r.date) log(`SKIPPED ${r.date} ${r.cell_line||'?'} ${r.gene||'?'}: no calibration curve for this date.`, 'l-warn');
+      return;
+    }
+    if(isNaN(mfi) || isNaN(isoMfi)) return;
+    const abcTarget = applyCurve(curve, mfi);
+    const abcIsotype = applyCurve(curve, isoMfi);
+    if(abcTarget===null || abcIsotype===null) return;
+    const net = abcTarget - abcIsotype;
+    results.push({
+      date:r.date, cell_line:r.cell_line, gene:(r.gene||'').trim().toUpperCase(),
+      replicate:r.replicate, mfi, isotype_mfi:isoMfi,
+      abc_target:abcTarget, abc_isotype:abcIsotype, net_receptors_per_cell:net,
+      calibration_method:curve.method, calibration_r_squared:curve.r_squared,
+    });
+    log(`  ${r.date} ${r.cell_line} ${(r.gene||'').toUpperCase()}: ~${Math.round(net)} receptors/cell (${curve.method} fit, R^2=${curve.r_squared.toFixed(3)})`);
+  });
+  lastQuantResults = results;
+  renderQuant(results);
+
+  // subtype comparison
+  log('\n=== Subtype comparison (protein vs RNA) ===');
+  renderSubtypeComparison(results);
+}
+
+function renderCurves(curveLog){
+  const el = document.getElementById('curves-out');
+  if(curveLog.length===0){ el.innerHTML = '<div class="results-empty">No calibration bead data entered yet.</div>'; return; }
+  el.innerHTML = curveLog.map(c=>{
+    const badge = !c.curve ? `<span class="badge bad">insufficient data</span>`
+      : c.curve.r_squared>=0.95 ? `<span class="badge good">R&sup2; ${c.curve.r_squared.toFixed(4)}</span>`
+      : `<span class="badge warn">R&sup2; ${c.curve.r_squared.toFixed(4)} (low)</span>`;
+    const chart = c.curve ? calibrationChartSVG(c.points, c.curve) : '';
+    return `<div class="curve-card">
+      <div class="curve-card-head"><span class="date">${c.date}</span>${badge}</div>
+      ${c.curve ? `<div class="curve-meta">${c.curve.method} fit &middot; slope=${c.curve.slope.toExponential(3)} &middot; intercept=${c.curve.intercept.toExponential(3)} &middot; ${c.points.length} bead populations</div>` : `<div class="curve-meta">${c.points.length} bead population(s) entered, need &ge; ${MIN_BEAD_POPULATIONS}.</div>`}
+      ${chart}
+    </div>`;
+  }).join('');
+}
+
+function calibrationChartSVG(points, curve){
+  const W=440, H=200, PAD=36;
+  const xs = points.map(p=>p[0]), ys = points.map(p=>p[1]);
+  const xMin=Math.min(...xs)*0.9, xMax=Math.max(...xs)*1.1;
+  const yMin=Math.min(...ys)*0.9, yMax=Math.max(...ys)*1.1;
+  const sx = v => PAD + (v-xMin)/(xMax-xMin||1) * (W-2*PAD);
+  const sy = v => H-PAD - (v-yMin)/(yMax-yMin||1) * (H-2*PAD);
+  const dots = points.map(p=>`<circle cx="${sx(p[0]).toFixed(1)}" cy="${sy(p[1]).toFixed(1)}" r="4" fill="#E7A9C0"/>`).join('');
+  // fit line, sample across range
+  const N=30; let pathPts=[];
+  for(let i=0;i<=N;i++){
+    const mfi = xMin + (xMax-xMin)*i/N;
+    const abc = curve.method==='linear' ? curve.slope*mfi+curve.intercept : Math.pow(10, curve.slope*Math.log10(mfi)+curve.intercept);
+    pathPts.push(`${sx(mfi).toFixed(1)},${sy(abc).toFixed(1)}`);
+  }
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%; max-width:460px; margin-top:8px;">
+    <line x1="${PAD}" y1="${H-PAD}" x2="${W-PAD}" y2="${H-PAD}" stroke="#3A3739" stroke-width="1"/>
+    <line x1="${PAD}" y1="${PAD}" x2="${PAD}" y2="${H-PAD}" stroke="#3A3739" stroke-width="1"/>
+    <text x="${W/2}" y="${H-6}" fill="#8A8781" font-size="10" text-anchor="middle">MFI</text>
+    <text x="12" y="${H/2}" fill="#8A8781" font-size="10" text-anchor="middle" transform="rotate(-90 12 ${H/2})">molecules/bead</text>
+    <polyline points="${pathPts.join(' ')}" fill="none" stroke="#F2B8CE" stroke-width="1.5" opacity="0.85"/>
+    ${dots}
+  </svg>`;
+}
+
+function renderQuant(results){
+  const el = document.getElementById('quant-out');
+  if(results.length===0){ el.innerHTML = '<div class="results-empty">No measurement rows converted yet. Check that dates match a fitted calibration curve.</div>'; return; }
+  const rowsHtml = results.map(r=>`<tr>
+    <td>${r.date}</td><td>${r.cell_line}</td><td>${r.gene}</td><td>${r.replicate||''}</td>
+    <td>${r.mfi.toFixed(1)}</td><td>${r.isotype_mfi.toFixed(1)}</td>
+    <td>${Math.round(r.abc_target).toLocaleString()}</td><td>${Math.round(r.abc_isotype).toLocaleString()}</td>
+    <td><strong>${Math.round(r.net_receptors_per_cell).toLocaleString()}</strong></td>
+    <td>${r.calibration_method} (R&sup2;${r.calibration_r_squared.toFixed(3)})</td>
+  </tr>`).join('');
+  el.innerHTML = `<div class="panel">
+    <table><thead><tr>
+      <th>Date</th><th>Cell line</th><th>Gene</th><th>Rep</th><th>MFI</th><th>Isotype MFI</th>
+      <th>ABC target</th><th>ABC isotype</th><th>Net receptors/cell</th><th>Curve</th>
+    </tr></thead><tbody>${rowsHtml}</tbody></table>
+    <div class="btnrow">
+      <button class="small" onclick="exportResultsJSON()">Export JSON</button>
+      <button class="small" onclick="exportResultsCSV()">Export CSV</button>
+    </div>
+  </div>`;
+}
+function exportResultsJSON(){ downloadText(JSON.stringify(lastQuantResults, null, 2), 'receptor_quantification.json', 'application/json'); }
+function exportResultsCSV(){
+  const cols = ['date','cell_line','gene','replicate','mfi','isotype_mfi','abc_target','abc_isotype','net_receptors_per_cell','calibration_method','calibration_r_squared'];
+  const lines = [cols.join(',')];
+  lastQuantResults.forEach(r=> lines.push(cols.map(c=> typeof r[c]==='number' ? r[c] : csvEscape(r[c])).join(',')));
+  downloadText(lines.join('\n'), 'receptor_quantification.csv', 'text/csv');
+}
+
+function renderSubtypeComparison(quantResults){
+  const el = document.getElementById('subtype-out');
+  // Absolute receptor count requires calibration. Only rows that already made it
+  // into quantResults (i.e. had a fitted curve for their date) are used here.
+  // Rows without a calibration curve are excluded, never approximated with the
+  // raw MFI/isotype ratio, since that ratio is a unitless fold-change and cannot
+  // be averaged or ranked alongside an absolute receptors-per-cell number.
+  const byKey = {}; // gene -> cell_line -> {signals:[], subtype, stable}
+  const unmapped = new Set();
+
+  quantResults.forEach(r=>{
+    const key = normalizeCellLine(r.cell_line);
+    const info = CELL_LINE_SUBTYPE[key];
+    if(!info){ unmapped.add(r.cell_line); return; }
+    byKey[r.gene] = byKey[r.gene] || {};
+    byKey[r.gene][r.cell_line] = byKey[r.gene][r.cell_line] || {signals:[], subtype:info.subtype, stable:info.stable};
+    byKey[r.gene][r.cell_line].signals.push(r.net_receptors_per_cell);
+  });
+
+  if(unmapped.size){
+    log(`WARNING - cell line(s) not in the subtype lookup table, excluded from subtype comparison: ${[...unmapped].join(', ')}`, 'l-warn');
+  }
+
+  // flag measurement rows that never got a calibrated value at all (no curve for that date)
+  const calibratedKeys = new Set(quantResults.map(r=>[r.date,r.cell_line,r.gene,r.replicate||''].join('|')));
+  measRows.forEach(r=>{
+    if(!r.cell_line || !r.gene) return;
+    const gene = (r.gene||'').trim().toUpperCase();
+    const k = [r.date,r.cell_line,gene,r.replicate||''].join('|');
+    if(!calibratedKeys.has(k)){
+      log(`  EXCLUDED from subtype comparison: ${r.date||'(no date)'} ${r.cell_line} ${gene}, no calibrated receptor count for this row (needs a fitted calibration curve for that date). Not approximated from the raw ratio.`, 'l-warn');
+    }
+  });
+
+  const genes = Object.keys(byKey);
+  if(genes.length===0){ el.innerHTML = '<div class="results-empty">No calibrated measurement rows with a recognized cell line yet. Absolute receptor counts require a fitted calibration curve; uncalibrated rows are excluded, not approximated.</div>'; return; }
+
+  el.innerHTML = genes.map(gene=>{
+    const cellLines = byKey[gene];
+    const bySubtype = {};
+    Object.entries(cellLines).forEach(([cl,d])=>{
+      const mean = d.signals.reduce((a,b)=>a+b,0)/d.signals.length;
+      (bySubtype[d.subtype] = bySubtype[d.subtype]||[]).push({cell_line:cl, mean, n:d.signals.length, stable:d.stable});
+    });
+    const subtypeAvg = {};
+    Object.entries(bySubtype).forEach(([st,lines])=>{ subtypeAvg[st] = lines.reduce((a,l)=>a+l.mean,0)/lines.length; });
+
+    const lineRows = Object.entries(bySubtype).map(([st,lines])=>
+      lines.map(l=>`<tr><td>${st}</td><td>${l.cell_line}${l.stable?'':' <span class="badge neutral">single-algorithm</span>'}</td><td>${Math.round(l.mean).toLocaleString()}</td><td>${l.n}</td></tr>`).join('')
+    ).join('');
+
+    let concordanceHtml = '<div class="curve-meta">No RNA reference saved for this gene yet (Section 3).</div>';
+    const rna = rnaData[gene];
+    if(rna){
+      const common = Object.keys(subtypeAvg).filter(s=> rna[s]!==undefined).sort();
+      if(common.length<2){
+        concordanceHtml = `<div class="curve-meta">Only ${common.length} subtype(s) in common with RNA data; need &ge; 2 to compare ranking.</div>`;
+      } else {
+        const proteinRank = [...common].sort((a,b)=>subtypeAvg[a]-subtypeAvg[b]);
+        const rnaRank = [...common].sort((a,b)=>rna[a]-rna[b]);
+        const match = JSON.stringify(proteinRank)===JSON.stringify(rnaRank);
+        concordanceHtml = `<div class="curve-meta">
+          Protein rank (low&rarr;high, calibrated receptors/cell): ${proteinRank.join(' &lt; ')}<br>
+          RNA rank (low&rarr;high, TCGA): ${rnaRank.join(' &lt; ')}<br>
+          <span class="badge ${match?'good':'bad'}">${match ? 'rankings match' : 'rankings differ'}</span>
+        </div>`;
+      }
+    }
+
+    return `<div class="gene-card">
+      <h3>${gene}</h3>
+      <table><thead><tr><th>Subtype</th><th>Cell line</th><th>Mean receptors/cell (calibrated)</th><th>n</th></tr></thead>
+      <tbody>${lineRows}</tbody></table>
+      ${concordanceHtml}
+    </div>`;
+  }).join('');
+}
+
+/* ---------- init ---------- */
+for(let i=0;i<3;i++) addBeadRow();
+for(let i=0;i<2;i++) addMeasRow();
+</script>
+</body>
+</html>

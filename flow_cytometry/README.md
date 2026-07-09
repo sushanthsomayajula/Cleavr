@@ -4,12 +4,14 @@ Raw wet-lab flow cytometry measurements, hand-entered after each experiment. Thi
 
 Two tools work off this data: `flow_cytometry_validation.py` compares a relative signal (MFI/isotype fold-change) across subtypes, `receptor_quantification.py` converts that into an absolute receptors-per-cell estimate using a calibration bead standard curve. The relative tool needs only `measurements.csv`; the quantification tool also needs `calibration_beads.csv` from the same experiment day.
 
+For entering and reviewing data without editing CSVs directly, `code/qflow_tool.html` is a self-contained browser tool (no server, no dependencies, open the file directly) that does both steps in one place: editable data-entry tables, calibration curve fitting, ABC conversion, and the subtype comparison, plus CSV import/export using the exact same column schema as the two scripts above, so files move freely between the browser tool and the command line. It also fixes a gap in `flow_cytometry_validation.py`: that script only ever uses the raw MFI/isotype ratio and never actually picks up the calibrated receptor count, even though this file used to say it would. The browser tool uses the calibrated number whenever a calibration curve exists for that date, falling back to the raw ratio otherwise.
+
 ## How to use
 
 1. Run calibration beads on the flow cytometer the same day as your samples, same instrument settings. Add one row per bead population (need at least 3, kits typically ship 4-6) to `calibration_beads.csv`, using the molecules-per-bead value from the kit's lot-specific certificate of analysis, not a measured value.
 2. After each flow cytometry run, add one row per cell line x gene x replicate to `measurements.csv`.
 3. Run `python3 ../code/receptor_quantification.py` from `code/`. It fits a calibration curve (linear or log-log, whichever fits better) per date and converts each sample's MFI into a background-subtracted receptors-per-cell estimate. Output lands in `../results/receptor_quantification.json` and `.csv`.
-4. Run `python3 ../code/flow_cytometry_validation.py`. It normalizes MFI against the isotype control (or uses the absolute receptor count when available), groups by subtype, and compares the protein-level pattern against Cleavr's existing RNA-level result for that gene (if `biomarker_pipeline.py` has already been run for it).
+4. Run `python3 ../code/flow_cytometry_validation.py`. It normalizes MFI against the isotype control, groups by subtype, and compares the protein-level pattern against Cleavr's existing RNA-level result for that gene (if `biomarker_pipeline.py` has already been run for it). Note: this script always uses the raw MFI/isotype ratio, even on dates with a fitted calibration curve; `code/qflow_tool.html` uses the calibrated receptor count instead whenever one is available.
 
 ## Columns
 
