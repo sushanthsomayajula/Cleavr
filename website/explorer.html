@@ -2,184 +2,109 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cleavr: GNRHR Explorer</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.0.4/3Dmol-min.js"></script>
 <style>
-  :root {
-    --bg: #0a0b0d;
-    --bg-panel: #101215;
-    --bg-inset: #0d0f12;
-    --border: #23262b;
-    --border-bright: #33373d;
-    --text: #d7dadd;
-    --text-dim: #82898f;
-    --text-faint: #52585e;
-    --accent: #e5484d;
-    --accent-2: #2dd4bf;
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, "Courier New", monospace;
-  }
-  * { box-sizing: border-box; }
-  body {
-    font-family: var(--mono);
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 32px 24px 90px;
-    color: var(--text);
-    line-height: 1.6;
-    background: var(--bg);
-    font-size: 14px;
-  }
-  h1 { font-size: 19px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.01em; }
-  .subtitle { color: var(--text-dim); font-size: 13px; margin-bottom: 8px; }
-  h2 {
-    font-size: 12px;
-    font-weight: 600;
-    margin: 0 0 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--text-dim);
-  }
-  h2 .idx { color: var(--accent); margin-right: 8px; }
-  p { color: var(--text); }
-  a { color: var(--accent-2); }
-  .panel {
-    background: var(--bg-panel);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 20px 22px;
-    margin-bottom: 18px;
-  }
-  .picker { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
-  .picker button {
-    flex: 1;
-    min-width: 140px;
-    padding: 12px 14px;
-    border: 1px solid var(--border-bright);
-    border-radius: 3px;
-    background: var(--bg-inset);
-    color: var(--text);
-    cursor: pointer;
-    text-align: left;
-    font-size: 13px;
-    font-family: var(--mono);
-    transition: border-color .15s, background .15s;
-  }
-  .picker button:hover { border-color: var(--text-dim); }
-  .picker button.active {
-    border-color: var(--accent-2);
-    background: #0e1a1a;
-  }
-  .picker button .code { font-weight: 700; font-size: 14px; display: block; color: var(--text); }
-  .picker button.active .code { color: var(--accent-2); }
-  .picker button .desc { color: var(--text-dim); font-size: 11px; display: block; margin-top: 2px; }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-  .stats-row { display: flex; gap: 1px; flex-wrap: wrap; margin: 18px 0; background: var(--border); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
-  .stat-card {
-    background: var(--bg-inset);
-    padding: 12px 16px;
-    flex: 1;
-    min-width: 130px;
-  }
-  .stat-value { font-size: 18px; font-weight: 700; color: var(--accent-2); font-variant-numeric: tabular-nums; }
-  .stat-label { font-size: 10px; color: var(--text-dim); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+:root{
+  --bg:#0A0A0B;
+  --charcoal:#242224;
+  --charcoal-2:#3A3739;
+  --pink:#E7A9C0;
+  --pink-strong:#F2B8CE;
+  --pink-dim:#9C6E80;
+  --cream:#EDEAE6;
+  --muted:#8A8781;
+  --line:#232024;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ background:var(--bg); color:var(--cream); font-family:'Inter', sans-serif; }
+body{ max-width:1080px; margin:0 auto; padding:0 32px 100px; line-height:1.6; font-size:15px; }
+a{ color:var(--pink); text-decoration:none; }
+a:hover{ color:var(--pink-strong); }
 
-  #stripplot { width: 100%; height: 130px; }
-  .plot-note { font-size: 11px; color: var(--text-faint); margin-top: 6px; }
+/* nav */
+.nav{ display:flex; align-items:center; justify-content:space-between; padding:34px 0; }
+.logo{ font-size:19px; font-weight:700; letter-spacing:-0.01em; color:var(--pink); }
+.nav-links{ display:flex; align-items:center; gap:40px; font-size:14px; color:var(--muted); }
+.nav-links a{ color:var(--muted); }
+.nav-links a:hover{ color:var(--cream); }
+.nav-links a.current{ color:var(--cream); }
+.nav-cta{ border:0.5px solid var(--charcoal-2); border-radius:100px; padding:9px 18px; font-size:13px; color:var(--cream) !important; }
 
-  .viewer-wrap { display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; }
-  #viewer {
-    width: 100%;
-    max-width: 480px;
-    height: 380px;
-    border-radius: 4px;
-    border: 1px solid var(--border-bright);
-    background: #000;
-  }
-  .viewer-info { flex: 1; min-width: 260px; font-size: 13px; color: var(--text-dim); }
-  .viewer-info p { margin: 0 0 10px; }
-  .viewer-info strong { color: var(--text); }
+h1{ font-size:clamp(30px,3.6vw,42px); font-weight:600; letter-spacing:-0.02em; margin-bottom:10px; }
+.subtitle{ color:var(--muted); font-size:15px; margin-bottom:10px; }
+.lede{ font-size:15px; line-height:1.7; color:var(--muted); max-width:720px; margin:16px 0 44px; }
 
-  .callout {
-    background: var(--bg-inset);
-    border: 1px solid var(--border);
-    border-left: 2px solid var(--accent);
-    padding: 12px 16px;
-    border-radius: 3px;
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-top: 14px;
-  }
-  .callout strong { color: var(--text); }
-  .legend { display: flex; gap: 16px; font-size: 11px; color: var(--text-dim); margin-top: 8px; flex-wrap: wrap; }
-  .legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+h2{ font-size:12px; font-weight:600; margin:0 0 20px; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); display:flex; align-items:center; gap:10px; }
+h2 .idx{ color:var(--pink); }
 
-  footer { margin-top: 40px; font-size: 11px; color: var(--text-faint); border-top: 1px solid var(--border); padding-top: 16px; }
-  .sitenav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 0;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-  .sitenav .brand { font-weight: 700; color: var(--text); letter-spacing: 0.02em; text-decoration: none; }
-  .sitenav .brand .cursor { color: var(--accent); }
-  .sitenav .links a {
-    color: var(--text-dim);
-    text-decoration: none;
-    margin-left: 22px;
-    padding: 4px 2px;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .sitenav .links a.current { color: var(--accent); border-bottom: 1px solid var(--accent); }
-  .sitenav .links a:hover { color: var(--text); }
-  .btn-ghost {
-    border: 1px solid var(--border-bright);
-    color: var(--text-dim);
-    border-radius: 3px;
-    padding: 5px 12px;
-    margin-left: 18px !important;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 11px !important;
-  }
-  .btn-ghost:hover { border-color: var(--accent-2); color: var(--accent-2); }
+.panel{ background:var(--bg); border:0.5px solid var(--line); border-radius:16px; padding:32px 36px; margin-bottom:24px; }
 
-  .lede { font-size: 13px; color: var(--text-dim); max-width: 680px; margin-bottom: 24px; }
-  .lede a { color: var(--accent-2); }
+.picker{ display:flex; gap:12px; flex-wrap:wrap; }
+.picker button{
+  flex:1; min-width:150px; padding:16px 18px;
+  border:0.5px solid var(--charcoal-2); border-radius:12px;
+  background:var(--charcoal); color:var(--cream);
+  cursor:pointer; text-align:left; font-size:14px; font-family:'Inter', sans-serif;
+  transition:border-color .15s, background .15s;
+}
+.picker button:hover{ border-color:var(--pink-dim); }
+.picker button.active{ border-color:var(--pink); background:#241A20; }
+.picker button .code{ font-weight:700; font-size:16px; display:block; color:var(--cream); }
+.picker button.active .code{ color:var(--pink); }
+.picker button .desc{ color:var(--muted); font-size:12px; display:block; margin-top:4px; }
 
-  abbr[title] { text-decoration: underline dotted; text-decoration-color: var(--text-faint); cursor: help; }
+.stats-row{ display:flex; gap:1px; flex-wrap:wrap; margin:24px 0; background:var(--line); border:0.5px solid var(--line); border-radius:12px; overflow:hidden; }
+.stat-card{ background:var(--bg); padding:16px 18px; flex:1; min-width:140px; }
+.stat-value{ font-size:20px; font-weight:600; color:var(--pink); font-variant-numeric:tabular-nums; }
+.stat-label{ font-size:11px; color:var(--muted); margin-top:6px; text-transform:uppercase; letter-spacing:0.06em; }
 
-  @media (max-width: 600px) {
-    body { padding: 20px 16px 60px; }
-    h1 { font-size: 17px; }
-    .sitenav { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .sitenav .links a { margin-left: 0; margin-right: 16px; }
-    .panel { padding: 16px; }
-    .picker button { min-width: 100%; }
-    .stats-row { flex-direction: column; }
-    .stat-card { min-width: 0; }
-    .viewer-info { min-width: 0; }
-    #viewer { max-width: 100%; height: 300px; }
-  }
+#stripplot{ width:100%; height:130px; }
+.plot-note{ font-size:12.5px; color:var(--muted); margin-top:10px; }
+
+.viewer-wrap{ display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start; }
+#viewer{ width:100%; max-width:480px; height:380px; border-radius:12px; border:0.5px solid var(--charcoal-2); background:#000; }
+.viewer-info{ flex:1; min-width:260px; font-size:14.5px; color:var(--muted); line-height:1.7; }
+.viewer-info p{ margin:0 0 12px; }
+.viewer-info strong{ color:var(--cream); }
+
+.callout{ background:var(--charcoal); border-left:2px solid var(--pink); padding:16px 20px; border-radius:0 12px 12px 0; font-size:13.5px; color:var(--muted); margin-top:16px; line-height:1.7; }
+.callout strong{ color:var(--cream); }
+.legend{ display:flex; gap:20px; font-size:12.5px; color:var(--muted); margin-top:14px; flex-wrap:wrap; }
+.legend span{ display:inline-flex; align-items:center; gap:8px; }
+.swatch{ width:11px; height:11px; border-radius:3px; display:inline-block; }
+
+footer{ margin-top:56px; font-size:13px; color:var(--muted); border-top:0.5px solid var(--line); padding-top:24px; line-height:1.7; }
+
+abbr[title]{ text-decoration:underline dotted; text-decoration-color:var(--charcoal-2); cursor:help; }
+
+@media (max-width:700px){
+  body{ padding:0 20px 60px; }
+  .nav{ padding:22px 0; flex-wrap:wrap; gap:12px; }
+  .nav-links{ gap:20px; font-size:12px; }
+  .panel{ padding:20px; }
+  .picker button{ min-width:100%; }
+  .stats-row{ flex-direction:column; }
+  .stat-card{ min-width:0; }
+  .viewer-info{ min-width:0; }
+  #viewer{ max-width:100%; height:300px; }
+}
 </style>
 </head>
 <body>
 
-  <div class="sitenav">
-    <a class="brand" href="index.html"><span class="cursor">&gt;</span> CLEAVR</a>
-    <span class="links">
+  <div class="nav">
+    <a class="logo" href="index.html">cleavr</a>
+    <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="studies.html">Studies</a>
       <a href="explorer.html" class="current">Explorer</a>
-      <a href="mailto:sushanthsomayajula@gmail.com" class="btn-ghost">Get in touch</a>
-    </span>
+      <a class="nav-cta" href="mailto:sushanthsomayajula@gmail.com">Get in touch</a>
+    </div>
   </div>
 
   <h1>GNRHR Explorer</h1>
@@ -210,10 +135,10 @@
         <p><strong>This structure does not change between subtypes.</strong> It is the same receptor protein regardless of which subtype is selected above; what changes is how much of it that subtype's cells make (the numbers in panel 02), not what it looks like.</p>
         <p>This is <strong>PDB entry 7BR3</strong>, the solved crystal structure of the human GNRHR, published in <em>Nature Communications</em> (Yan et al., 2020). Yellow spheres = <strong>elagolix</strong>, a small-molecule antagonist bound in the binding pocket.</p>
         <div class="callout">
-          Caveats, per the PDB file's own DBREF records: (1) elagolix is a small-molecule <em>antagonist</em>, not a peptide agonist such as triptorelin, the molecule LHRH-conjugated nanoparticle constructs use. No structure of GNRHR bound to a peptide agonist has been solved; these are substantially harder to crystallize. (2) This is an engineered fusion construct: PDB residues 1&ndash;242 and 257&ndash;328 (<span style="color:#2dd4bf; font-weight:600;">teal</span> below) are human GNRHR (UniProt P30968). PDB residues 1001&ndash;1196 (<span style="color:#9aa0a6; font-weight:600;">gray</span> below) are a bacterial (<em>Pyrococcus abyssi</em>) glycogen synthase domain, inserted to stabilize the receptor for crystallization, a standard GPCR crystallography technique, not part of the native receptor.
+          Caveats, per the PDB file's own DBREF records: (1) elagolix is a small-molecule <em>antagonist</em>, not a peptide agonist such as triptorelin, the molecule LHRH-conjugated nanoparticle constructs use. No structure of GNRHR bound to a peptide agonist has been solved; these are substantially harder to crystallize. (2) This is an engineered fusion construct: PDB residues 1&ndash;242 and 257&ndash;328 (<span style="color:#E7A9C0; font-weight:600;">pink</span> below) are human GNRHR (UniProt P30968). PDB residues 1001&ndash;1196 (<span style="color:#9aa0a6; font-weight:600;">gray</span> below) are a bacterial (<em>Pyrococcus abyssi</em>) glycogen synthase domain, inserted to stabilize the receptor for crystallization, a standard GPCR crystallography technique, not part of the native receptor.
         </div>
         <div class="legend">
-          <span><span class="swatch" style="background:#2dd4bf"></span>GNRHR</span>
+          <span><span class="swatch" style="background:#E7A9C0"></span>GNRHR</span>
           <span><span class="swatch" style="background:#9aa0a6"></span>GlgA fusion (not GNRHR)</span>
           <span><span class="swatch" style="background:#e0a72a"></span>Elagolix (ligand)</span>
         </div>
@@ -224,7 +149,7 @@
   <div class="panel">
     <h2><span class="idx">04</span>GNRHR expression vs. survival</h2>
     <div class="viewer-wrap">
-      <img src="../results/gnrhr/gnrhr_survival_km.png" alt="Kaplan-Meier survival curves, GNRHR-high vs GNRHR-low" style="max-width:480px; width:100%; border-radius:4px; border:1px solid var(--border-bright); background:#fff;">
+      <img src="../results/gnrhr/gnrhr_survival_km.png" alt="Kaplan-Meier survival curves, GNRHR-high vs GNRHR-low" style="max-width:480px; width:100%; border-radius:12px; border:0.5px solid var(--charcoal-2); background:#fff;">
       <div class="viewer-info">
         <p>Patients were split into GNRHR-high (n=58) and GNRHR-low (n=57) groups at the median, independent of subtype, and compared on overall survival.</p>
         <p><strong>No detectable difference</strong> (log-rank p=0.98): the two curves sit almost exactly on top of each other.</p>
@@ -301,7 +226,7 @@ function drawStrip() {
     label.setAttribute("x", 4);
     label.setAttribute("y", y + 4);
     label.setAttribute("font-size", "11");
-    label.setAttribute("fill", s === current ? "#2dd4bf" : "#52585e");
+    label.setAttribute("fill", s === current ? "#E7A9C0" : "#8A8781");
     label.textContent = s;
     svg.appendChild(label);
 
@@ -310,7 +235,7 @@ function drawStrip() {
       c.setAttribute("cx", x(v));
       c.setAttribute("cy", y);
       c.setAttribute("r", s === current ? 4 : 2.5);
-      c.setAttribute("fill", s === current ? "#2dd4bf" : "#4a4f56");
+      c.setAttribute("fill", s === current ? "#E7A9C0" : "#4A4748");
       c.setAttribute("opacity", s === current ? 0.9 : 0.6);
       c.style.cursor = "pointer";
       const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
@@ -326,12 +251,12 @@ function drawStrip() {
   const axis = document.createElementNS("http://www.w3.org/2000/svg", "line");
   axis.setAttribute("x1", pad); axis.setAttribute("x2", w - pad);
   axis.setAttribute("y1", h - 12); axis.setAttribute("y2", h - 12);
-  axis.setAttribute("stroke", "#23262b");
+  axis.setAttribute("stroke", "#232024");
   svg.appendChild(axis);
   [0, max/2, max].forEach(v => {
     const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
     t.setAttribute("x", x(v)); t.setAttribute("y", h - 2);
-    t.setAttribute("font-size", "10"); t.setAttribute("fill", "#52585e");
+    t.setAttribute("font-size", "10"); t.setAttribute("fill", "#8A8781");
     t.setAttribute("text-anchor", "middle");
     t.textContent = v.toFixed(1);
     svg.appendChild(t);
@@ -363,7 +288,7 @@ try {
       viewerStatus.innerHTML = "Couldn't load the structure from rcsb.org. Check your internet connection and reload the page.";
       return;
     }
-    viewer.setStyle({}, { cartoon: { color: "#2dd4bf" } });
+    viewer.setStyle({}, { cartoon: { color: "#E7A9C0" } });
     viewer.setStyle({ resi: "1001-1196" }, { cartoon: { color: "#9aa0a6" } });
     viewer.setStyle({ hetflag: true, not: { resn: "HOH" } }, { sphere: { colorscheme: "yellowCarbon", scale: 0.3 } });
     viewer.zoomTo();

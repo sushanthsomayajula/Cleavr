@@ -2,271 +2,176 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cleavr: Studies</title>
 <meta name="description" content="Every Cleavr case study and screen in one place, with every claim independently re-derived and cross-checked against the literature.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
-  :root {
-    --bg: #0a0b0d;
-    --bg-panel: #101215;
-    --bg-inset: #0d0f12;
-    --border: #23262b;
-    --border-bright: #33373d;
-    --text: #d7dadd;
-    --text-dim: #82898f;
-    --text-faint: #52585e;
-    --accent: #e5484d;
-    --accent-dim: #7a2b2e;
-    --accent-2: #2dd4bf;
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, "Courier New", monospace;
-  }
-  * { box-sizing: border-box; }
-  body {
-    font-family: var(--mono);
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 32px 24px 0;
-    color: var(--text);
-    line-height: 1.65;
-    background: var(--bg);
-    font-size: 14px;
-  }
-  a { color: var(--accent-2); }
-  a:hover { color: #6ee7de; }
-  p { font-size: 14px; margin: 0 0 14px; color: var(--text); }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-  /* nav */
-  .sitenav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 0;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-  .sitenav .brand { font-weight: 700; color: var(--text); letter-spacing: 0.02em; text-decoration: none; }
-  .sitenav .brand .cursor { color: var(--accent); }
-  .sitenav .links { display: flex; align-items: center; gap: 4px; }
-  .sitenav .links a {
-    color: var(--text-dim);
-    text-decoration: none;
-    margin-left: 18px;
-    padding: 4px 2px;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .sitenav .links a.current { color: var(--accent); border-bottom: 1px solid var(--accent); }
-  .sitenav .links a:hover { color: var(--text); }
+:root{
+  --bg:#0A0A0B;
+  --charcoal:#242224;
+  --charcoal-2:#3A3739;
+  --pink:#E7A9C0;
+  --pink-strong:#F2B8CE;
+  --pink-dim:#9C6E80;
+  --cream:#EDEAE6;
+  --muted:#8A8781;
+  --line:#232024;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+html,body{ background:var(--bg); color:var(--cream); font-family:'Inter', sans-serif; }
+a{ color:inherit; text-decoration:none; }
 
-  /* buttons */
-  .btn {
-    display: inline-block;
-    padding: 9px 16px;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    background: transparent;
-    border-radius: 3px;
-    font-family: var(--mono);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    transition: background .15s, color .15s;
-  }
-  .btn:hover { background: var(--accent); color: #0a0b0d; }
-  .btn-ghost { border-color: var(--border-bright); color: var(--text-dim); }
-  .btn-ghost:hover { border-color: var(--accent-2); color: var(--accent-2); background: transparent; }
-  .btn-sm { padding: 5px 12px; font-size: 11px; margin-left: 18px; }
+/* nav */
+.nav{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:34px 56px; background:var(--bg); }
+.logo{ font-size:19px; font-weight:700; letter-spacing:-0.01em; color:var(--pink); }
+.nav-links{ display:flex; align-items:center; gap:40px; font-size:14px; color:var(--muted); }
+.nav-links a:hover{ color:var(--cream); }
+.nav-links a.current{ color:var(--cream); }
+.nav-cta{ border:0.5px solid var(--charcoal-2); border-radius:100px; padding:9px 18px; font-size:13px; color:var(--cream); }
 
-  /* header */
-  .hero { padding: 28px 0 8px; }
-  .hero-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-faint); margin-bottom: 14px; }
-  .hero h1 { font-size: 30px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 16px; max-width: 640px; }
-  .hero-sub { font-size: 15px; color: var(--text-dim); max-width: 580px; margin-bottom: 8px; }
+/* page header */
+.page-header{ padding:40px 0 60px; border-bottom:0.5px solid var(--line); }
+.eyebrow{ font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--pink); margin-bottom:24px; font-weight:600; }
+.page-title{ font-size:clamp(34px,4.6vw,56px); line-height:1.08; font-weight:600; letter-spacing:-0.03em; color:var(--cream); margin-bottom:22px; max-width:760px; }
+.page-sub{ font-size:17px; line-height:1.6; color:var(--muted); max-width:620px; }
 
-  /* section pattern */
-  .section-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-dim);
-    margin-top: 48px;
-  }
-  .section-eyebrow .idx { color: var(--accent); }
+/* shared section rhythm */
+.wrap{ max-width:1080px; margin:0 auto; padding:0 32px; }
+.section{ padding:100px 0; border-bottom:0.5px solid var(--line); }
+.section-inner{ max-width:1080px; margin:0 auto; padding:0 32px; }
+.eyebrow-row{ display:flex; align-items:center; gap:14px; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:28px; }
+.eyebrow-row .idx{ color:var(--pink); }
 
-  /* case card */
-  .case-card {
-    background: var(--bg-panel);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 22px 24px;
-    margin: 16px 0;
-  }
-  .case-card .status {
-    display: inline-block;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--accent-2);
-    border: 1px solid var(--accent-2);
-    border-radius: 3px;
-    padding: 2px 8px;
-    margin-bottom: 10px;
-  }
-  .case-card .status.partial { color: #e8b339; border-color: #e8b339; }
-  .case-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin: 0 0 6px; }
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-    margin: 16px 0;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .stat-card { background: var(--bg-inset); padding: 12px 16px; flex: 1; min-width: 130px; }
-  .stat-value { font-size: 17px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
-  .stat-label { font-size: 10px; color: var(--text-dim); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
-  .case-links { margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; }
-  .callout {
-    background: var(--bg-inset);
-    border-left: 2px solid var(--accent-2);
-    padding: 10px 14px;
-    margin: 14px 0 0;
-    font-size: 13px;
-    color: var(--text-dim);
-  }
-  .callout strong { color: var(--text); }
+/* case cards, full-width single column here */
+.card{ background:var(--bg); border:0.5px solid var(--line); border-radius:16px; padding:44px 40px; margin-bottom:1px; }
+.card-num{ font-size:12px; color:var(--pink); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:18px; font-weight:600; }
+.card-title{ font-size:26px; font-weight:600; margin-bottom:16px; letter-spacing:-0.01em; }
+.card-body{ font-size:16px; line-height:1.75; color:var(--muted); margin-bottom:8px; max-width:760px; }
+.card-body strong{ color:var(--cream); font-weight:600; }
+.mini-stats{ display:flex; gap:0; margin:22px 0; border-top:0.5px solid var(--line); border-bottom:0.5px solid var(--line); max-width:600px; }
+.mini-stat{ flex:1; padding:16px 14px 16px 0; }
+.mini-stat-val{ font-size:19px; font-weight:600; color:var(--cream); }
+.mini-stat-label{ font-size:11px; color:var(--muted); margin-top:4px; text-transform:uppercase; letter-spacing:0.05em; }
+.callout{ background:var(--charcoal); border-left:2px solid var(--pink); padding:16px 20px; margin:20px 0; font-size:14.5px; line-height:1.7; color:var(--muted); max-width:760px; }
+.callout strong{ color:var(--cream); }
+.card-status{ display:inline-block; margin-bottom:0; font-size:12px; padding:6px 14px; border-radius:100px; border:0.5px solid var(--pink-dim); color:var(--pink); margin-top:8px; }
+.card-links{ display:flex; gap:24px; margin-top:24px; font-size:14px; }
+.card-links a{ color:var(--pink); }
+.card-links a:hover{ color:var(--pink-strong); }
 
-  /* footer */
-  .site-footer {
-    margin: 60px calc(50% - 50vw) 0;
-    padding: 40px calc(50vw - 50%) 24px;
-    background: var(--bg-inset);
-    border-top: 1px solid var(--border);
-    font-size: 12px;
-  }
-  .footer-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .footer-brand { font-weight: 700; color: var(--text); margin-bottom: 8px; }
-  .footer-tagline { color: var(--text-faint); font-size: 12px; max-width: 220px; }
-  .footer-col { min-width: 120px; }
-  .footer-col-title { color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; font-size: 10px; margin-bottom: 10px; }
-  .footer-col a { display: block; color: var(--text-faint); text-decoration: none; margin-bottom: 8px; font-size: 12.5px; }
-  .footer-col a:hover { color: var(--accent-2); }
-  .footer-bottom {
-    max-width: 860px;
-    margin: 32px auto 0;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    color: var(--text-faint);
-    font-size: 11px;
-  }
+/* footer */
+.footer{ padding:80px 0 60px; }
+.footer-grid{ display:flex; flex-wrap:wrap; gap:56px; margin-bottom:56px; }
+.footer-brand{ font-size:19px; font-weight:700; color:var(--pink); margin-bottom:14px; }
+.footer-tagline{ color:var(--muted); font-size:14px; max-width:240px; line-height:1.6; }
+.footer-col{ min-width:140px; }
+.footer-col-title{ color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; font-size:11px; margin-bottom:16px; }
+.footer-col a{ display:block; color:var(--muted); margin-bottom:12px; font-size:14.5px; }
+.footer-col a:hover{ color:var(--pink); }
+.footer-bottom{ padding-top:32px; border-top:0.5px solid var(--line); color:var(--muted); font-size:13px; max-width:640px; line-height:1.6; }
 
-  @media (max-width: 600px) {
-    body { padding: 20px 16px 0; font-size: 13.5px; }
-    .hero h1 { font-size: 22px; }
-    .sitenav { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .sitenav .links { flex-wrap: wrap; }
-    .sitenav .links a { margin-left: 0; margin-right: 16px; }
-    .btn-sm { margin-left: 0; margin-right: 16px; }
-    .stats { flex-direction: column; }
-    .stat-card { min-width: 0; }
-  }
+@media (max-width:760px){
+  .nav{ padding:22px 24px; }
+  .nav-links{ gap:20px; font-size:12px; }
+  .section{ padding:60px 0; }
+  .card{ padding:32px 24px; }
+  .mini-stats{ flex-direction:column; }
+}
 </style>
 </head>
 <body>
 
-  <div class="sitenav">
-    <a class="brand" href="index.html"><span class="cursor">&gt;</span> CLEAVR</a>
-    <span class="links">
-      <a href="index.html">Home</a>
-      <a href="studies.html" class="current">Studies</a>
+<div class="nav">
+  <a class="logo" href="index.html">cleavr</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="studies.html" class="current">Studies</a>
+    <a href="explorer.html">Explorer</a>
+    <a class="nav-cta" href="mailto:sushanthsomayajula@gmail.com">Get in touch</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="eyebrow">Cleavr · All studies</div>
+    <h1 class="page-title">Every case study and screen, in one place.</h1>
+    <p class="page-sub">Each entry below is independently re-derived from raw source data and cross-checked against the literature before publishing. Null results are reported as directly as positive ones.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+    <div class="eyebrow-row"><span class="idx">01</span>Case study 01</div>
+    <div class="card">
+      <div class="card-num">Case study 01</div>
+      <div class="card-title">GNRHR expression across TNBC molecular subtypes</div>
+      <p class="card-body">Does the LHRH/GnRH receptor (GNRHR), the target of an active TNBC nanoparticle-targeting strategy, express differently across TNBC's molecular subtypes? If it does, that would matter for how consistently a receptor-targeted therapy could work across the disease's biological variants.</p>
+      <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-val">116</div><div class="mini-stat-label">TNBC patients</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">p = 0.71</div><div class="mini-stat-label">Across subtypes</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">p = 0.98</div><div class="mini-stat-label">Survival, log-rank</div></div>
+      </div>
+      <p class="card-body">Result: no statistically significant difference across subtypes, and no relationship to survival in this cohort (TCGA), a real, well-caveated null result.</p>
+      <div class="card-status">Single-cohort · Complete</div>
+      <div class="card-links">
+        <a href="gnrhr.html">Read the case study →</a>
+        <a href="explorer.html">Open the explorer →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="border-bottom:none;">
+  <div class="section-inner">
+    <div class="eyebrow-row"><span class="idx">02</span>Case study 02</div>
+    <div class="card">
+      <div class="card-num">Case study 02</div>
+      <div class="card-title">Systematic candidate screen, with cross-cohort validation</div>
+      <p class="card-body">A gene-agnostic follow-up to Case Study 01: instead of testing one hand-picked gene, 15 candidates were sourced systematically from Open Targets' TNBC-associated target scores, then tested for subtype- and survival-association with Benjamini&ndash;Hochberg FDR correction applied across all 15 together, then scored on druggability (ChEMBL) and TNBC-specific literature coverage (PubMed).</p>
+      <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-val">15</div><div class="mini-stat-label">Candidates screened</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">8 / 15</div><div class="mini-stat-label">Significant after FDR</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">7 / 8</div><div class="mini-stat-label">Replicated in METABRIC</div></div>
+      </div>
+      <p class="card-body">The 8 FDR-significant genes were re-tested against METABRIC, a second, independent cohort (320 TNBC patients, nearly 3x the TCGA cohort) profiled on a different expression platform. 7 of 8 replicated on both. <strong>RRM2</strong> did not (TCGA-significant, but p = 0.23 in METABRIC) and is reported as a miss, not dropped.</p>
+      <div class="callout"><strong>FTO</strong> is the standout candidate: significant in both cohorts, 91 potent ChEMBL ligands (a known druggable target), and only moderately studied in TNBC specifically (14 papers). Most other replicated genes (POLD1, POLD2, PRIM2, RRM1, TYMS, POLE) are DNA-replication-machinery genes, likely reflecting the known higher proliferation of the basal-like subtype rather than a subtype-specific mechanism on its own.</div>
+      <p class="card-body"><strong>Status:</strong> computational only. Nothing here has been validated at the protein level yet, that's the next step, now underway with wet-lab flow cytometry.</p>
+      <div class="card-status">Cross-cohort validated</div>
+      <div class="card-links">
+        <a href="https://github.com/sushanthsomayajula/cleavr/blob/main/results/screen_results.json" target="_blank" rel="noopener">View screen results →</a>
+        <a href="https://github.com/sushanthsomayajula/cleavr/blob/main/results/cross_cohort_results.json" target="_blank" rel="noopener">View cross-cohort results →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap footer">
+  <div class="footer-grid">
+    <div class="footer-col" style="flex:1; min-width:220px;">
+      <div class="footer-brand">cleavr</div>
+      <div class="footer-tagline">Systematic biomarker discovery for TNBC, subtype by subtype.</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Studies</div>
+      <a href="studies.html">All Studies</a>
+      <a href="gnrhr.html">GNRHR Study</a>
       <a href="explorer.html">Explorer</a>
-      <a href="mailto:sushanthsomayajula@gmail.com" class="btn btn-ghost btn-sm">Get in touch</a>
-    </span>
-  </div>
-
-  <div class="hero">
-    <div class="hero-eyebrow">Cleavr · All studies</div>
-    <h1>Every case study and screen, in one place.</h1>
-    <p class="hero-sub">Each entry below is independently re-derived from raw source data and cross-checked against the literature before publishing. Null results are reported as directly as positive ones.</p>
-  </div>
-
-  <div class="section-eyebrow"><span class="idx">01</span>Case Study 01</div>
-  <div class="case-card">
-    <span class="status">Single-cohort · Complete</span>
-    <h3>GNRHR expression across TNBC molecular subtypes</h3>
-    <p>Does the LHRH/GnRH receptor (GNRHR), the target of an active TNBC nanoparticle-targeting strategy, express differently across TNBC's molecular subtypes? If it does, that would matter for how consistently a receptor-targeted therapy could work across the disease's biological variants.</p>
-    <div class="stats">
-      <div class="stat-card"><div class="stat-value">116</div><div class="stat-label">TNBC patients</div></div>
-      <div class="stat-card"><div class="stat-value">p = 0.71</div><div class="stat-label">across subtypes</div></div>
-      <div class="stat-card"><div class="stat-value">p = 0.98</div><div class="stat-label">survival, log-rank</div></div>
     </div>
-    <p style="margin-bottom:0;">Result: no statistically significant difference across subtypes, and no relationship to survival in this cohort (TCGA): a real, well-caveated null result.</p>
-    <div class="case-links">
-      <a class="btn" href="gnrhr.html">Read the case study →</a>
-      <a class="btn btn-ghost" href="explorer.html">Open the explorer →</a>
+    <div class="footer-col">
+      <div class="footer-col-title">Project</div>
+      <a href="https://github.com/sushanthsomayajula/cleavr" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/sushanthsomayajula/cleavr/blob/main/docs/ROADMAP.md" target="_blank" rel="noopener">Roadmap</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <a href="mailto:sushanthsomayajula@gmail.com">Email</a>
     </div>
   </div>
-
-  <div class="section-eyebrow"><span class="idx">02</span>Case Study 02</div>
-  <div class="case-card">
-    <span class="status">Cross-cohort validated</span>
-    <h3>Systematic candidate screen, with cross-cohort validation</h3>
-    <p>A gene-agnostic follow-up to Case Study 01: instead of testing one hand-picked gene, 15 candidates were sourced systematically from Open Targets' TNBC-associated target scores, then tested for subtype- and survival-association with Benjamini&ndash;Hochberg FDR correction applied across all 15 together, the correction that matters once you're screening many genes at once, not just one. Each candidate was also scored on druggability (ChEMBL) and TNBC-specific literature coverage (PubMed).</p>
-    <div class="stats">
-      <div class="stat-card"><div class="stat-value">15</div><div class="stat-label">candidates screened</div></div>
-      <div class="stat-card"><div class="stat-value">8 / 15</div><div class="stat-label">significant after FDR (TCGA)</div></div>
-      <div class="stat-card"><div class="stat-value">7 / 8</div><div class="stat-label">replicated in METABRIC</div></div>
-    </div>
-    <p>The 8 FDR-significant genes were re-tested against METABRIC, a second, independent cohort (320 TNBC patients, nearly 3x the TCGA cohort) profiled on a different expression platform (Illumina microarray, not RNA-seq). 7 of 8 replicated on both. <strong>RRM2</strong> did not (TCGA-significant, but p = 0.23 in METABRIC) and is reported as a miss, not dropped.</p>
-    <div class="callout">
-      <strong>FTO</strong> is the standout candidate: significant in both cohorts, 91 potent ChEMBL ligands (a known druggable target), and only moderately studied in TNBC specifically (14 papers), a real signal that's replicated on two platforms but not yet over-mined in the literature. Most of the other replicated genes (POLD1, POLD2, PRIM2, RRM1, TYMS, POLE) are DNA-replication-machinery genes, a pattern that likely reflects the known higher proliferation of the basal-like subtype rather than a subtype-specific mechanism on its own.
-    </div>
-    <p style="margin: 14px 0 0;"><strong>Status:</strong> computational only. Nothing here has been validated at the protein level yet: that's the next step, now underway with wet-lab flow cytometry.</p>
-    <div class="case-links">
-      <a class="btn btn-ghost" href="https://github.com/sushanthsomayajula/cleavr/blob/main/results/screen_results.json" target="_blank" rel="noopener">View screen results →</a>
-      <a class="btn btn-ghost" href="https://github.com/sushanthsomayajula/cleavr/blob/main/results/cross_cohort_results.json" target="_blank" rel="noopener">View cross-cohort results →</a>
-    </div>
-  </div>
-
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-brand"><span class="cursor" style="color:var(--accent);">&gt;</span> CLEAVR</div>
-        <div class="footer-tagline">Systematic biomarker discovery for TNBC, subtype by subtype.</div>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Studies</div>
-        <a href="gnrhr.html">GNRHR Study</a>
-        <a href="explorer.html">Explorer</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Project</div>
-        <a href="https://github.com/sushanthsomayajula/cleavr" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://github.com/sushanthsomayajula/cleavr/blob/main/docs/ROADMAP.md" target="_blank" rel="noopener">Roadmap</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Contact</div>
-        <a href="mailto:sushanthsomayajula@gmail.com">Email</a>
-      </div>
-    </div>
-    <div class="footer-bottom">Cleavr is an early-stage, independently verified research project, not a diagnostic or clinical tool. All findings are exploratory.</div>
-  </footer>
+  <div class="footer-bottom">Cleavr is an early-stage, independently verified research project, not a diagnostic or clinical tool. All findings are exploratory.</div>
+</div>
 
 </body>
 </html>
