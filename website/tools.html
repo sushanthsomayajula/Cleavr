@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cleavr: Tools</title>
-<meta name="description" content="Cleavr's open lab tools. qFlow: a quantitative flow cytometry workbench for absolute receptor quantification, unit calibration, gating, indices, compensation, and FCS parsing — all running locally in your browser.">
+<meta name="description" content="Cleavr's open lab tools. qFlow: a quantitative flow cytometry workbench for absolute receptor quantification, unit calibration, gating, indices, compensation, and FCS parsing, all running locally in your browser.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -60,7 +60,9 @@ a{ color:inherit; text-decoration:none; }
 
 /* module grid */
 .mod-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; margin:30px 0 8px; background:var(--line); border:0.5px solid var(--line); border-radius:14px; overflow:hidden; }
-.mod{ background:var(--bg); padding:24px 26px; }
+.mod{ display:block; background:var(--bg); padding:24px 26px; transition:background .15s; }
+.mod:hover{ background:var(--charcoal); }
+.mod:hover .mod-name{ color:var(--pink); }
 .mod-name{ font-size:15px; font-weight:600; color:var(--cream); margin-bottom:8px; }
 .mod-name .n{ color:var(--pink); font-size:12px; margin-right:8px; }
 .mod-desc{ font-size:14px; line-height:1.65; color:var(--muted); }
@@ -109,7 +111,7 @@ a{ color:inherit; text-decoration:none; }
   <div class="page-header">
     <div class="eyebrow">Cleavr · Tools</div>
     <h1 class="page-title">Open tools for the work behind the studies.</h1>
-    <p class="page-sub">The same analysis Cleavr runs on its own data, packaged as browser tools you can use directly. Everything computes locally — no upload, no account, no server. The receptor-quantification math is numerically identical to the Python in the repo, and verified against it in an automated test suite.</p>
+    <p class="page-sub">The same analysis Cleavr runs on its own data, packaged as browser tools you can use directly. Everything computes locally: no upload, no account, no server. The receptor-quantification math is numerically identical to the Python in the repo, and verified against it in an automated test suite.</p>
   </div>
 </div>
 
@@ -119,17 +121,17 @@ a{ color:inherit; text-decoration:none; }
     <div class="card">
       <div class="card-num">qFlow · workbench</div>
       <div class="card-title">qFlow: a quantitative flow cytometry workbench</div>
-      <p class="card-body">Flow cytometry is how Cleavr checks whether an RNA-level subtype pattern actually holds at the protein level — the thing that determines whether a receptor is usable for targeting. qFlow bundles the whole quantitative-flow toolchain into one page: turn raw fluorescence into an absolute receptor count with calibration beads, convert between standardized units, gate populations, score staining quality, compensate spillover, and read raw FCS files. It replaces round-tripping through a spreadsheet or several single-purpose calculators.</p>
+      <p class="card-body">Flow cytometry is how Cleavr checks whether an RNA-level subtype pattern actually holds at the protein level, the thing that determines whether a receptor is usable for targeting. qFlow bundles the whole quantitative-flow toolchain into one page: turn raw fluorescence into an absolute receptor count with calibration beads, convert between standardized units, gate populations, score staining quality, compensate spillover, and read raw FCS files. It replaces round-tripping through a spreadsheet or several single-purpose calculators.</p>
 
-      <div class="callout">Absolute receptor counts require a fitted calibration curve. Rows without one are excluded and flagged — never approximated from a raw MFI/isotype ratio, which has no absolute meaning on its own. The receptor-quantification and subtype logic are identical to <strong>receptor_quantification.py</strong> and <strong>flow_cytometry_validation.py</strong>, so the browser and the scripts return the same numbers.</div>
+      <div class="callout">Absolute receptor counts require a fitted calibration curve. Rows without one are excluded and flagged, never approximated from a raw MFI/isotype ratio, which has no absolute meaning on its own. The receptor-quantification and subtype logic are identical to <strong>receptor_quantification.py</strong> and <strong>flow_cytometry_validation.py</strong>, so the browser and the scripts return the same numbers.</div>
 
       <div class="mod-grid">
-        <div class="mod"><div class="mod-name"><span class="n">01</span>Receptor quantification</div><div class="mod-desc">Fit a per-date calibration curve (linear or log-log), convert MFI to absolute antibody binding capacity (receptors/cell), and compare the protein-level subtype pattern against the RNA-level screen.</div></div>
-        <div class="mod"><div class="mod-name"><span class="n">02</span>Unit conversion</div><div class="mod-desc">Convert MFI to MESF, ERF (NIST-traceable), or PE molecules / ABC via QuantiBRITE-style beads — with F/P ratio handling and batch conversion.</div></div>
-        <div class="mod"><div class="mod-name"><span class="n">03</span>Gating &amp; %positive</div><div class="mod-desc">Compute percent-positive, median MFI, geometric mean, and robust SD from event-level data. Set a gate manually or derive it from a negative control.</div></div>
-        <div class="mod"><div class="mod-name"><span class="n">04</span>Stain / separation index</div><div class="mod-desc">Score how cleanly a positive population separates from background — the standard metric for antibody titration and fluorochrome comparison.</div></div>
-        <div class="mod"><div class="mod-name"><span class="n">05</span>Compensation</div><div class="mod-desc">Enter a spillover matrix and compensate measured values by inverting it — corrected = measured × spillover⁻¹.</div></div>
-        <div class="mod"><div class="mod-name"><span class="n">06</span>FCS import</div><div class="mod-desc">Parse FCS 3.0 / 3.1 list-mode files in the browser (float, double, and integer data types), inspect parameters, and push any channel to the gating module.</div></div>
+        <a class="mod" href="qflow.html#quant"><div class="mod-name"><span class="n">01</span>Receptor quantification</div><div class="mod-desc">Fit a per-date calibration curve (linear or log-log), convert MFI to absolute antibody binding capacity (receptors/cell), and compare the protein-level subtype pattern against the RNA-level screen.</div></a>
+        <a class="mod" href="qflow.html#units"><div class="mod-name"><span class="n">02</span>Unit conversion</div><div class="mod-desc">Convert MFI to MESF, ERF (NIST-traceable), or PE molecules / ABC via QuantiBRITE-style beads, with F/P ratio handling and batch conversion.</div></a>
+        <a class="mod" href="qflow.html#gating"><div class="mod-name"><span class="n">03</span>Gating &amp; %positive</div><div class="mod-desc">Compute percent-positive, median MFI, geometric mean, and robust SD from event-level data. Set a gate manually or derive it from a negative control.</div></a>
+        <a class="mod" href="qflow.html#indices"><div class="mod-name"><span class="n">04</span>Stain / separation index</div><div class="mod-desc">Score how cleanly a positive population separates from background, the standard metric for antibody titration and fluorochrome comparison.</div></a>
+        <a class="mod" href="qflow.html#comp"><div class="mod-name"><span class="n">05</span>Compensation</div><div class="mod-desc">Enter a spillover matrix and compensate measured values by inverting it: corrected = measured × spillover⁻¹.</div></a>
+        <a class="mod" href="qflow.html#fcs"><div class="mod-name"><span class="n">06</span>FCS import</div><div class="mod-desc">Parse FCS 3.0 / 3.1 list-mode files in the browser (float, double, and integer data types), inspect parameters, and push any channel to the gating module.</div></a>
       </div>
 
       <div class="trust">

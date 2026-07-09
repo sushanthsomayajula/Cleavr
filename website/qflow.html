@@ -152,7 +152,7 @@ code{ font-family:'SF Mono', Menlo, monospace; font-size:0.92em; color:var(--pin
   <header>
     <div class="eyebrow">Cleavr &middot; Tools</div>
     <h1>qFlow: quantitative flow cytometry workbench</h1>
-    <p>A single-page workbench for the quantitative-flow-cytometry family: absolute receptor quantification from calibration beads, MESF/ERF/ABC unit conversion, %positive gating and MFI from event-level data, stain and separation indices, spillover compensation, and FCS-file parsing. Everything runs locally in your browser &mdash; nothing is uploaded or stored. The receptor-quantification and subtype logic are numerically identical to <code>receptor_quantification.py</code> and <code>flow_cytometry_validation.py</code>; the browser and the scripts produce the same numbers on the same input.</p>
+    <p>A single-page workbench for the quantitative-flow-cytometry family: absolute receptor quantification from calibration beads, MESF/ERF/ABC unit conversion, %positive gating and MFI from event-level data, stain and separation indices, spillover compensation, and FCS-file parsing. Everything runs locally in your browser, and nothing is uploaded or stored. The receptor-quantification and subtype logic are numerically identical to <code>receptor_quantification.py</code> and <code>flow_cytometry_validation.py</code>; the browser and the scripts produce the same numbers on the same input.</p>
   </header>
 
   <div class="tabbar" id="tabbar">
@@ -280,7 +280,7 @@ code{ font-family:'SF Mono', Menlo, monospace; font-size:0.92em; color:var(--pin
 
   <!-- ==================== TAB: UNIT CONVERSION ==================== -->
   <div class="tab-panel" id="tab-units">
-    <p class="panel-intro">Convert raw fluorescence (MFI) into standardized units &mdash; MESF (molecules of equivalent soluble fluorochrome), ERF (equivalent reference fluorophores, the NIST-traceable successor), or PE molecules / ABC via QuantiBRITE-style beads. Enter the bead standard's assigned unit value against its measured MFI, fit the curve, then convert any MFI (or a whole column of them) either way. QuantiBRITE PE with a 1:1 PE:antibody conjugate yields antibody binding capacity directly.</p>
+    <p class="panel-intro">Convert raw fluorescence (MFI) into standardized units: MESF (molecules of equivalent soluble fluorochrome), ERF (equivalent reference fluorophores, the NIST-traceable successor), or PE molecules / ABC via QuantiBRITE-style beads. Enter the bead standard's assigned unit value against its measured MFI, fit the curve, then convert any MFI (or a whole column of them) either way. QuantiBRITE PE with a 1:1 PE:antibody conjugate yields antibody binding capacity directly.</p>
 
     <div class="section">
       <div class="section-head"><h2>1. Bead standard</h2><span class="sub">assigned units vs. measured MFI, &ge; 3 points</span></div>
@@ -333,7 +333,7 @@ code{ font-family:'SF Mono', Menlo, monospace; font-size:0.92em; color:var(--pin
         </div>
       </div>
       <div class="panel" style="margin-top:20px;">
-        <label class="small-label">Batch convert &mdash; one MFI per line</label>
+        <label class="small-label">Batch convert, one MFI per line</label>
         <textarea id="conv-batch" placeholder="512&#10;1840&#10;9932"></textarea>
         <div class="btnrow"><button class="small" onclick="convertBatch()">Convert list</button></div>
         <div id="conv-batch-out" style="margin-top:14px;"></div>
@@ -391,7 +391,7 @@ code{ font-family:'SF Mono', Menlo, monospace; font-size:0.92em; color:var(--pin
 
   <!-- ==================== TAB: INDICES ==================== -->
   <div class="tab-panel" id="tab-indices">
-    <p class="panel-intro">Stain index and separation index quantify how cleanly a positive population separates from background &mdash; the standard metric for titrating antibodies and comparing fluorochrome brightness. Stain index = (MFI<sub>pos</sub> &minus; MFI<sub>neg</sub>) / (2 &times; SD<sub>neg</sub>). The separation index uses the robust SD of the negative population instead, which is more resistant to outliers and the definition used by FCS Express. Compute from raw event data, or from summary statistics you already have.</p>
+    <p class="panel-intro">Stain index and separation index quantify how cleanly a positive population separates from background, the standard metric for titrating antibodies and comparing fluorochrome brightness. Stain index = (MFI<sub>pos</sub> &minus; MFI<sub>neg</sub>) / (2 &times; SD<sub>neg</sub>). The separation index uses the robust SD of the negative population instead, which is more resistant to outliers and the definition used by FCS Express. Compute from raw event data, or from summary statistics you already have.</p>
 
     <div class="tabbar" style="margin-bottom:22px;">
       <button class="active" data-subtab="idx-events" onclick="switchIdxMode('idx-events', this)">From event data</button>
@@ -401,7 +401,7 @@ code{ font-family:'SF Mono', Menlo, monospace; font-size:0.92em; color:var(--pin
     <div class="section idx-mode" id="idx-events">
       <div class="grid2">
         <div class="panel">
-          <label class="small-label">Positive population &mdash; one fluorescence value per line</label>
+          <label class="small-label">Positive population, one fluorescence value per line</label>
           <textarea id="idx-pos" placeholder="880&#10;910&#10;1020&#10;..."></textarea>
         </div>
         <div class="panel">
@@ -427,7 +427,7 @@ code{ font-family:'SF Mono', Menlo, monospace; font-size:0.92em; color:var(--pin
 
   <!-- ==================== TAB: COMPENSATION ==================== -->
   <div class="tab-panel" id="tab-comp">
-    <p class="panel-intro">Spillover compensation. Enter the spillover matrix as percentages &mdash; row <em>i</em>, column <em>j</em> is the fraction of fluorochrome <em>i</em>'s signal that appears in detector <em>j</em>. The diagonal is fixed at 100%. Compensation inverts this matrix and applies it to measured values: corrected&nbsp;=&nbsp;measured&nbsp;&times;&nbsp;spillover<sup>&minus;1</sup>. Enter one or more measured event/MFI vectors below to get compensated values.</p>
+    <p class="panel-intro">Spillover compensation. Enter the spillover matrix as percentages. Row <em>i</em>, column <em>j</em> is the fraction of fluorochrome <em>i</em>'s signal that appears in detector <em>j</em>. The diagonal is fixed at 100%. Compensation inverts this matrix and applies it to measured values: corrected&nbsp;=&nbsp;measured&nbsp;&times;&nbsp;spillover<sup>&minus;1</sup>. Enter one or more measured event/MFI vectors below to get compensated values.</p>
 
     <div class="section">
       <div class="panel">
@@ -437,7 +437,7 @@ code{ font-family:'SF Mono', Menlo, monospace; font-size:0.92em; color:var(--pin
             <option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option>
           </select>
         </div>
-        <label class="small-label" style="margin-top:8px;">Spillover matrix (%) &mdash; diagonal locked at 100</label>
+        <label class="small-label" style="margin-top:8px;">Spillover matrix (%), diagonal locked at 100</label>
         <div class="matrix-wrap"><div id="comp-matrix"></div></div>
         <div class="btnrow">
           <button class="small" onclick="loadCompExample()">Load example</button>
@@ -449,7 +449,7 @@ code{ font-family:'SF Mono', Menlo, monospace; font-size:0.92em; color:var(--pin
 
     <div class="section">
       <div class="panel">
-        <label class="small-label">Measured values &mdash; one event per line, comma-separated per detector (n columns)</label>
+        <label class="small-label">Measured values, one event per line, comma-separated per detector (n columns)</label>
         <textarea id="comp-measured" placeholder="1000,300,50&#10;200,1500,90"></textarea>
         <div class="btnrow"><button class="primary" onclick="runCompensation()">Compensate</button></div>
         <div id="comp-out" style="margin-top:18px;"></div>
@@ -838,19 +838,29 @@ const CORE = (typeof window!=='undefined' ? window.QFlowCore : module.exports);
    ==== UI / DOM layer (not part of the tested core) ======================
    ========================================================================= */
 
-/* ---------- tab switching ---------- */
+/* ---------- tab switching (with URL-hash deep links, e.g. qflow.html#gating) ---------- */
+const TAB_NAMES = ['quant','units','gating','indices','comp','fcs'];
+function activateTab(tab, updateHash){
+  if(!TAB_NAMES.includes(tab)) return;
+  document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.id==='tab-'+tab));
+  if(updateHash) history.replaceState(null, '', '#'+tab);
+}
 document.getElementById('tabbar').addEventListener('click', e=>{
   const btn = e.target.closest('button[data-tab]');
   if(!btn) return;
-  document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('active', b===btn));
-  const tab = btn.dataset.tab;
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.id==='tab-'+tab));
+  activateTab(btn.dataset.tab, true);
 });
+window.addEventListener('hashchange', ()=>{
+  const h=(location.hash||'').replace('#','');
+  if(TAB_NAMES.includes(h)) activateTab(h, false);
+});
+(function(){ const h=(location.hash||'').replace('#',''); if(TAB_NAMES.includes(h)) activateTab(h, false); })();
 
 /* ---------- shared helpers ---------- */
 function uid(){ return Math.random().toString(36).slice(2,9); }
 function escapeAttr(v){ return (v===undefined||v===null? '': String(v)).replace(/"/g,'&quot;'); }
-function fmt(n, d){ if(n===null||n===undefined||isNaN(n)) return '&mdash;'; return Number(n).toLocaleString(undefined,{maximumFractionDigits:d===undefined?2:d}); }
+function fmt(n, d){ if(n===null||n===undefined||isNaN(n)) return '&ndash;'; return Number(n).toLocaleString(undefined,{maximumFractionDigits:d===undefined?2:d}); }
 function parseNumberList(text){
   return text.split(/[\s,;]+/).map(s=>s.trim()).filter(s=>s.length).map(Number).filter(v=>!isNaN(v));
 }
@@ -1141,7 +1151,7 @@ function convertFromMfi(){
   const unitType=document.getElementById('unit-type').value;
   if(units===null){ out.innerHTML='<span class="badge bad">MFI must be &gt; 0</span>'; return; }
   const abc=units/fpRatio();
-  const neg=units<0?' <span class="badge bad">negative &mdash; outside curve range</span>':'';
+  const neg=units<0?' <span class="badge bad">negative, outside curve range</span>':'';
   out.innerHTML=`${fmt(units,0)} ${unitType}${neg}<br>ABC (units &divide; F/P): <strong>${fmt(abc,0)}</strong>`;
 }
 function convertFromUnits(){
@@ -1159,7 +1169,7 @@ function convertBatch(){
   const mfis=parseNumberList(document.getElementById('conv-batch').value);
   if(mfis.length===0){ out.innerHTML='<div class="results-empty">No numbers found.</div>'; return; }
   const unitType=document.getElementById('unit-type').value; const fp=fpRatio();
-  const rows=mfis.map(m=>{ const u=CORE.applyCurve(unitCurve,m); return `<tr><td>${fmt(m,1)}</td><td>${u===null?'&mdash;':fmt(u,0)}</td><td>${u===null?'&mdash;':fmt(u/fp,0)}</td></tr>`; }).join('');
+  const rows=mfis.map(m=>{ const u=CORE.applyCurve(unitCurve,m); return `<tr><td>${fmt(m,1)}</td><td>${u===null?'&ndash;':fmt(u,0)}</td><td>${u===null?'&ndash;':fmt(u/fp,0)}</td></tr>`; }).join('');
   out.innerHTML=`<div class="panel"><table><thead><tr><th>MFI</th><th>${unitType}</th><th>ABC</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
