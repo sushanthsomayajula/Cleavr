@@ -31,20 +31,31 @@ a{ color:var(--pink); }
 .site-nav-links{ display:flex; align-items:center; gap:32px; font-size:13px; color:var(--muted); }
 .site-nav-links a{ color:inherit; text-decoration:none; }
 .site-nav-links a:hover{ color:var(--cream); }
+.site-nav-links a.current{ color:var(--cream); }
 .site-nav-cta{ border:0.5px solid var(--charcoal-3); border-radius:100px; padding:7px 16px; font-size:12px; color:var(--cream) !important; }
-.not-indexed-note{ max-width:1180px; margin:20px auto 0; padding:0 28px; color:var(--muted); font-size:12.5px; }
 
 .wrap{ max-width:1180px; margin:0 auto; padding:40px 28px 100px; }
-header{ margin-bottom:36px; border-bottom:0.5px solid var(--line); padding-bottom:28px; }
+header{ margin-bottom:24px; border-bottom:0.5px solid var(--line); padding-bottom:28px; }
 header .eyebrow{ font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--pink); margin-bottom:12px; font-weight:600; }
 header h1{ font-size:30px; font-weight:600; letter-spacing:-0.02em; margin-bottom:10px; }
-header p{ color:var(--muted); font-size:14.5px; max-width:720px; line-height:1.6; }
+header p{ color:var(--muted); font-size:14.5px; max-width:760px; line-height:1.6; }
 
-.section{ margin-bottom:44px; }
+.tabbar{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:30px; border-bottom:0.5px solid var(--line); }
+.tabbar button{
+  font-family:inherit; font-size:13px; font-weight:600; padding:11px 16px; border:none; background:none;
+  color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-0.5px; border-radius:0;
+}
+.tabbar button:hover{ color:var(--cream); }
+.tabbar button.active{ color:var(--pink); border-bottom-color:var(--pink); }
+.tab-panel{ display:none; }
+.tab-panel.active{ display:block; }
+
+.section{ margin-bottom:40px; }
 .section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:14px; flex-wrap:wrap; }
 .section-head h2{ font-size:17px; font-weight:600; }
 .section-head .sub{ color:var(--muted); font-size:13px; }
-.section-body{ color:var(--muted); font-size:13.5px; line-height:1.6; margin-bottom:16px; max-width:820px; }
+.section-body{ color:var(--muted); font-size:13.5px; line-height:1.6; margin-bottom:16px; max-width:840px; }
+.panel-intro{ color:var(--muted); font-size:13.5px; line-height:1.6; margin-bottom:22px; max-width:840px; }
 
 .panel{ background:var(--charcoal); border:0.5px solid var(--line); border-radius:12px; padding:22px; }
 
@@ -52,11 +63,14 @@ table{ width:100%; border-collapse:collapse; font-size:13px; }
 th{ text-align:left; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.04em; font-size:10.5px; padding:6px 8px; border-bottom:0.5px solid var(--line); }
 td{ padding:4px 6px; border-bottom:0.5px solid var(--line); vertical-align:middle; }
 tr:last-child td{ border-bottom:none; }
-input[type=text], input[type=number]{
+input[type=text], input[type=number], select{
   width:100%; background:var(--charcoal-2); border:0.5px solid var(--charcoal-3); border-radius:6px;
   color:var(--cream); font-family:inherit; font-size:12.5px; padding:6px 8px;
 }
-input[type=text]:focus, input[type=number]:focus{ outline:1px solid var(--pink-dim); border-color:var(--pink-dim); }
+select{ cursor:pointer; }
+input[type=text]:focus, input[type=number]:focus, select:focus{ outline:1px solid var(--pink-dim); border-color:var(--pink-dim); }
+.inline-field{ display:inline-flex; flex-direction:column; gap:5px; margin-right:16px; margin-bottom:12px; vertical-align:top; }
+.inline-field input, .inline-field select{ min-width:150px; }
 
 .btnrow{ display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
 button{
@@ -82,12 +96,18 @@ input[type=file]{ display:none; }
 .curve-card{ background:var(--charcoal-2); border:0.5px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
 .curve-card-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
 .curve-card-head .date{ font-weight:600; font-size:13.5px; }
-.curve-meta{ color:var(--muted); font-size:12px; margin-top:6px; }
+.curve-meta{ color:var(--muted); font-size:12px; margin-top:6px; line-height:1.7; }
 
 .results-empty{ color:var(--muted); font-size:13px; padding:24px 0; text-align:center; }
 
 .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 @media (max-width:860px){ .grid2{ grid-template-columns:1fr; } }
+
+.stat-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px; margin-top:6px; }
+.stat-box{ background:var(--charcoal-2); border:0.5px solid var(--line); border-radius:9px; padding:12px 14px; }
+.stat-box .k{ font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:6px; }
+.stat-box .v{ font-size:18px; font-weight:600; letter-spacing:-0.01em; }
+.stat-box .u{ font-size:11px; color:var(--muted); margin-left:3px; }
 
 .gene-card{ background:var(--charcoal-2); border:0.5px solid var(--line); border-radius:10px; padding:18px; margin-bottom:14px; }
 .gene-card h3{ font-size:15px; margin-bottom:10px; letter-spacing:-0.01em; }
@@ -98,6 +118,13 @@ textarea{
 }
 label.small-label{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:6px; }
 
+.matrix-wrap{ overflow-x:auto; }
+.matrix{ border-collapse:collapse; }
+.matrix th, .matrix td{ border:0.5px solid var(--line); padding:2px; text-align:center; }
+.matrix th{ font-size:10px; color:var(--muted); padding:4px 6px; }
+.matrix input{ width:74px; text-align:center; font-size:11.5px; padding:5px 4px; }
+.matrix td.diag input{ background:var(--charcoal-3); color:var(--muted); }
+
 .log{ background:var(--charcoal-2); border:0.5px solid var(--line); border-radius:8px; padding:12px 14px; font-family:'SF Mono', Menlo, monospace; font-size:11.5px; color:var(--muted); white-space:pre-wrap; line-height:1.6; max-height:220px; overflow:auto; }
 .log .l-warn{ color:var(--warn); }
 .log .l-bad{ color:var(--bad); }
@@ -105,6 +132,7 @@ label.small-label{ font-size:11px; color:var(--muted); text-transform:uppercase;
 
 footer{ margin-top:60px; padding-top:24px; border-top:0.5px solid var(--line); color:var(--muted); font-size:12px; line-height:1.6; }
 svg text{ font-family:'Inter', sans-serif; }
+code{ font-family:'SF Mono', Menlo, monospace; font-size:0.92em; color:var(--pink); }
 </style>
 </head>
 <body>
@@ -115,130 +143,347 @@ svg text{ font-family:'Inter', sans-serif; }
     <a href="index.html">Home</a>
     <a href="studies.html">Studies</a>
     <a href="explorer.html">Explorer</a>
+    <a href="tools.html" class="current">Tools</a>
     <a class="site-nav-cta" href="mailto:sushanthsomayajula@gmail.com">Get in touch</a>
   </div>
 </div>
-<p class="not-indexed-note">This is a working lab tool, not a polished feature of the site. It isn't linked from the main navigation on purpose. All computation happens locally in your browser; nothing is stored or sent anywhere.</p>
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Cleavr &middot; Internal tool</div>
-    <h1>qFlow: receptor quantification &amp; subtype validation</h1>
-    <p>Enter calibration bead runs and flow cytometry measurements below. This tool fits a per-date calibration curve (linear or log-log, whichever fits better), converts raw MFI into absolute antibody binding capacity (receptors per cell), and compares the protein-level pattern across TNBC subtypes against the RNA-level pattern from the computational screen. Same math as <code>receptor_quantification.py</code> and <code>flow_cytometry_validation.py</code>, done here so nothing has to round-trip through a spreadsheet.</p>
+    <div class="eyebrow">Cleavr &middot; Tools</div>
+    <h1>qFlow: quantitative flow cytometry workbench</h1>
+    <p>A single-page workbench for the quantitative-flow-cytometry family: absolute receptor quantification from calibration beads, MESF/ERF/ABC unit conversion, %positive gating and MFI from event-level data, stain and separation indices, spillover compensation, and FCS-file parsing. Everything runs locally in your browser &mdash; nothing is uploaded or stored. The receptor-quantification and subtype logic are numerically identical to <code>receptor_quantification.py</code> and <code>flow_cytometry_validation.py</code>; the browser and the scripts produce the same numbers on the same input.</p>
   </header>
 
-  <div class="section">
-    <div class="section-head">
-      <h2>1. Calibration beads</h2>
-      <span class="sub">one row per bead population per calibration run</span>
+  <div class="tabbar" id="tabbar">
+    <button class="active" data-tab="quant">Receptor quantification</button>
+    <button data-tab="units">Unit conversion</button>
+    <button data-tab="gating">Gating &amp; %positive</button>
+    <button data-tab="indices">Stain / separation index</button>
+    <button data-tab="comp">Compensation</button>
+    <button data-tab="fcs">FCS import</button>
+  </div>
+
+  <!-- ==================== TAB: QUANTIFICATION ==================== -->
+  <div class="tab-panel active" id="tab-quant">
+    <p class="panel-intro">Fit a per-date calibration curve (linear or log-log), convert raw MFI into absolute antibody binding capacity (receptors per cell), and compare the protein-level subtype pattern against the RNA-level pattern from the computational screen. Absolute counts require a fitted calibration curve; rows without one are excluded and flagged, never approximated from a raw MFI/isotype ratio.</p>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>1. Calibration beads</h2>
+        <span class="sub">one row per bead population per calibration run</span>
+      </div>
+      <p class="section-body"><code>molecules_per_bead</code> comes from the bead kit's lot-specific certificate of analysis, not measured. Need at least 3 populations per date to fit a curve.</p>
+      <div class="panel">
+        <div class="inline-field">
+          <label class="small-label">Curve model</label>
+          <select id="calib-model">
+            <option value="auto">Auto (best R&sup2;)</option>
+            <option value="linear">Linear</option>
+            <option value="log-log">Log-log</option>
+          </select>
+        </div>
+        <table id="beads-table">
+          <thead><tr>
+            <th style="width:14%">Date</th>
+            <th style="width:18%">Bead lot</th>
+            <th style="width:16%">Population</th>
+            <th style="width:20%">Molecules / bead</th>
+            <th style="width:16%">MFI</th>
+            <th style="width:6%"></th>
+          </tr></thead>
+          <tbody id="beads-body"></tbody>
+        </table>
+        <div class="btnrow">
+          <button class="small" onclick="addBeadRow()">+ Add row</button>
+          <button class="small" onclick="document.getElementById('beads-file').click()">Import CSV</button>
+          <button class="small" onclick="exportCSV('beads')">Export CSV</button>
+          <input type="file" id="beads-file" accept=".csv" onchange="importCSV(event,'beads')">
+        </div>
+      </div>
     </div>
-    <p class="section-body"><code>molecules_per_bead</code> comes from the bead kit's lot-specific certificate of analysis, not measured. Need at least 3 populations per date to fit a curve.</p>
-    <div class="panel">
-      <table id="beads-table">
-        <thead><tr>
-          <th style="width:14%">Date</th>
-          <th style="width:18%">Bead lot</th>
-          <th style="width:16%">Population</th>
-          <th style="width:20%">Molecules / bead</th>
-          <th style="width:16%">MFI</th>
-          <th style="width:6%"></th>
-        </tr></thead>
-        <tbody id="beads-body"></tbody>
-      </table>
-      <div class="btnrow">
-        <button class="small" onclick="addBeadRow()">+ Add row</button>
-        <button class="small" onclick="document.getElementById('beads-file').click()">Import CSV</button>
-        <button class="small" onclick="exportCSV('beads')">Export CSV</button>
-        <input type="file" id="beads-file" accept=".csv" onchange="importCSV(event,'beads')">
+
+    <div class="section">
+      <div class="section-head">
+        <h2>2. Measurements</h2>
+        <span class="sub">one row per experiment: cell line &times; gene &times; replicate</span>
+      </div>
+      <p class="section-body">Cell lines are matched against the Lehmann-subtype lookup table (Lehmann et al. 2011, PMID 21633166; cross-checked by Espinosa Fernandez et al. 2020, PMID 32353087). Unrecognized cell line names are flagged, not silently dropped.</p>
+      <div class="panel">
+        <table id="meas-table">
+          <thead><tr>
+            <th style="width:11%">Date</th>
+            <th style="width:14%">Cell line</th>
+            <th style="width:9%">Gene</th>
+            <th style="width:10%">MFI</th>
+            <th style="width:12%">Isotype MFI</th>
+            <th style="width:9%">% positive</th>
+            <th style="width:9%">Replicate</th>
+            <th style="width:20%">Notes</th>
+            <th style="width:6%"></th>
+          </tr></thead>
+          <tbody id="meas-body"></tbody>
+        </table>
+        <div class="btnrow">
+          <button class="small" onclick="addMeasRow()">+ Add row</button>
+          <button class="small" onclick="document.getElementById('meas-file').click()">Import CSV</button>
+          <button class="small" onclick="exportCSV('meas')">Export CSV</button>
+          <input type="file" id="meas-file" accept=".csv" onchange="importCSV(event,'meas')">
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>3. RNA reference (optional)</h2>
+        <span class="sub">for protein-vs-RNA subtype concordance</span>
+      </div>
+      <p class="section-body">Paste the <code>group_medians</code> block from a gene's <code>results/&lt;gene&gt;/&lt;gene&gt;_analysis_results.json</code> (produced by <code>biomarker_pipeline.py</code>), or upload the whole file. One entry per gene you're testing.</p>
+      <div class="panel">
+        <label class="small-label">Gene</label>
+        <input type="text" id="rna-gene" placeholder="e.g. GNRHR" style="max-width:200px; margin-bottom:10px;">
+        <label class="small-label">group_medians JSON, e.g. {"BL1":2.55,"BL2":2.89,"M":3.08,"LAR":4.55}</label>
+        <textarea id="rna-json" placeholder='{"BL1": 2.5539, "BL2": 2.8948, "M": 3.08135, "LAR": 4.5535}'></textarea>
+        <div class="btnrow">
+          <button class="small" onclick="document.getElementById('rna-file').click()">Upload analysis_results.json</button>
+          <button class="small" onclick="saveRnaEntry()">Save this gene's RNA data</button>
+          <input type="file" id="rna-file" accept=".json" onchange="importRnaJson(event)">
+        </div>
+        <div id="rna-saved" class="curve-meta" style="margin-top:10px;"></div>
+      </div>
+    </div>
+
+    <div class="btnrow" style="margin-bottom:36px;">
+      <button class="primary" onclick="runAnalysis()">Run analysis</button>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h2>Calibration curves</h2></div>
+      <div id="curves-out" class="results-empty">Run analysis to fit calibration curves.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h2>Quantification results</h2></div>
+      <div id="quant-out" class="results-empty">Run analysis to compute ABC / receptors per cell.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h2>Subtype comparison</h2></div>
+      <div id="subtype-out" class="results-empty">Run analysis to compare protein vs. RNA patterns across subtypes.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h2>Log</h2></div>
+      <div id="run-log" class="log">Nothing run yet.</div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB: UNIT CONVERSION ==================== -->
+  <div class="tab-panel" id="tab-units">
+    <p class="panel-intro">Convert raw fluorescence (MFI) into standardized units &mdash; MESF (molecules of equivalent soluble fluorochrome), ERF (equivalent reference fluorophores, the NIST-traceable successor), or PE molecules / ABC via QuantiBRITE-style beads. Enter the bead standard's assigned unit value against its measured MFI, fit the curve, then convert any MFI (or a whole column of them) either way. QuantiBRITE PE with a 1:1 PE:antibody conjugate yields antibody binding capacity directly.</p>
+
+    <div class="section">
+      <div class="section-head"><h2>1. Bead standard</h2><span class="sub">assigned units vs. measured MFI, &ge; 3 points</span></div>
+      <p class="section-body">Assigned unit values come from the bead lot's certificate of analysis. For QuantiBRITE PE, enter PE molecules per bead. The log-log model is standard for QuantiBRITE (log<sub>10</sub> PE/bead vs. log<sub>10</sub> geometric-mean fluorescence).</p>
+      <div class="panel">
+        <div class="inline-field">
+          <label class="small-label">Unit type</label>
+          <select id="unit-type">
+            <option value="MESF">MESF</option>
+            <option value="ERF">ERF</option>
+            <option value="PE">PE molecules (ABC)</option>
+          </select>
+        </div>
+        <div class="inline-field">
+          <label class="small-label">Curve model</label>
+          <select id="unit-model">
+            <option value="log-log">Log-log (QuantiBRITE default)</option>
+            <option value="linear">Linear</option>
+            <option value="auto">Auto (best R&sup2;)</option>
+          </select>
+        </div>
+        <div class="inline-field">
+          <label class="small-label">Fluorophore : antibody (F/P)</label>
+          <input type="number" id="fp-ratio" value="1" step="0.1" min="0.1">
+        </div>
+        <table id="unitcal-table">
+          <thead><tr><th style="width:20%">Population</th><th style="width:35%">Assigned units</th><th style="width:35%">MFI</th><th style="width:6%"></th></tr></thead>
+          <tbody id="unitcal-body"></tbody>
+        </table>
+        <div class="btnrow">
+          <button class="small" onclick="addUnitCalRow()">+ Add row</button>
+          <button class="primary small" onclick="fitUnitCurve()">Fit curve</button>
+        </div>
+        <div id="unitcal-out" class="curve-meta" style="margin-top:14px;"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h2>2. Convert</h2></div>
+      <div class="grid2">
+        <div class="panel">
+          <label class="small-label">MFI &rarr; units</label>
+          <input type="number" id="conv-mfi" placeholder="enter MFI" oninput="convertFromMfi()">
+          <div id="conv-mfi-out" class="curve-meta" style="margin-top:12px;">Fit a curve first.</div>
+        </div>
+        <div class="panel">
+          <label class="small-label">Units &rarr; MFI</label>
+          <input type="number" id="conv-units" placeholder="enter units" oninput="convertFromUnits()">
+          <div id="conv-units-out" class="curve-meta" style="margin-top:12px;">Fit a curve first.</div>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:20px;">
+        <label class="small-label">Batch convert &mdash; one MFI per line</label>
+        <textarea id="conv-batch" placeholder="512&#10;1840&#10;9932"></textarea>
+        <div class="btnrow"><button class="small" onclick="convertBatch()">Convert list</button></div>
+        <div id="conv-batch-out" style="margin-top:14px;"></div>
       </div>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-head">
-      <h2>2. Measurements</h2>
-      <span class="sub">one row per experiment: cell line &times; gene &times; replicate</span>
+  <!-- ==================== TAB: GATING ==================== -->
+  <div class="tab-panel" id="tab-gating">
+    <p class="panel-intro">Compute percent-positive and summary statistics (median / MFI, geometric mean, arithmetic mean, robust SD) from event-level single-cell data. Paste a CSV or numeric column, or push a channel over from a parsed FCS file (FCS import tab). Set a gate threshold manually, or derive it from a negative-control column as median&nbsp;+&nbsp;<em>k</em>&times;rSD.</p>
+
+    <div class="section">
+      <div class="panel">
+        <label class="small-label">Event data (CSV with a header row, or one value per line for a single channel)</label>
+        <textarea id="gating-data" style="min-height:130px;" placeholder="FITC,PE,APC&#10;12,880,45&#10;9,910,50&#10;15,120,600&#10;..."></textarea>
+        <div class="btnrow">
+          <button class="small" onclick="document.getElementById('gating-file').click()">Upload CSV</button>
+          <button class="small" onclick="loadGatingFromFcs()">Use parsed FCS data</button>
+          <button class="small" onclick="parseGatingData()">Load columns</button>
+          <input type="file" id="gating-file" accept=".csv,.txt" onchange="uploadGatingCsv(event)">
+        </div>
+        <div id="gating-cols" style="margin-top:16px;"></div>
+      </div>
     </div>
-    <p class="section-body">Cell lines are matched against the Lehmann-subtype lookup table (Lehmann et al. 2011, PMID 21633166; cross-checked by Espinosa Fernandez et al. 2020, PMID 32353087). Unrecognized cell line names are flagged, not silently dropped.</p>
-    <div class="panel">
-      <table id="meas-table">
-        <thead><tr>
-          <th style="width:11%">Date</th>
-          <th style="width:14%">Cell line</th>
-          <th style="width:9%">Gene</th>
-          <th style="width:10%">MFI</th>
-          <th style="width:12%">Isotype MFI</th>
-          <th style="width:9%">% positive</th>
-          <th style="width:9%">Replicate</th>
-          <th style="width:20%">Notes</th>
-          <th style="width:6%"></th>
-        </tr></thead>
-        <tbody id="meas-body"></tbody>
-      </table>
-      <div class="btnrow">
-        <button class="small" onclick="addMeasRow()">+ Add row</button>
-        <button class="small" onclick="document.getElementById('meas-file').click()">Import CSV</button>
-        <button class="small" onclick="exportCSV('meas')">Export CSV</button>
-        <input type="file" id="meas-file" accept=".csv" onchange="importCSV(event,'meas')">
+
+    <div class="section" id="gating-controls" style="display:none;">
+      <div class="panel">
+        <div class="inline-field">
+          <label class="small-label">Target channel</label>
+          <select id="gating-channel" onchange="renderGating()"></select>
+        </div>
+        <div class="inline-field">
+          <label class="small-label">Threshold mode</label>
+          <select id="gating-thresh-mode" onchange="renderGating()">
+            <option value="manual">Manual value</option>
+            <option value="negctrl">Negative control column</option>
+          </select>
+        </div>
+        <div class="inline-field" id="gating-manual-field">
+          <label class="small-label">Threshold (gate &gt;)</label>
+          <input type="number" id="gating-threshold" value="0" oninput="renderGating()">
+        </div>
+        <div class="inline-field" id="gating-negctrl-field" style="display:none;">
+          <label class="small-label">Negative control channel</label>
+          <select id="gating-negchannel" onchange="renderGating()"></select>
+        </div>
+        <div class="inline-field" id="gating-k-field" style="display:none;">
+          <label class="small-label">k (median + k&times;rSD)</label>
+          <input type="number" id="gating-k" value="2" step="0.5" oninput="renderGating()">
+        </div>
+        <div id="gating-out" style="margin-top:10px;"></div>
       </div>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-head">
-      <h2>3. RNA reference (optional)</h2>
-      <span class="sub">for protein-vs-RNA subtype concordance</span>
+  <!-- ==================== TAB: INDICES ==================== -->
+  <div class="tab-panel" id="tab-indices">
+    <p class="panel-intro">Stain index and separation index quantify how cleanly a positive population separates from background &mdash; the standard metric for titrating antibodies and comparing fluorochrome brightness. Stain index = (MFI<sub>pos</sub> &minus; MFI<sub>neg</sub>) / (2 &times; SD<sub>neg</sub>). The separation index uses the robust SD of the negative population instead, which is more resistant to outliers and the definition used by FCS Express. Compute from raw event data, or from summary statistics you already have.</p>
+
+    <div class="tabbar" style="margin-bottom:22px;">
+      <button class="active" data-subtab="idx-events" onclick="switchIdxMode('idx-events', this)">From event data</button>
+      <button data-subtab="idx-summary" onclick="switchIdxMode('idx-summary', this)">From summary stats</button>
     </div>
-    <p class="section-body">Paste the <code>group_medians</code> block from a gene's <code>results/&lt;gene&gt;/&lt;gene&gt;_analysis_results.json</code> (produced by <code>biomarker_pipeline.py</code>), or upload the whole file. One entry per gene you're testing.</p>
-    <div class="panel">
-      <label class="small-label">Gene</label>
-      <input type="text" id="rna-gene" placeholder="e.g. GNRHR" style="max-width:200px; margin-bottom:10px;">
-      <label class="small-label">group_medians JSON, e.g. {"BL1":2.55,"BL2":2.89,"M":3.08,"LAR":4.55}</label>
-      <textarea id="rna-json" placeholder='{"BL1": 2.5539, "BL2": 2.8948, "M": 3.08135, "LAR": 4.5535}'></textarea>
-      <div class="btnrow">
-        <button class="small" onclick="document.getElementById('rna-file').click()">Upload analysis_results.json</button>
-        <button class="small" onclick="saveRnaEntry()">Save this gene's RNA data</button>
-        <input type="file" id="rna-file" accept=".json" onchange="importRnaJson(event)">
+
+    <div class="section idx-mode" id="idx-events">
+      <div class="grid2">
+        <div class="panel">
+          <label class="small-label">Positive population &mdash; one fluorescence value per line</label>
+          <textarea id="idx-pos" placeholder="880&#10;910&#10;1020&#10;..."></textarea>
+        </div>
+        <div class="panel">
+          <label class="small-label">Negative population (unstained / isotype / FMO)</label>
+          <textarea id="idx-neg" placeholder="12&#10;9&#10;15&#10;..."></textarea>
+        </div>
       </div>
-      <div id="rna-saved" class="curve-meta" style="margin-top:10px;"></div>
+      <div class="btnrow"><button class="primary" onclick="computeIndexFromEvents()">Compute indices</button></div>
+      <div id="idx-events-out" style="margin-top:18px;"></div>
+    </div>
+
+    <div class="section idx-mode" id="idx-summary" style="display:none;">
+      <div class="panel">
+        <div class="inline-field"><label class="small-label">Positive MFI</label><input type="number" id="s-pos"></div>
+        <div class="inline-field"><label class="small-label">Negative MFI</label><input type="number" id="s-neg"></div>
+        <div class="inline-field"><label class="small-label">Negative SD</label><input type="number" id="s-sd"></div>
+        <div class="inline-field"><label class="small-label">Negative robust SD (optional)</label><input type="number" id="s-rsd"></div>
+        <div class="btnrow"><button class="primary" onclick="computeIndexFromSummary()">Compute indices</button></div>
+        <div id="idx-summary-out" style="margin-top:18px;"></div>
+      </div>
     </div>
   </div>
 
-  <div class="btnrow" style="margin-bottom:36px;">
-    <button class="primary" onclick="runAnalysis()">Run analysis</button>
+  <!-- ==================== TAB: COMPENSATION ==================== -->
+  <div class="tab-panel" id="tab-comp">
+    <p class="panel-intro">Spillover compensation. Enter the spillover matrix as percentages &mdash; row <em>i</em>, column <em>j</em> is the fraction of fluorochrome <em>i</em>'s signal that appears in detector <em>j</em>. The diagonal is fixed at 100%. Compensation inverts this matrix and applies it to measured values: corrected&nbsp;=&nbsp;measured&nbsp;&times;&nbsp;spillover<sup>&minus;1</sup>. Enter one or more measured event/MFI vectors below to get compensated values.</p>
+
+    <div class="section">
+      <div class="panel">
+        <div class="inline-field">
+          <label class="small-label">Detectors (n)</label>
+          <select id="comp-n" onchange="buildCompMatrix()">
+            <option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option>
+          </select>
+        </div>
+        <label class="small-label" style="margin-top:8px;">Spillover matrix (%) &mdash; diagonal locked at 100</label>
+        <div class="matrix-wrap"><div id="comp-matrix"></div></div>
+        <div class="btnrow">
+          <button class="small" onclick="loadCompExample()">Load example</button>
+          <button class="small" onclick="showCompInverse()">Show inverse (compensation matrix)</button>
+        </div>
+        <div id="comp-inverse" class="curve-meta" style="margin-top:12px;"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="panel">
+        <label class="small-label">Measured values &mdash; one event per line, comma-separated per detector (n columns)</label>
+        <textarea id="comp-measured" placeholder="1000,300,50&#10;200,1500,90"></textarea>
+        <div class="btnrow"><button class="primary" onclick="runCompensation()">Compensate</button></div>
+        <div id="comp-out" style="margin-top:18px;"></div>
+      </div>
+    </div>
   </div>
 
-  <div class="section">
-    <div class="section-head"><h2>Calibration curves</h2></div>
-    <div id="curves-out" class="results-empty">Run analysis to fit calibration curves.</div>
-  </div>
+  <!-- ==================== TAB: FCS IMPORT ==================== -->
+  <div class="tab-panel" id="tab-fcs">
+    <p class="panel-intro">Parse an FCS 3.0 / 3.1 list-mode file entirely in your browser: read the TEXT segment keywords, list the parameters, and decode the event matrix (32-bit float, 64-bit double, or fixed-width integer data types). Once loaded, any channel can be pushed to the Gating tab. Nothing is uploaded; the file is read locally with FileReader.</p>
 
-  <div class="section">
-    <div class="section-head"><h2>Quantification results</h2></div>
-    <div id="quant-out" class="results-empty">Run analysis to compute ABC / receptors per cell.</div>
-  </div>
-
-  <div class="section">
-    <div class="section-head"><h2>Subtype comparison</h2></div>
-    <div id="subtype-out" class="results-empty">Run analysis to compare protein vs. RNA patterns across subtypes.</div>
-  </div>
-
-  <div class="section">
-    <div class="section-head"><h2>Log</h2></div>
-    <div id="run-log" class="log">Nothing run yet.</div>
+    <div class="section">
+      <div class="panel">
+        <div class="btnrow" style="margin-top:0;">
+          <button class="small" onclick="document.getElementById('fcs-file').click()">Choose .fcs file</button>
+          <input type="file" id="fcs-file" accept=".fcs" onchange="handleFcsFile(event)">
+        </div>
+        <div id="fcs-summary" class="curve-meta" style="margin-top:16px;">No file loaded.</div>
+        <div id="fcs-params" style="margin-top:16px;"></div>
+      </div>
+    </div>
   </div>
 
   <footer>
-    Calibration and ABC logic mirrors <code>code/receptor_quantification.py</code> exactly (manual OLS, linear vs. log-log selection by R&sup2;). Subtype logic mirrors <code>code/flow_cytometry_validation.py</code>, but only ever uses calibrated receptors-per-cell. A measurement row without a fitted calibration curve for its date is excluded from the subtype comparison and flagged in the log, never approximated from the raw MFI/isotype ratio, since that ratio has no absolute meaning on its own. Nothing on this page is sent anywhere: all computation happens locally in your browser. CSV import/export uses the same column schema as the Python scripts, so files are interchangeable. See <a href="#methodology">Methodology</a> below for the exact equations and references.
+    Calibration and ABC logic mirrors <code>code/receptor_quantification.py</code> exactly (manual OLS, linear vs. log-log selection by R&sup2;). Subtype logic mirrors <code>code/flow_cytometry_validation.py</code> and only ever uses calibrated receptors-per-cell; a measurement row without a fitted calibration curve for its date is excluded from the subtype comparison and flagged, never approximated from the raw MFI/isotype ratio. All other modules (unit conversion, gating, indices, compensation, FCS parsing) run the same pure functions this page is tested against. Nothing on this page is sent anywhere: all computation happens locally in your browser. See <a href="#methodology">Methodology</a> for equations and references.
   </footer>
 
   <div class="section" id="methodology" style="margin-top:8px;">
     <div class="section-head"><h2>Methodology: equations &amp; references</h2></div>
     <div class="panel">
       <h3 style="font-size:14px; margin-bottom:8px;">1. Calibration curve fit</h3>
-      <p class="section-body" style="margin-bottom:10px;">For each calibration date, ordinary least squares is fit twice, once on raw values (linear model) and once on log<sub>10</sub>-transformed values (log-log model), and whichever fit has the higher R&sup2; is kept and reported. Implemented as explicit summations, not a stats library, so every step is auditable.</p>
-      <div class="log" style="white-space:pre-wrap;">Linear model:      ABC = a&middot;MFI + b
-Log-log model:     log10(ABC) = a&middot;log10(MFI) + b   =>   ABC = 10^(a&middot;log10(MFI) + b)
+      <p class="section-body" style="margin-bottom:10px;">For each calibration date, ordinary least squares is fit on raw values (linear model) and on log<sub>10</sub>-transformed values (log-log model); whichever fit has the higher R&sup2; is kept, unless a specific model is forced. Implemented as explicit summations, not a stats library, so every step is auditable.</p>
+      <div class="log" style="white-space:pre-wrap;">Linear model:      units = a&middot;MFI + b
+Log-log model:     log10(units) = a&middot;log10(MFI) + b   =>   units = 10^(a&middot;log10(MFI) + b)
 
 Ordinary least squares (both models fit this way, x/y substituted accordingly):
   mean_x = (1/n) * sum(x_i)
@@ -247,208 +492,77 @@ Ordinary least squares (both models fit this way, x/y substituted accordingly):
   b (intercept) = mean_y - a * mean_x
   R^2           = 1 - [ sum((y_i - y_pred_i)^2) / sum((y_i - mean_y)^2) ]
 
-Minimum 3 bead populations per date (kits typically ship 4-6).
+Minimum 3 bead populations (kits typically ship 4-6).
 R^2 below 0.95 is flagged as noisier than kit manufacturers typically expect.</div>
 
-      <h3 style="font-size:14px; margin:18px 0 8px;">2. Antibody binding capacity (ABC) conversion</h3>
-      <div class="log" style="white-space:pre-wrap;">ABC_target  = curve applied to target-antibody MFI
-ABC_isotype = curve applied to isotype-control MFI
-Net receptors per cell = ABC_target - ABC_isotype
+      <h3 style="font-size:14px; margin:18px 0 8px;">2. Antibody binding capacity (ABC) &amp; standardized units</h3>
+      <div class="log" style="white-space:pre-wrap;">units_target  = curve applied to target-antibody MFI
+units_isotype = curve applied to isotype-control MFI
+Net receptors per cell = (units_target - units_isotype) / (F/P)
 
-This background-subtraction step is what makes the number a receptor count and
-not just a fluorescence readout: isotype MFI is the assay's own noise floor
-(nonspecific antibody binding), and subtracting it out is standard practice
-for antibody-binding-capacity flow cytometry (qFlow).</div>
+MESF = molecules of equivalent soluble fluorochrome (bead standard).
+ERF  = equivalent reference fluorophores (NIST-traceable successor to MESF).
+PE molecules -> ABC: with a 1:1 PE:antibody conjugate (F/P = 1) and 1:1
+antibody:antigen binding, PE molecules per cell equals antibody binding
+capacity. Background subtraction of the isotype control is what makes the
+number a receptor count rather than a raw fluorescence readout.</div>
 
-      <h3 style="font-size:14px; margin:18px 0 8px;">3. Subtype comparison</h3>
-      <p class="section-body" style="margin-bottom:6px;">Mean calibrated receptors/cell is averaged per cell line, then per subtype (BL1/BL2/M/LAR, Lehmann classification). Subtypes are ranked low-to-high on the protein side and compared against the same ranking on the RNA side (TCGA medians from <code>biomarker_pipeline.py</code>). Cell lines not in the lookup table, and measurement rows without a calibration curve for their date, are excluded and flagged in the log rather than silently dropped or approximated.</p>
+      <h3 style="font-size:14px; margin:18px 0 8px;">3. Gating, %positive, and summary statistics</h3>
+      <div class="log" style="white-space:pre-wrap;">%positive = 100 * (events above gate threshold) / (total events)
+MFI      = median of the channel (median is the standard "MFI" in flow)
+geo mean = exp( mean( ln(x) ) ) over positive values
+robust SD (rSD) = ( P84.13 - P15.87 ) / 2      (robust analogue of SD)
+Negative-control gate = median_neg + k * rSD_neg   (default k = 2)</div>
+
+      <h3 style="font-size:14px; margin:18px 0 8px;">4. Stain &amp; separation index</h3>
+      <div class="log" style="white-space:pre-wrap;">Stain index      = (MFI_pos - MFI_neg) / (2 * SD_neg)
+Separation index = (MFI_pos - MFI_neg) / (2 * rSD_neg)   (robust SD variant)</div>
+
+      <h3 style="font-size:14px; margin:18px 0 8px;">5. Compensation</h3>
+      <div class="log" style="white-space:pre-wrap;">Spillover matrix S: S[i][j] = fraction of fluorochrome i seen in detector j,
+diagonal S[i][i] = 1. Measured (row vector) = True * S.
+Compensated True = Measured * S^(-1)   (S inverted by Gauss-Jordan elimination).</div>
+
+      <h3 style="font-size:14px; margin:18px 0 8px;">6. Subtype comparison</h3>
+      <p class="section-body" style="margin-bottom:6px;">Mean calibrated receptors/cell is averaged per cell line, then per subtype (BL1/BL2/M/LAR, Lehmann classification). Subtypes are ranked low-to-high on the protein side and compared against the same ranking on the RNA side (TCGA medians from <code>biomarker_pipeline.py</code>). Cell lines not in the lookup table, and measurement rows without a calibration curve for their date, are excluded and flagged rather than silently dropped or approximated.</p>
 
       <h3 style="font-size:14px; margin:18px 0 8px;">References</h3>
       <ol style="padding-left:20px; color:var(--muted); font-size:12.5px; line-height:1.9;">
         <li>Gratama JW, D'hautcourt JL, Mandy F, et al. Flow cytometric quantitation of immunofluorescence intensity: problems and perspectives. European Working Group on Clinical Cell Analysis. <em>Cytometry.</em> 1998;33(2):166-78. <a href="https://doi.org/10.1002/(sici)1097-0320(19981001)33:2%3C166::aid-cyto11%3E3.0.co;2-s" target="_blank" rel="noopener">DOI</a>. General ABC/MESF calibration-bead framework.</li>
-        <li>Wang L, Abbasi F, Gaigalas AK, Hoffman RA, Flagler D, Marti GE. Discrepancy in measuring CD4 expression on T-lymphocytes using fluorescein conjugates in comparison with unimolar CD4-phycoerythrin conjugates. <em>Cytometry B Clin Cytom.</em> 2007;72(6):442-9. <a href="https://doi.org/10.1002/cyto.b.20354" target="_blank" rel="noopener">DOI</a>. QuantiBRITE PE + unimolar PE-conjugate ABC methodology.</li>
+        <li>Wang L, Gaigalas AK, Marti G, et al. Formalization of the MESF unit of fluorescence intensity. <em>Cytometry B Clin Cytom.</em> 2005;68(1):45-52. <a href="https://doi.org/10.1002/cyto.b.20077" target="_blank" rel="noopener">DOI</a>. Definition of the MESF unit.</li>
+        <li>Wang L, Gaigalas AK. Development of multicolor flow cytometry calibration standards: assignment of equivalent reference fluorophores (ERF) unit. <em>J Res Natl Inst Stand Technol.</em> 2011. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4550335/" target="_blank" rel="noopener">PMC4550335</a>. NIST ERF unit, successor to MESF.</li>
+        <li>Pannu KK, Joe ET, Iyer SB. Performance evaluation of QuantiBRITE phycoerythrin beads. <em>Cytometry.</em> 2001;45(4):250-8. PMID <a href="https://pubmed.ncbi.nlm.nih.gov/11746094/" target="_blank" rel="noopener">11746094</a>. QuantiBRITE PE log-log calibration and PE-to-ABC conversion.</li>
+        <li>Maecker HT, Trotter J. Flow cytometry controls, instrument setup, and the determination of positivity. <em>Cytometry A.</em> 2006;69(9):1037-42. <a href="https://doi.org/10.1002/cyto.a.20333" target="_blank" rel="noopener">DOI</a>. FMO gating and the stain-index concept.</li>
+        <li>Roederer M. Spectral compensation for flow cytometry: visualization artifacts, limitations, and caveats. <em>Cytometry.</em> 2001;45(3):194-205. PMID <a href="https://pubmed.ncbi.nlm.nih.gov/11746088/" target="_blank" rel="noopener">11746088</a>. Spillover-matrix inversion and compensation.</li>
+        <li>Spidlen J, Moore W, Parks D, et al. Data File Standard for Flow Cytometry, version FCS 3.1. <em>Cytometry A.</em> 2010;77(1):97-100. <a href="https://doi.org/10.1002/cyto.a.20825" target="_blank" rel="noopener">DOI</a>. FCS 3.1 file format used by the FCS parser.</li>
         <li>Fang Y, Malik M, England SK, Imoukhuede PI. Absolute Quantification of Plasma Membrane Receptors Via Quantitative Flow Cytometry. <em>Methods Mol Biol.</em> 2022;2475:61-77. <a href="https://doi.org/10.1007/978-1-0716-2217-9_4" target="_blank" rel="noopener">DOI</a>. qFlow protocol for RTKs/GPCRs, PE-based absolute quantification.</li>
-        <li>Chen S, Weddell J, Gupta P, Conard G, Parkin J, Imoukhuede PI. qFlow Cytometry-Based Receptoromic Screening. <em>Methods Mol Biol.</em> 2017;1570:117-138. <a href="https://doi.org/10.1007/978-1-4939-6840-4_8" target="_blank" rel="noopener">DOI</a>. Background subtraction and calibration workflow for high-throughput receptor quantification.</li>
-        <li>Lehmann BD, Bauer JA, Chen X, et al. Identification of human triple-negative breast cancer subtypes and preclinical models for selection of targeted therapies. <em>J Clin Invest.</em> 2011;121(7):2750-67. PMID <a href="https://pubmed.ncbi.nlm.nih.gov/21633166/" target="_blank" rel="noopener">21633166</a>. Original TNBCtype subtype algorithm applied to a cell line panel, source of the cell-line-to-subtype lookup table used here.</li>
-        <li>Espinosa Fernandez JR, Eckhardt BL, Lee J, et al. Identification of triple-negative breast cancer cell lines classified under the same molecular subtype using different molecular characterization techniques. <em>PLoS One.</em> 2020;15(4):e0231953. PMID <a href="https://pubmed.ncbi.nlm.nih.gov/32353087/" target="_blank" rel="noopener">32353087</a>. Cross-checked the same cell lines against a revised algorithm across 5 independent datasets; the "stable" flag in the lookup table reflects concordance here.</li>
+        <li>Lehmann BD, Bauer JA, Chen X, et al. Identification of human triple-negative breast cancer subtypes and preclinical models for selection of targeted therapies. <em>J Clin Invest.</em> 2011;121(7):2750-67. PMID <a href="https://pubmed.ncbi.nlm.nih.gov/21633166/" target="_blank" rel="noopener">21633166</a>. Cell-line-to-subtype lookup table.</li>
+        <li>Espinosa Fernandez JR, Eckhardt BL, Lee J, et al. Identification of triple-negative breast cancer cell lines classified under the same molecular subtype using different molecular characterization techniques. <em>PLoS One.</em> 2020;15(4):e0231953. PMID <a href="https://pubmed.ncbi.nlm.nih.gov/32353087/" target="_blank" rel="noopener">32353087</a>. Cross-check of the same cell lines; source of the "stable" flag.</li>
       </ol>
     </div>
   </div>
 </div>
 
 <script>
-/* ---------- data model ---------- */
-let beadRows = [];
-let measRows = [];
-let rnaData = {}; // gene -> {BL1:.., BL2:.., M:.., LAR:..}
+/* =========================================================================
+   ==== QFLOW-CORE-START : pure, DOM-free functions (unit-tested) ==========
+   These functions take numbers in and return numbers/objects out. They do
+   not touch the DOM. The test harness (test/qflow_core.test.js) extracts
+   this exact block between the START/END markers and runs it in Node.
+   ========================================================================= */
+(function(root, factory){
+  const core = factory();
+  if (typeof module !== 'undefined' && module.exports) module.exports = core;
+  else root.QFlowCore = core;
+})(typeof self !== 'undefined' ? self : this, function(){
+'use strict';
 
-function uid(){ return Math.random().toString(36).slice(2,9); }
+const MIN_BEAD_POPULATIONS = 3;
 
-function addBeadRow(vals){
-  const r = Object.assign({id:uid(), date:'', bead_lot:'', population:'', molecules_per_bead:'', mfi:''}, vals||{});
-  beadRows.push(r);
-  renderBeads();
-}
-function addMeasRow(vals){
-  const r = Object.assign({id:uid(), date:'', cell_line:'', gene:'', mfi:'', isotype_mfi:'', pct_positive:'', replicate:'', notes:''}, vals||{});
-  measRows.push(r);
-  renderMeas();
-}
-function delBeadRow(id){ beadRows = beadRows.filter(r=>r.id!==id); renderBeads(); }
-function delMeasRow(id){ measRows = measRows.filter(r=>r.id!==id); renderMeas(); }
-
-function cellInput(row, key, arr, width){
-  return `<input type="text" value="${escapeAttr(row[key])}" oninput="updateCell('${arr}','${row.id}','${key}',this.value)">`;
-}
-function escapeAttr(v){ return (v===undefined||v===null? '': String(v)).replace(/"/g,'&quot;'); }
-function updateCell(arr,id,key,val){
-  const list = arr==='beads' ? beadRows : measRows;
-  const row = list.find(r=>r.id===id);
-  if(row) row[key]=val;
-}
-
-function renderBeads(){
-  const body = document.getElementById('beads-body');
-  body.innerHTML = beadRows.map(r=>`<tr>
-    <td>${cellInput(r,'date','beads')}</td>
-    <td>${cellInput(r,'bead_lot','beads')}</td>
-    <td>${cellInput(r,'population','beads')}</td>
-    <td>${cellInput(r,'molecules_per_bead','beads')}</td>
-    <td>${cellInput(r,'mfi','beads')}</td>
-    <td><button class="del-btn" onclick="delBeadRow('${r.id}')">&times;</button></td>
-  </tr>`).join('');
-}
-function renderMeas(){
-  const body = document.getElementById('meas-body');
-  body.innerHTML = measRows.map(r=>`<tr>
-    <td>${cellInput(r,'date','meas')}</td>
-    <td>${cellInput(r,'cell_line','meas')}</td>
-    <td>${cellInput(r,'gene','meas')}</td>
-    <td>${cellInput(r,'mfi','meas')}</td>
-    <td>${cellInput(r,'isotype_mfi','meas')}</td>
-    <td>${cellInput(r,'pct_positive','meas')}</td>
-    <td>${cellInput(r,'replicate','meas')}</td>
-    <td>${cellInput(r,'notes','meas')}</td>
-    <td><button class="del-btn" onclick="delMeasRow('${r.id}')">&times;</button></td>
-  </tr>`).join('');
-}
-
-/* ---------- CSV import/export ---------- */
-const SCHEMAS = {
-  beads: ['date','bead_lot','population','molecules_per_bead','mfi'],
-  meas: ['date','cell_line','gene','mfi','isotype_mfi','pct_positive','replicate','notes']
-};
-
-function parseCSV(text){
-  const lines = text.replace(/\r\n/g,'\n').split('\n').filter(l=>l.length>0);
-  if(lines.length===0) return {header:[], rows:[]};
-  const header = splitCSVLine(lines[0]);
-  const rows = lines.slice(1).map(splitCSVLine);
-  return {header, rows};
-}
-function splitCSVLine(line){
-  const out=[]; let cur=''; let inQ=false;
-  for(let i=0;i<line.length;i++){
-    const c=line[i];
-    if(inQ){
-      if(c==='"'){ if(line[i+1]==='"'){cur+='"';i++;} else inQ=false; }
-      else cur+=c;
-    } else {
-      if(c===','){ out.push(cur); cur=''; }
-      else if(c==='"'){ inQ=true; }
-      else cur+=c;
-    }
-  }
-  out.push(cur);
-  return out;
-}
-function csvEscape(v){
-  v = v===undefined||v===null ? '' : String(v);
-  if(/[",\n]/.test(v)) return '"'+v.replace(/"/g,'""')+'"';
-  return v;
-}
-
-function importCSV(evt, which){
-  const file = evt.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    const {header, rows} = parseCSV(reader.result);
-    const schema = SCHEMAS[which];
-    const idx = {};
-    header.forEach((h,i)=> idx[h.trim()]=i);
-    const parsed = rows.map(cols=>{
-      const obj = {id:uid()};
-      schema.forEach(key=>{ obj[key] = idx[key]!==undefined ? (cols[idx[key]]||'') : ''; });
-      return obj;
-    });
-    if(which==='beads'){ beadRows = parsed; renderBeads(); }
-    else { measRows = parsed; renderMeas(); }
-    log(`Imported ${parsed.length} rows into ${which==='beads'?'calibration beads':'measurements'}.`);
-  };
-  reader.readAsText(file);
-  evt.target.value = '';
-}
-function exportCSV(which){
-  const schema = SCHEMAS[which];
-  const rows = which==='beads' ? beadRows : measRows;
-  const lines = [schema.join(',')];
-  rows.forEach(r=> lines.push(schema.map(k=>csvEscape(r[k])).join(',')));
-  downloadText(lines.join('\n'), which==='beads' ? 'calibration_beads.csv' : 'measurements.csv', 'text/csv');
-}
-function downloadText(text, filename, type){
-  const blob = new Blob([text], {type});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename;
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-function importRnaJson(evt){
-  const file = evt.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    try{
-      const parsed = JSON.parse(reader.result);
-      const gene = (parsed.gene || document.getElementById('rna-gene').value || '').toUpperCase();
-      const medians = parsed.group_medians || parsed;
-      if(!gene){ alert('Could not determine gene name; fill in the Gene field first.'); return; }
-      rnaData[gene] = medians;
-      renderRnaSaved();
-      log(`Loaded RNA group_medians for ${gene} from uploaded file.`);
-    } catch(e){
-      alert('Could not parse that file as JSON: ' + e.message);
-    }
-  };
-  reader.readAsText(file);
-  evt.target.value='';
-}
-function saveRnaEntry(){
-  const gene = document.getElementById('rna-gene').value.trim().toUpperCase();
-  const raw = document.getElementById('rna-json').value.trim();
-  if(!gene){ alert('Enter a gene symbol first.'); return; }
-  if(!raw){ alert('Paste the group_medians JSON first.'); return; }
-  try{
-    const medians = JSON.parse(raw);
-    rnaData[gene] = medians;
-    renderRnaSaved();
-    log(`Saved RNA group_medians for ${gene}.`);
-  } catch(e){
-    alert('That is not valid JSON: ' + e.message);
-  }
-}
-function renderRnaSaved(){
-  const genes = Object.keys(rnaData);
-  document.getElementById('rna-saved').textContent = genes.length
-    ? 'Saved RNA data for: ' + genes.join(', ')
-    : '';
-}
-
-/* ---------- calibration curve fitting (mirrors receptor_quantification.py) ---------- */
+/* ---- ordinary least squares (mirrors ols_fit in receptor_quantification.py) ---- */
 function olsFit(x, y){
   const n = x.length;
+  if(n === 0) return null;
   const meanX = x.reduce((a,b)=>a+b,0)/n;
   const meanY = y.reduce((a,b)=>a+b,0)/n;
   let num=0, den=0;
@@ -466,26 +580,30 @@ function olsFit(x, y){
   return {slope, intercept, r2};
 }
 
-const MIN_BEAD_POPULATIONS = 3;
-
-function fitCalibrationCurve(points){
-  // points: [[mfi, abc], ...]
+/* ---- calibration curve (mirrors fit_calibration_curve; model optional) ---- */
+function fitCalibrationCurve(points, model){
+  model = model || 'auto';
   if(points.length < MIN_BEAD_POPULATIONS) return null;
   const mfis = points.map(p=>p[0]);
   const abcs = points.map(p=>p[1]);
   const candidates = [];
-  const linear = olsFit(mfis, abcs);
-  if(linear) candidates.push({method:'linear', slope:linear.slope, intercept:linear.intercept, r_squared:linear.r2});
-  if(mfis.every(v=>v>0) && abcs.every(v=>v>0)){
-    const logMfis = mfis.map(Math.log10);
-    const logAbcs = abcs.map(Math.log10);
-    const loglog = olsFit(logMfis, logAbcs);
-    if(loglog) candidates.push({method:'log-log', slope:loglog.slope, intercept:loglog.intercept, r_squared:loglog.r2});
+  if(model === 'auto' || model === 'linear'){
+    const linear = olsFit(mfis, abcs);
+    if(linear) candidates.push({method:'linear', slope:linear.slope, intercept:linear.intercept, r_squared:linear.r2});
   }
-  if(candidates.length===0) return null;
+  if(model === 'auto' || model === 'log-log'){
+    if(mfis.every(v=>v>0) && abcs.every(v=>v>0)){
+      const logMfis = mfis.map(v=>Math.log10(v));
+      const logAbcs = abcs.map(v=>Math.log10(v));
+      const loglog = olsFit(logMfis, logAbcs);
+      if(loglog) candidates.push({method:'log-log', slope:loglog.slope, intercept:loglog.intercept, r_squared:loglog.r2});
+    }
+  }
+  if(candidates.length === 0) return null;
   return candidates.reduce((best,c)=> c.r_squared>best.r_squared ? c : best);
 }
 
+/* ---- apply a fitted curve: MFI -> units (mirrors apply_curve) ---- */
 function applyCurve(curve, mfi){
   if(mfi===null || mfi===undefined || isNaN(mfi) || mfi<=0) return null;
   if(curve.method==='linear') return curve.slope*mfi + curve.intercept;
@@ -493,7 +611,130 @@ function applyCurve(curve, mfi){
   return Math.pow(10, logAbc);
 }
 
-/* ---------- subtype lookup (mirrors flow_cytometry_validation.py) ---------- */
+/* ---- inverse of applyCurve: units -> MFI ---- */
+function invertCurve(curve, value){
+  if(value===null || value===undefined || isNaN(value)) return null;
+  if(curve.method==='linear'){
+    if(curve.slope===0) return null;
+    return (value - curve.intercept)/curve.slope;
+  }
+  if(value<=0 || curve.slope===0) return null;
+  const logMfi = (Math.log10(value) - curve.intercept)/curve.slope;
+  return Math.pow(10, logMfi);
+}
+
+/* ---- descriptive statistics ---- */
+function mean(a){ return a.length ? a.reduce((s,v)=>s+v,0)/a.length : NaN; }
+function median(a){
+  if(a.length===0) return NaN;
+  const s=[...a].sort((x,y)=>x-y);
+  const m=Math.floor(s.length/2);
+  return s.length%2 ? s[m] : (s[m-1]+s[m])/2;
+}
+function percentile(a, p){
+  if(a.length===0) return NaN;
+  const s=[...a].sort((x,y)=>x-y);
+  if(s.length===1) return s[0];
+  const idx=(p/100)*(s.length-1);
+  const lo=Math.floor(idx), hi=Math.ceil(idx);
+  if(lo===hi) return s[lo];
+  return s[lo] + (s[hi]-s[lo])*(idx-lo);
+}
+/* sample standard deviation (n-1 denominator) */
+function stddev(a){
+  const n=a.length; if(n<2) return NaN;
+  const mu=mean(a);
+  const v=a.reduce((s,x)=>s+(x-mu)**2,0)/(n-1);
+  return Math.sqrt(v);
+}
+/* robust SD: half the 15.87-84.13 percentile spread (== 1 sigma for a normal) */
+function robustStd(a){
+  if(a.length<2) return NaN;
+  return (percentile(a,84.13) - percentile(a,15.87))/2;
+}
+function geometricMean(a){
+  const pos=a.filter(v=>v>0);
+  if(pos.length===0) return NaN;
+  const s=pos.reduce((acc,v)=>acc+Math.log(v),0)/pos.length;
+  return Math.exp(s);
+}
+function pctPositive(values, threshold){
+  if(values.length===0) return NaN;
+  const n=values.filter(v=>v>threshold).length;
+  return 100*n/values.length;
+}
+function channelStats(values, threshold){
+  return {
+    n: values.length,
+    median: median(values),
+    mean: mean(values),
+    geoMean: geometricMean(values),
+    sd: stddev(values),
+    rSD: robustStd(values),
+    pctPositive: (threshold===undefined||threshold===null) ? null : pctPositive(values, threshold),
+  };
+}
+
+/* ---- stain & separation index ---- */
+function stainIndex(posMFI, negMFI, negSD){
+  if(!negSD || isNaN(negSD)) return NaN;
+  return (posMFI - negMFI)/(2*negSD);
+}
+function separationIndex(posMFI, negMFI, negRSD){
+  if(!negRSD || isNaN(negRSD)) return NaN;
+  return (posMFI - negMFI)/(2*negRSD);
+}
+function indicesFromEvents(pos, neg){
+  const posMed = median(pos), negMed = median(neg);
+  const negSD = stddev(neg), negRSD = robustStd(neg);
+  return {
+    posMFI: posMed, negMFI: negMed, negSD, negRSD,
+    stainIndex: stainIndex(posMed, negMed, negSD),
+    separationIndex: separationIndex(posMed, negMed, negRSD),
+  };
+}
+
+/* ---- compensation ---- */
+function matInvert(m){
+  const n=m.length;
+  const A=m.map((row,i)=> row.concat(Array.from({length:n},(_,j)=> i===j?1:0)));
+  for(let col=0; col<n; col++){
+    let piv=col;
+    for(let r=col+1;r<n;r++){ if(Math.abs(A[r][col])>Math.abs(A[piv][col])) piv=r; }
+    if(Math.abs(A[piv][col])<1e-12) return null;
+    const tmp=A[col]; A[col]=A[piv]; A[piv]=tmp;
+    const pv=A[col][col];
+    for(let j=0;j<2*n;j++) A[col][j]/=pv;
+    for(let r=0;r<n;r++){
+      if(r===col) continue;
+      const f=A[r][col];
+      if(f===0) continue;
+      for(let j=0;j<2*n;j++) A[r][j]-=f*A[col][j];
+    }
+  }
+  return A.map(row=>row.slice(n));
+}
+function matVecRow(vec, M){
+  // returns vec (row) * M
+  const n=M.length;
+  const out=new Array(M[0].length).fill(0);
+  for(let j=0;j<M[0].length;j++){
+    let s=0;
+    for(let i=0;i<n;i++) s+=vec[i]*M[i][j];
+    out[j]=s;
+  }
+  return out;
+}
+function spilloverFromPercent(pct){
+  return pct.map((row,i)=> row.map((v,j)=> i===j ? 1 : (Number(v)||0)/100));
+}
+function compensate(spillFrac, measured){
+  const inv=matInvert(spillFrac);
+  if(!inv) return null;
+  return matVecRow(measured, inv);
+}
+
+/* ---- subtype lookup (mirrors flow_cytometry_validation.py) ---- */
 const CELL_LINE_SUBTYPE = {
   'HCC70':    {subtype:'BL2', stable:true},
   'SUM149PT': {subtype:'BL2', stable:true},
@@ -510,247 +751,620 @@ function normalizeCellLine(name){
   return (name||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
 }
 
-/* ---------- main run ---------- */
-let lastQuantResults = [];
-let logLines = [];
-function log(msg, cls){
-  logLines.push(cls ? `<span class="${cls}">${msg}</span>` : msg);
-  document.getElementById('run-log').innerHTML = logLines.join('\n');
+/* ---- FCS 3.0 / 3.1 parser (list mode; datatypes F, D, I) ---- */
+function parseFCS(buffer){
+  let u8;
+  if(typeof Buffer !== 'undefined' && buffer instanceof Buffer) u8 = new Uint8Array(buffer);
+  else if(buffer instanceof ArrayBuffer) u8 = new Uint8Array(buffer);
+  else if(buffer instanceof Uint8Array) u8 = buffer;
+  else throw new Error('parseFCS: unsupported buffer type');
+
+  const ascii=(start,end)=>{ let s=''; for(let i=start;i<end;i++) s+=String.fromCharCode(u8[i]); return s; };
+  const version = ascii(0,6);
+  if(version.slice(0,3)!=='FCS') throw new Error('Not an FCS file (missing FCS magic bytes).');
+
+  const textStart = parseInt(ascii(10,18).trim(),10);
+  const textEnd   = parseInt(ascii(18,26).trim(),10);
+  let dataStart   = parseInt(ascii(26,34).trim(),10);
+  let dataEnd     = parseInt(ascii(34,42).trim(),10);
+
+  const delim = String.fromCharCode(u8[textStart]);
+  const textSeg = ascii(textStart+1, textEnd+1);
+  const parts = textSeg.split(delim);
+  const kw={};
+  for(let i=0;i+1<parts.length;i+=2){ kw[parts[i].trim().toUpperCase()] = parts[i+1]; }
+
+  const par = parseInt(kw['$PAR'],10);
+  const tot = parseInt(kw['$TOT'],10);
+  const datatype = (kw['$DATATYPE']||'F').trim().toUpperCase();
+  const mode = (kw['$MODE']||'L').trim().toUpperCase();
+  const byteord = (kw['$BYTEORD']||'1,2,3,4').trim();
+  const littleEndian = byteord.charAt(0)==='1';
+  if(!dataStart && (kw['$BEGINDATA']||kw['$DATASTART'])) dataStart=parseInt(kw['$BEGINDATA']||kw['$DATASTART'],10);
+  if(!dataEnd && (kw['$ENDDATA']||kw['$DATAEND'])) dataEnd=parseInt(kw['$ENDDATA']||kw['$DATAEND'],10);
+
+  const params=[];
+  for(let p=1;p<=par;p++){
+    params.push({
+      index:p,
+      name:(kw['$P'+p+'N']||('P'+p)),
+      label:(kw['$P'+p+'S']||''),
+      bits:parseInt(kw['$P'+p+'B'],10),
+      range:parseFloat(kw['$P'+p+'R']),
+    });
+  }
+
+  if(mode!=='L') throw new Error('Only list-mode ($MODE L) FCS data is supported; got $MODE '+mode+'.');
+
+  const dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
+  const matrix=[];
+  let pos=dataStart;
+  for(let e=0;e<tot;e++){
+    const row=new Array(par);
+    for(let p=0;p<par;p++){
+      let val;
+      if(datatype==='F'){ val=dv.getFloat32(pos, littleEndian); pos+=4; }
+      else if(datatype==='D'){ val=dv.getFloat64(pos, littleEndian); pos+=8; }
+      else if(datatype==='I'){
+        const b=params[p].bits;
+        if(b===8){ val=dv.getUint8(pos); pos+=1; }
+        else if(b===16){ val=dv.getUint16(pos, littleEndian); pos+=2; }
+        else if(b===32){ val=dv.getUint32(pos, littleEndian); pos+=4; }
+        else throw new Error('Unsupported integer width $PnB='+b+' (need 8/16/32).');
+      } else throw new Error('Unsupported $DATATYPE '+datatype+' (need F, D, or I).');
+      row[p]=val;
+    }
+    matrix.push(row);
+  }
+  const byParam={};
+  params.forEach((prm,ci)=>{ byParam[prm.name]=matrix.map(r=>r[ci]); });
+  return {version, mode, datatype, byteord, littleEndian, params, nEvents:tot, matrix, byParam};
 }
+
+return {
+  MIN_BEAD_POPULATIONS,
+  olsFit, fitCalibrationCurve, applyCurve, invertCurve,
+  mean, median, percentile, stddev, robustStd, geometricMean, pctPositive, channelStats,
+  stainIndex, separationIndex, indicesFromEvents,
+  matInvert, matVecRow, spilloverFromPercent, compensate,
+  CELL_LINE_SUBTYPE, normalizeCellLine, parseFCS,
+};
+});
+/* ==== QFLOW-CORE-END ==================================================== */
+
+const CORE = (typeof window!=='undefined' ? window.QFlowCore : module.exports);
+
+/* =========================================================================
+   ==== UI / DOM layer (not part of the tested core) ======================
+   ========================================================================= */
+
+/* ---------- tab switching ---------- */
+document.getElementById('tabbar').addEventListener('click', e=>{
+  const btn = e.target.closest('button[data-tab]');
+  if(!btn) return;
+  document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('active', b===btn));
+  const tab = btn.dataset.tab;
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.id==='tab-'+tab));
+});
+
+/* ---------- shared helpers ---------- */
+function uid(){ return Math.random().toString(36).slice(2,9); }
+function escapeAttr(v){ return (v===undefined||v===null? '': String(v)).replace(/"/g,'&quot;'); }
+function fmt(n, d){ if(n===null||n===undefined||isNaN(n)) return '&mdash;'; return Number(n).toLocaleString(undefined,{maximumFractionDigits:d===undefined?2:d}); }
+function parseNumberList(text){
+  return text.split(/[\s,;]+/).map(s=>s.trim()).filter(s=>s.length).map(Number).filter(v=>!isNaN(v));
+}
+function downloadText(text, filename, type){
+  const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+/* =====================================================================
+   TAB 1: RECEPTOR QUANTIFICATION
+   ===================================================================== */
+let beadRows = [];
+let measRows = [];
+let rnaData = {};
+
+function addBeadRow(vals){
+  beadRows.push(Object.assign({id:uid(), date:'', bead_lot:'', population:'', molecules_per_bead:'', mfi:''}, vals||{}));
+  renderBeads();
+}
+function addMeasRow(vals){
+  measRows.push(Object.assign({id:uid(), date:'', cell_line:'', gene:'', mfi:'', isotype_mfi:'', pct_positive:'', replicate:'', notes:''}, vals||{}));
+  renderMeas();
+}
+function delBeadRow(id){ beadRows=beadRows.filter(r=>r.id!==id); renderBeads(); }
+function delMeasRow(id){ measRows=measRows.filter(r=>r.id!==id); renderMeas(); }
+function cellInput(row, key, arr){ return `<input type="text" value="${escapeAttr(row[key])}" oninput="updateCell('${arr}','${row.id}','${key}',this.value)">`; }
+function updateCell(arr,id,key,val){
+  const list = arr==='beads'?beadRows:measRows;
+  const row=list.find(r=>r.id===id); if(row) row[key]=val;
+}
+function renderBeads(){
+  document.getElementById('beads-body').innerHTML = beadRows.map(r=>`<tr>
+    <td>${cellInput(r,'date','beads')}</td><td>${cellInput(r,'bead_lot','beads')}</td>
+    <td>${cellInput(r,'population','beads')}</td><td>${cellInput(r,'molecules_per_bead','beads')}</td>
+    <td>${cellInput(r,'mfi','beads')}</td>
+    <td><button class="del-btn" onclick="delBeadRow('${r.id}')">&times;</button></td></tr>`).join('');
+}
+function renderMeas(){
+  document.getElementById('meas-body').innerHTML = measRows.map(r=>`<tr>
+    <td>${cellInput(r,'date','meas')}</td><td>${cellInput(r,'cell_line','meas')}</td>
+    <td>${cellInput(r,'gene','meas')}</td><td>${cellInput(r,'mfi','meas')}</td>
+    <td>${cellInput(r,'isotype_mfi','meas')}</td><td>${cellInput(r,'pct_positive','meas')}</td>
+    <td>${cellInput(r,'replicate','meas')}</td><td>${cellInput(r,'notes','meas')}</td>
+    <td><button class="del-btn" onclick="delMeasRow('${r.id}')">&times;</button></td></tr>`).join('');
+}
+
+const SCHEMAS = {
+  beads: ['date','bead_lot','population','molecules_per_bead','mfi'],
+  meas: ['date','cell_line','gene','mfi','isotype_mfi','pct_positive','replicate','notes']
+};
+function parseCSV(text){
+  const lines=text.replace(/\r\n/g,'\n').split('\n').filter(l=>l.length>0);
+  if(lines.length===0) return {header:[], rows:[]};
+  return {header:splitCSVLine(lines[0]), rows:lines.slice(1).map(splitCSVLine)};
+}
+function splitCSVLine(line){
+  const out=[]; let cur=''; let inQ=false;
+  for(let i=0;i<line.length;i++){
+    const c=line[i];
+    if(inQ){ if(c==='"'){ if(line[i+1]==='"'){cur+='"';i++;} else inQ=false; } else cur+=c; }
+    else { if(c===','){ out.push(cur); cur=''; } else if(c==='"'){ inQ=true; } else cur+=c; }
+  }
+  out.push(cur); return out;
+}
+function csvEscape(v){ v=v===undefined||v===null?'':String(v); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; }
+function importCSV(evt, which){
+  const file=evt.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const {header, rows}=parseCSV(reader.result);
+    const schema=SCHEMAS[which]; const idx={};
+    header.forEach((h,i)=>idx[h.trim()]=i);
+    const parsed=rows.map(cols=>{ const obj={id:uid()}; schema.forEach(k=>{obj[k]=idx[k]!==undefined?(cols[idx[k]]||''):'';}); return obj; });
+    if(which==='beads'){ beadRows=parsed; renderBeads(); } else { measRows=parsed; renderMeas(); }
+    log(`Imported ${parsed.length} rows into ${which==='beads'?'calibration beads':'measurements'}.`);
+  };
+  reader.readAsText(file); evt.target.value='';
+}
+function exportCSV(which){
+  const schema=SCHEMAS[which]; const rows=which==='beads'?beadRows:measRows;
+  const lines=[schema.join(',')]; rows.forEach(r=>lines.push(schema.map(k=>csvEscape(r[k])).join(',')));
+  downloadText(lines.join('\n'), which==='beads'?'calibration_beads.csv':'measurements.csv','text/csv');
+}
+function importRnaJson(evt){
+  const file=evt.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const parsed=JSON.parse(reader.result);
+      const gene=(parsed.gene||document.getElementById('rna-gene').value||'').toUpperCase();
+      const medians=parsed.group_medians||parsed;
+      if(!gene){ alert('Could not determine gene name; fill in the Gene field first.'); return; }
+      rnaData[gene]=medians; renderRnaSaved(); log(`Loaded RNA group_medians for ${gene} from uploaded file.`);
+    }catch(e){ alert('Could not parse that file as JSON: '+e.message); }
+  };
+  reader.readAsText(file); evt.target.value='';
+}
+function saveRnaEntry(){
+  const gene=document.getElementById('rna-gene').value.trim().toUpperCase();
+  const raw=document.getElementById('rna-json').value.trim();
+  if(!gene){ alert('Enter a gene symbol first.'); return; }
+  if(!raw){ alert('Paste the group_medians JSON first.'); return; }
+  try{ rnaData[gene]=JSON.parse(raw); renderRnaSaved(); log(`Saved RNA group_medians for ${gene}.`); }
+  catch(e){ alert('That is not valid JSON: '+e.message); }
+}
+function renderRnaSaved(){
+  const genes=Object.keys(rnaData);
+  document.getElementById('rna-saved').textContent = genes.length ? 'Saved RNA data for: '+genes.join(', ') : '';
+}
+
+let lastQuantResults=[]; let logLines=[];
+function log(msg, cls){ logLines.push(cls?`<span class="${cls}">${msg}</span>`:msg); document.getElementById('run-log').innerHTML=logLines.join('\n'); }
 function resetLog(){ logLines=[]; document.getElementById('run-log').innerHTML=''; }
 
 function runAnalysis(){
   resetLog();
-  log('=== Fitting calibration curves ===');
-
-  // group bead rows by date
-  const byDate = {};
+  const model=document.getElementById('calib-model').value;
+  log('=== Fitting calibration curves ('+model+') ===');
+  const byDate={};
   beadRows.forEach(r=>{
-    const mfi = parseFloat(r.mfi), abc = parseFloat(r.molecules_per_bead);
-    if(!r.date || isNaN(mfi) || isNaN(abc)) return;
-    (byDate[r.date] = byDate[r.date] || []).push([mfi, abc]);
+    const mfi=parseFloat(r.mfi), abc=parseFloat(r.molecules_per_bead);
+    if(!r.date||isNaN(mfi)||isNaN(abc)) return;
+    (byDate[r.date]=byDate[r.date]||[]).push([mfi,abc]);
   });
-
-  const curves = {};
-  const curveLog = [];
+  const curves={}; const curveLog=[];
   Object.keys(byDate).sort().forEach(date=>{
-    const points = byDate[date];
-    const curve = fitCalibrationCurve(points);
-    if(!curve){
-      log(`WARNING - ${date}: only ${points.length} bead population(s), need >= ${MIN_BEAD_POPULATIONS}. Skipped.`, 'l-warn');
-      curveLog.push({date, points, curve:null});
-      return;
-    }
-    curves[date] = curve;
-    log(`${date}: ${curve.method} calibration curve, R^2 = ${curve.r_squared.toFixed(4)}, from ${points.length} bead populations`,
-        curve.r_squared<0.95 ? 'l-warn' : 'l-good');
-    if(curve.r_squared < 0.95){
-      log(`  WARNING - R^2 below 0.95, noisier than kit manufacturers typically expect. Re-run calibration if possible.`, 'l-warn');
-    }
-    curveLog.push({date, points, curve});
+    const points=byDate[date]; const curve=CORE.fitCalibrationCurve(points, model);
+    if(!curve){ log(`WARNING - ${date}: only ${points.length} bead population(s), need >= ${CORE.MIN_BEAD_POPULATIONS}. Skipped.`,'l-warn'); curveLog.push({date,points,curve:null}); return; }
+    curves[date]=curve;
+    log(`${date}: ${curve.method} calibration curve, R^2 = ${curve.r_squared.toFixed(4)}, from ${points.length} bead populations`, curve.r_squared<0.95?'l-warn':'l-good');
+    if(curve.r_squared<0.95) log(`  WARNING - R^2 below 0.95, noisier than kit manufacturers typically expect. Re-run calibration if possible.`,'l-warn');
+    curveLog.push({date,points,curve});
   });
   renderCurves(curveLog);
 
-  // quantify measurements
   log('\n=== Converting measurements to receptors/cell ===');
-  const results = [];
+  const results=[];
   measRows.forEach(r=>{
-    const curve = curves[r.date];
-    const mfi = parseFloat(r.mfi), isoMfi = parseFloat(r.isotype_mfi);
-    if(!curve){
-      if(r.date) log(`SKIPPED ${r.date} ${r.cell_line||'?'} ${r.gene||'?'}: no calibration curve for this date.`, 'l-warn');
-      return;
-    }
-    if(isNaN(mfi) || isNaN(isoMfi)) return;
-    const abcTarget = applyCurve(curve, mfi);
-    const abcIsotype = applyCurve(curve, isoMfi);
-    if(abcTarget===null || abcIsotype===null) return;
-    const net = abcTarget - abcIsotype;
-    const negativeAbc = abcTarget<0 || abcIsotype<0;
-    results.push({
-      date:r.date, cell_line:r.cell_line, gene:(r.gene||'').trim().toUpperCase(),
-      replicate:r.replicate, mfi, isotype_mfi:isoMfi,
-      abc_target:abcTarget, abc_isotype:abcIsotype, net_receptors_per_cell:net,
-      calibration_method:curve.method, calibration_r_squared:curve.r_squared,
-      negative_abc:negativeAbc,
-    });
+    const curve=curves[r.date]; const mfi=parseFloat(r.mfi), isoMfi=parseFloat(r.isotype_mfi);
+    if(!curve){ if(r.date) log(`SKIPPED ${r.date} ${r.cell_line||'?'} ${r.gene||'?'}: no calibration curve for this date.`,'l-warn'); return; }
+    if(isNaN(mfi)||isNaN(isoMfi)) return;
+    const abcTarget=CORE.applyCurve(curve,mfi), abcIsotype=CORE.applyCurve(curve,isoMfi);
+    if(abcTarget===null||abcIsotype===null) return;
+    const net=abcTarget-abcIsotype;
+    const negativeAbc=abcTarget<0||abcIsotype<0;
+    results.push({date:r.date, cell_line:r.cell_line, gene:(r.gene||'').trim().toUpperCase(), replicate:r.replicate,
+      mfi, isotype_mfi:isoMfi, abc_target:abcTarget, abc_isotype:abcIsotype, net_receptors_per_cell:net,
+      calibration_method:curve.method, calibration_r_squared:curve.r_squared, negative_abc:negativeAbc});
     log(`  ${r.date} ${r.cell_line} ${(r.gene||'').toUpperCase()}: ~${Math.round(net)} receptors/cell (${curve.method} fit, R^2=${curve.r_squared.toFixed(3)})`);
-    if(negativeAbc){
-      log(`  WARNING - ${r.date} ${r.cell_line} ${(r.gene||'').toUpperCase()}: calibration curve produced a negative ABC value (target=${abcTarget.toFixed(0)}, isotype=${abcIsotype.toFixed(0)}). A receptor count cannot be negative; this MFI falls outside the range the curve extrapolates reliably. Net receptors/cell for this row should not be trusted.`, 'l-bad');
-    }
+    if(negativeAbc) log(`  WARNING - ${r.date} ${r.cell_line} ${(r.gene||'').toUpperCase()}: calibration curve produced a negative ABC value (target=${abcTarget.toFixed(0)}, isotype=${abcIsotype.toFixed(0)}). A receptor count cannot be negative; this MFI falls outside the range the curve extrapolates reliably. Net receptors/cell for this row should not be trusted.`,'l-bad');
   });
-  lastQuantResults = results;
-  renderQuant(results);
+  lastQuantResults=results; renderQuant(results);
 
-  // subtype comparison
   log('\n=== Subtype comparison (protein vs RNA) ===');
   renderSubtypeComparison(results);
 }
 
 function renderCurves(curveLog){
-  const el = document.getElementById('curves-out');
-  if(curveLog.length===0){ el.innerHTML = '<div class="results-empty">No calibration bead data entered yet.</div>'; return; }
-  el.innerHTML = curveLog.map(c=>{
-    const badge = !c.curve ? `<span class="badge bad">insufficient data</span>`
-      : c.curve.r_squared>=0.95 ? `<span class="badge good">R&sup2; ${c.curve.r_squared.toFixed(4)}</span>`
-      : `<span class="badge warn">R&sup2; ${c.curve.r_squared.toFixed(4)} (low)</span>`;
-    const chart = c.curve ? calibrationChartSVG(c.points, c.curve) : '';
-    return `<div class="curve-card">
-      <div class="curve-card-head"><span class="date">${c.date}</span>${badge}</div>
-      ${c.curve ? `<div class="curve-meta">${c.curve.method} fit &middot; slope=${c.curve.slope.toExponential(3)} &middot; intercept=${c.curve.intercept.toExponential(3)} &middot; ${c.points.length} bead populations</div>` : `<div class="curve-meta">${c.points.length} bead population(s) entered, need &ge; ${MIN_BEAD_POPULATIONS}.</div>`}
-      ${chart}
-    </div>`;
+  const el=document.getElementById('curves-out');
+  if(curveLog.length===0){ el.innerHTML='<div class="results-empty">No calibration bead data entered yet.</div>'; return; }
+  el.innerHTML=curveLog.map(c=>{
+    const badge=!c.curve?`<span class="badge bad">insufficient data</span>`
+      :c.curve.r_squared>=0.95?`<span class="badge good">R&sup2; ${c.curve.r_squared.toFixed(4)}</span>`
+      :`<span class="badge warn">R&sup2; ${c.curve.r_squared.toFixed(4)} (low)</span>`;
+    const chart=c.curve?calibrationChartSVG(c.points,c.curve):'';
+    return `<div class="curve-card"><div class="curve-card-head"><span class="date">${c.date}</span>${badge}</div>
+      ${c.curve?`<div class="curve-meta">${c.curve.method} fit &middot; slope=${c.curve.slope.toExponential(3)} &middot; intercept=${c.curve.intercept.toExponential(3)} &middot; ${c.points.length} bead populations</div>`:`<div class="curve-meta">${c.points.length} bead population(s) entered, need &ge; ${CORE.MIN_BEAD_POPULATIONS}.</div>`}
+      ${chart}</div>`;
   }).join('');
 }
-
 function calibrationChartSVG(points, curve){
-  const W=440, H=200, PAD=36;
-  const xs = points.map(p=>p[0]), ys = points.map(p=>p[1]);
-  const xMin=Math.min(...xs)*0.9, xMax=Math.max(...xs)*1.1;
-  const yMin=Math.min(...ys)*0.9, yMax=Math.max(...ys)*1.1;
-  const sx = v => PAD + (v-xMin)/(xMax-xMin||1) * (W-2*PAD);
-  const sy = v => H-PAD - (v-yMin)/(yMax-yMin||1) * (H-2*PAD);
-  const dots = points.map(p=>`<circle cx="${sx(p[0]).toFixed(1)}" cy="${sy(p[1]).toFixed(1)}" r="4" fill="#E7A9C0"/>`).join('');
-  // fit line, sample across range
+  const W=440,H=200,PAD=36;
+  const xs=points.map(p=>p[0]), ys=points.map(p=>p[1]);
+  const xMin=Math.min(...xs)*0.9, xMax=Math.max(...xs)*1.1, yMin=Math.min(...ys)*0.9, yMax=Math.max(...ys)*1.1;
+  const sx=v=>PAD+(v-xMin)/(xMax-xMin||1)*(W-2*PAD);
+  const sy=v=>H-PAD-(v-yMin)/(yMax-yMin||1)*(H-2*PAD);
+  const dots=points.map(p=>`<circle cx="${sx(p[0]).toFixed(1)}" cy="${sy(p[1]).toFixed(1)}" r="4" fill="#E7A9C0"/>`).join('');
   const N=30; let pathPts=[];
-  for(let i=0;i<=N;i++){
-    const mfi = xMin + (xMax-xMin)*i/N;
-    const abc = curve.method==='linear' ? curve.slope*mfi+curve.intercept : Math.pow(10, curve.slope*Math.log10(mfi)+curve.intercept);
-    pathPts.push(`${sx(mfi).toFixed(1)},${sy(abc).toFixed(1)}`);
-  }
+  for(let i=0;i<=N;i++){ const mfi=xMin+(xMax-xMin)*i/N; const abc=curve.method==='linear'?curve.slope*mfi+curve.intercept:Math.pow(10,curve.slope*Math.log10(mfi)+curve.intercept); pathPts.push(`${sx(mfi).toFixed(1)},${sy(abc).toFixed(1)}`); }
   return `<svg viewBox="0 0 ${W} ${H}" style="width:100%; max-width:460px; margin-top:8px;">
     <line x1="${PAD}" y1="${H-PAD}" x2="${W-PAD}" y2="${H-PAD}" stroke="#3A3739" stroke-width="1"/>
     <line x1="${PAD}" y1="${PAD}" x2="${PAD}" y2="${H-PAD}" stroke="#3A3739" stroke-width="1"/>
     <text x="${W/2}" y="${H-6}" fill="#8A8781" font-size="10" text-anchor="middle">MFI</text>
     <text x="12" y="${H/2}" fill="#8A8781" font-size="10" text-anchor="middle" transform="rotate(-90 12 ${H/2})">molecules/bead</text>
-    <polyline points="${pathPts.join(' ')}" fill="none" stroke="#F2B8CE" stroke-width="1.5" opacity="0.85"/>
-    ${dots}
-  </svg>`;
+    <polyline points="${pathPts.join(' ')}" fill="none" stroke="#F2B8CE" stroke-width="1.5" opacity="0.85"/>${dots}</svg>`;
 }
-
 function renderQuant(results){
-  const el = document.getElementById('quant-out');
-  if(results.length===0){ el.innerHTML = '<div class="results-empty">No measurement rows converted yet. Check that dates match a fitted calibration curve.</div>'; return; }
-  const negTitle = 'Calibration curve extrapolates below zero at this MFI. A receptor count cannot be negative, this value is not physically meaningful.';
-  const rowsHtml = results.map(r=>{
-    const targetCell = r.abc_target<0
-      ? `<span class="badge bad" title="${negTitle}">${Math.round(r.abc_target).toLocaleString()}</span>`
-      : Math.round(r.abc_target).toLocaleString();
-    const isoCell = r.abc_isotype<0
-      ? `<span class="badge bad" title="${negTitle}">${Math.round(r.abc_isotype).toLocaleString()}</span>`
-      : Math.round(r.abc_isotype).toLocaleString();
-    const netFlag = r.negative_abc
-      ? ` <span class="badge warn" title="Includes a negative ABC component above; this net value is unreliable, not a real receptor count.">unreliable</span>`
-      : '';
-    return `<tr>
-    <td>${r.date}</td><td>${r.cell_line}</td><td>${r.gene}</td><td>${r.replicate||''}</td>
-    <td>${r.mfi.toFixed(1)}</td><td>${r.isotype_mfi.toFixed(1)}</td>
-    <td>${targetCell}</td><td>${isoCell}</td>
-    <td><strong>${Math.round(r.net_receptors_per_cell).toLocaleString()}</strong>${netFlag}</td>
-    <td>${r.calibration_method} (R&sup2;${r.calibration_r_squared.toFixed(3)})</td>
-  </tr>`;
+  const el=document.getElementById('quant-out');
+  if(results.length===0){ el.innerHTML='<div class="results-empty">No measurement rows converted yet. Check that dates match a fitted calibration curve.</div>'; return; }
+  const negTitle='Calibration curve extrapolates below zero at this MFI. A receptor count cannot be negative, this value is not physically meaningful.';
+  const rowsHtml=results.map(r=>{
+    const targetCell=r.abc_target<0?`<span class="badge bad" title="${negTitle}">${Math.round(r.abc_target).toLocaleString()}</span>`:Math.round(r.abc_target).toLocaleString();
+    const isoCell=r.abc_isotype<0?`<span class="badge bad" title="${negTitle}">${Math.round(r.abc_isotype).toLocaleString()}</span>`:Math.round(r.abc_isotype).toLocaleString();
+    const netFlag=r.negative_abc?` <span class="badge warn" title="Includes a negative ABC component above; this net value is unreliable, not a real receptor count.">unreliable</span>`:'';
+    return `<tr><td>${r.date}</td><td>${r.cell_line}</td><td>${r.gene}</td><td>${r.replicate||''}</td>
+      <td>${r.mfi.toFixed(1)}</td><td>${r.isotype_mfi.toFixed(1)}</td><td>${targetCell}</td><td>${isoCell}</td>
+      <td><strong>${Math.round(r.net_receptors_per_cell).toLocaleString()}</strong>${netFlag}</td>
+      <td>${r.calibration_method} (R&sup2;${r.calibration_r_squared.toFixed(3)})</td></tr>`;
   }).join('');
-  el.innerHTML = `<div class="panel">
-    <table><thead><tr>
-      <th>Date</th><th>Cell line</th><th>Gene</th><th>Rep</th><th>MFI</th><th>Isotype MFI</th>
-      <th>ABC target</th><th>ABC isotype</th><th>Net receptors/cell</th><th>Curve</th>
+  el.innerHTML=`<div class="panel"><table><thead><tr>
+    <th>Date</th><th>Cell line</th><th>Gene</th><th>Rep</th><th>MFI</th><th>Isotype MFI</th>
+    <th>ABC target</th><th>ABC isotype</th><th>Net receptors/cell</th><th>Curve</th>
     </tr></thead><tbody>${rowsHtml}</tbody></table>
-    <div class="btnrow">
-      <button class="small" onclick="exportResultsJSON()">Export JSON</button>
-      <button class="small" onclick="exportResultsCSV()">Export CSV</button>
-    </div>
-  </div>`;
+    <div class="btnrow"><button class="small" onclick="exportResultsJSON()">Export JSON</button><button class="small" onclick="exportResultsCSV()">Export CSV</button></div></div>`;
 }
-function exportResultsJSON(){ downloadText(JSON.stringify(lastQuantResults, null, 2), 'receptor_quantification.json', 'application/json'); }
+function exportResultsJSON(){ downloadText(JSON.stringify(lastQuantResults,null,2),'receptor_quantification.json','application/json'); }
 function exportResultsCSV(){
-  const cols = ['date','cell_line','gene','replicate','mfi','isotype_mfi','abc_target','abc_isotype','net_receptors_per_cell','calibration_method','calibration_r_squared'];
-  const lines = [cols.join(',')];
-  lastQuantResults.forEach(r=> lines.push(cols.map(c=> typeof r[c]==='number' ? r[c] : csvEscape(r[c])).join(',')));
-  downloadText(lines.join('\n'), 'receptor_quantification.csv', 'text/csv');
+  const cols=['date','cell_line','gene','replicate','mfi','isotype_mfi','abc_target','abc_isotype','net_receptors_per_cell','calibration_method','calibration_r_squared'];
+  const lines=[cols.join(',')]; lastQuantResults.forEach(r=>lines.push(cols.map(c=>typeof r[c]==='number'?r[c]:csvEscape(r[c])).join(',')));
+  downloadText(lines.join('\n'),'receptor_quantification.csv','text/csv');
 }
-
 function renderSubtypeComparison(quantResults){
-  const el = document.getElementById('subtype-out');
-  // Absolute receptor count requires calibration. Only rows that already made it
-  // into quantResults (i.e. had a fitted curve for their date) are used here.
-  // Rows without a calibration curve are excluded, never approximated with the
-  // raw MFI/isotype ratio, since that ratio is a unitless fold-change and cannot
-  // be averaged or ranked alongside an absolute receptors-per-cell number.
-  const byKey = {}; // gene -> cell_line -> {signals:[], subtype, stable}
-  const unmapped = new Set();
-
+  const el=document.getElementById('subtype-out');
+  const byKey={}; const unmapped=new Set();
   quantResults.forEach(r=>{
-    const key = normalizeCellLine(r.cell_line);
-    const info = CELL_LINE_SUBTYPE[key];
+    const key=CORE.normalizeCellLine(r.cell_line); const info=CORE.CELL_LINE_SUBTYPE[key];
     if(!info){ unmapped.add(r.cell_line); return; }
-    byKey[r.gene] = byKey[r.gene] || {};
-    byKey[r.gene][r.cell_line] = byKey[r.gene][r.cell_line] || {signals:[], subtype:info.subtype, stable:info.stable, anyNegative:false};
+    byKey[r.gene]=byKey[r.gene]||{};
+    byKey[r.gene][r.cell_line]=byKey[r.gene][r.cell_line]||{signals:[],subtype:info.subtype,stable:info.stable,anyNegative:false};
     byKey[r.gene][r.cell_line].signals.push(r.net_receptors_per_cell);
-    if(r.negative_abc) byKey[r.gene][r.cell_line].anyNegative = true;
+    if(r.negative_abc) byKey[r.gene][r.cell_line].anyNegative=true;
   });
-
-  if(unmapped.size){
-    log(`WARNING - cell line(s) not in the subtype lookup table, excluded from subtype comparison: ${[...unmapped].join(', ')}`, 'l-warn');
-  }
-
-  // flag measurement rows that never got a calibrated value at all (no curve for that date)
-  const calibratedKeys = new Set(quantResults.map(r=>[r.date,r.cell_line,r.gene,r.replicate||''].join('|')));
+  if(unmapped.size) log(`WARNING - cell line(s) not in the subtype lookup table, excluded from subtype comparison: ${[...unmapped].join(', ')}`,'l-warn');
+  const calibratedKeys=new Set(quantResults.map(r=>[r.date,r.cell_line,r.gene,r.replicate||''].join('|')));
   measRows.forEach(r=>{
-    if(!r.cell_line || !r.gene) return;
-    const gene = (r.gene||'').trim().toUpperCase();
-    const k = [r.date,r.cell_line,gene,r.replicate||''].join('|');
-    if(!calibratedKeys.has(k)){
-      log(`  EXCLUDED from subtype comparison: ${r.date||'(no date)'} ${r.cell_line} ${gene}, no calibrated receptor count for this row (needs a fitted calibration curve for that date). Not approximated from the raw ratio.`, 'l-warn');
-    }
+    if(!r.cell_line||!r.gene) return;
+    const gene=(r.gene||'').trim().toUpperCase(); const k=[r.date,r.cell_line,gene,r.replicate||''].join('|');
+    if(!calibratedKeys.has(k)) log(`  EXCLUDED from subtype comparison: ${r.date||'(no date)'} ${r.cell_line} ${gene}, no calibrated receptor count for this row (needs a fitted calibration curve for that date). Not approximated from the raw ratio.`,'l-warn');
   });
-
-  const genes = Object.keys(byKey);
-  if(genes.length===0){ el.innerHTML = '<div class="results-empty">No calibrated measurement rows with a recognized cell line yet. Absolute receptor counts require a fitted calibration curve; uncalibrated rows are excluded, not approximated.</div>'; return; }
-
-  el.innerHTML = genes.map(gene=>{
-    const cellLines = byKey[gene];
-    const bySubtype = {};
-    Object.entries(cellLines).forEach(([cl,d])=>{
-      const mean = d.signals.reduce((a,b)=>a+b,0)/d.signals.length;
-      (bySubtype[d.subtype] = bySubtype[d.subtype]||[]).push({cell_line:cl, mean, n:d.signals.length, stable:d.stable, anyNegative:d.anyNegative});
-    });
-    const subtypeAvg = {};
-    Object.entries(bySubtype).forEach(([st,lines])=>{ subtypeAvg[st] = lines.reduce((a,l)=>a+l.mean,0)/lines.length; });
-
-    const lineRows = Object.entries(bySubtype).map(([st,lines])=>
-      lines.map(l=>`<tr><td>${st}</td><td>${l.cell_line}${l.stable?'':' <span class="badge neutral">single-algorithm</span>'}${l.anyNegative?' <span class="badge bad" title="At least one measurement for this cell line had a negative ABC component; treat this mean with caution.">flagged</span>':''}</td><td>${Math.round(l.mean).toLocaleString()}</td><td>${l.n}</td></tr>`).join('')
-    ).join('');
-
-    let concordanceHtml = '<div class="curve-meta">No RNA reference saved for this gene yet (Section 3).</div>';
-    const rna = rnaData[gene];
+  const genes=Object.keys(byKey);
+  if(genes.length===0){ el.innerHTML='<div class="results-empty">No calibrated measurement rows with a recognized cell line yet. Absolute receptor counts require a fitted calibration curve; uncalibrated rows are excluded, not approximated.</div>'; return; }
+  el.innerHTML=genes.map(gene=>{
+    const cellLines=byKey[gene]; const bySubtype={};
+    Object.entries(cellLines).forEach(([cl,d])=>{ const mean=d.signals.reduce((a,b)=>a+b,0)/d.signals.length; (bySubtype[d.subtype]=bySubtype[d.subtype]||[]).push({cell_line:cl,mean,n:d.signals.length,stable:d.stable,anyNegative:d.anyNegative}); });
+    const subtypeAvg={}; Object.entries(bySubtype).forEach(([st,lines])=>{ subtypeAvg[st]=lines.reduce((a,l)=>a+l.mean,0)/lines.length; });
+    const lineRows=Object.entries(bySubtype).map(([st,lines])=>lines.map(l=>`<tr><td>${st}</td><td>${l.cell_line}${l.stable?'':' <span class="badge neutral">single-algorithm</span>'}${l.anyNegative?' <span class="badge bad" title="At least one measurement for this cell line had a negative ABC component; treat this mean with caution.">flagged</span>':''}</td><td>${Math.round(l.mean).toLocaleString()}</td><td>${l.n}</td></tr>`).join('')).join('');
+    let concordanceHtml='<div class="curve-meta">No RNA reference saved for this gene yet (Section 3).</div>';
+    const rna=rnaData[gene];
     if(rna){
-      const common = Object.keys(subtypeAvg).filter(s=> rna[s]!==undefined).sort();
-      if(common.length<2){
-        concordanceHtml = `<div class="curve-meta">Only ${common.length} subtype(s) in common with RNA data; need &ge; 2 to compare ranking.</div>`;
-      } else {
-        const proteinRank = [...common].sort((a,b)=>subtypeAvg[a]-subtypeAvg[b]);
-        const rnaRank = [...common].sort((a,b)=>rna[a]-rna[b]);
-        const match = JSON.stringify(proteinRank)===JSON.stringify(rnaRank);
-        concordanceHtml = `<div class="curve-meta">
-          Protein rank (low&rarr;high, calibrated receptors/cell): ${proteinRank.join(' &lt; ')}<br>
-          RNA rank (low&rarr;high, TCGA): ${rnaRank.join(' &lt; ')}<br>
-          <span class="badge ${match?'good':'bad'}">${match ? 'rankings match' : 'rankings differ'}</span>
-        </div>`;
+      const common=Object.keys(subtypeAvg).filter(s=>rna[s]!==undefined).sort();
+      if(common.length<2) concordanceHtml=`<div class="curve-meta">Only ${common.length} subtype(s) in common with RNA data; need &ge; 2 to compare ranking.</div>`;
+      else{
+        const proteinRank=[...common].sort((a,b)=>subtypeAvg[a]-subtypeAvg[b]);
+        const rnaRank=[...common].sort((a,b)=>rna[a]-rna[b]);
+        const match=JSON.stringify(proteinRank)===JSON.stringify(rnaRank);
+        concordanceHtml=`<div class="curve-meta">Protein rank (low&rarr;high, calibrated receptors/cell): ${proteinRank.join(' &lt; ')}<br>RNA rank (low&rarr;high, TCGA): ${rnaRank.join(' &lt; ')}<br><span class="badge ${match?'good':'bad'}">${match?'rankings match':'rankings differ'}</span></div>`;
       }
     }
-
-    return `<div class="gene-card">
-      <h3>${gene}</h3>
-      <table><thead><tr><th>Subtype</th><th>Cell line</th><th>Mean receptors/cell (calibrated)</th><th>n</th></tr></thead>
-      <tbody>${lineRows}</tbody></table>
-      ${concordanceHtml}
-    </div>`;
+    return `<div class="gene-card"><h3>${gene}</h3><table><thead><tr><th>Subtype</th><th>Cell line</th><th>Mean receptors/cell (calibrated)</th><th>n</th></tr></thead><tbody>${lineRows}</tbody></table>${concordanceHtml}</div>`;
   }).join('');
+}
+
+/* =====================================================================
+   TAB 2: UNIT CONVERSION
+   ===================================================================== */
+let unitCalRows=[];
+let unitCurve=null;
+function addUnitCalRow(vals){ unitCalRows.push(Object.assign({id:uid(), population:'', units:'', mfi:''}, vals||{})); renderUnitCal(); }
+function delUnitCalRow(id){ unitCalRows=unitCalRows.filter(r=>r.id!==id); renderUnitCal(); }
+function updateUnitCell(id,key,val){ const r=unitCalRows.find(x=>x.id===id); if(r) r[key]=val; }
+function renderUnitCal(){
+  document.getElementById('unitcal-body').innerHTML=unitCalRows.map(r=>`<tr>
+    <td><input type="text" value="${escapeAttr(r.population)}" oninput="updateUnitCell('${r.id}','population',this.value)"></td>
+    <td><input type="number" value="${escapeAttr(r.units)}" oninput="updateUnitCell('${r.id}','units',this.value)"></td>
+    <td><input type="number" value="${escapeAttr(r.mfi)}" oninput="updateUnitCell('${r.id}','mfi',this.value)"></td>
+    <td><button class="del-btn" onclick="delUnitCalRow('${r.id}')">&times;</button></td></tr>`).join('');
+}
+function fitUnitCurve(){
+  const model=document.getElementById('unit-model').value;
+  const points=unitCalRows.map(r=>[parseFloat(r.mfi), parseFloat(r.units)]).filter(p=>!isNaN(p[0])&&!isNaN(p[1]));
+  const out=document.getElementById('unitcal-out');
+  if(points.length<CORE.MIN_BEAD_POPULATIONS){ out.innerHTML=`<span class="badge bad">need &ge; ${CORE.MIN_BEAD_POPULATIONS} valid points</span>`; unitCurve=null; return; }
+  unitCurve=CORE.fitCalibrationCurve(points, model);
+  if(!unitCurve){ out.innerHTML='<span class="badge bad">could not fit a curve (check for non-positive values in log-log mode)</span>'; return; }
+  const unitType=document.getElementById('unit-type').value;
+  out.innerHTML=`<span class="badge ${unitCurve.r_squared>=0.95?'good':'warn'}">R&sup2; ${unitCurve.r_squared.toFixed(4)}</span>
+    &nbsp; ${unitCurve.method} fit &middot; slope=${unitCurve.slope.toExponential(3)} &middot; intercept=${unitCurve.intercept.toExponential(3)} &middot; units = ${unitType} &middot; ${points.length} points`;
+  convertFromMfi(); convertFromUnits();
+}
+function fpRatio(){ const v=parseFloat(document.getElementById('fp-ratio').value); return (isNaN(v)||v<=0)?1:v; }
+function convertFromMfi(){
+  const out=document.getElementById('conv-mfi-out');
+  if(!unitCurve){ out.textContent='Fit a curve first.'; return; }
+  const mfi=parseFloat(document.getElementById('conv-mfi').value);
+  if(isNaN(mfi)){ out.textContent='Enter an MFI.'; return; }
+  const units=CORE.applyCurve(unitCurve, mfi);
+  const unitType=document.getElementById('unit-type').value;
+  if(units===null){ out.innerHTML='<span class="badge bad">MFI must be &gt; 0</span>'; return; }
+  const abc=units/fpRatio();
+  const neg=units<0?' <span class="badge bad">negative &mdash; outside curve range</span>':'';
+  out.innerHTML=`${fmt(units,0)} ${unitType}${neg}<br>ABC (units &divide; F/P): <strong>${fmt(abc,0)}</strong>`;
+}
+function convertFromUnits(){
+  const out=document.getElementById('conv-units-out');
+  if(!unitCurve){ out.textContent='Fit a curve first.'; return; }
+  const units=parseFloat(document.getElementById('conv-units').value);
+  if(isNaN(units)){ out.textContent='Enter a units value.'; return; }
+  const mfi=CORE.invertCurve(unitCurve, units);
+  if(mfi===null){ out.innerHTML='<span class="badge bad">cannot invert (non-positive in log-log mode)</span>'; return; }
+  out.innerHTML=`MFI: <strong>${fmt(mfi,1)}</strong>`;
+}
+function convertBatch(){
+  const out=document.getElementById('conv-batch-out');
+  if(!unitCurve){ out.innerHTML='<div class="results-empty">Fit a curve first.</div>'; return; }
+  const mfis=parseNumberList(document.getElementById('conv-batch').value);
+  if(mfis.length===0){ out.innerHTML='<div class="results-empty">No numbers found.</div>'; return; }
+  const unitType=document.getElementById('unit-type').value; const fp=fpRatio();
+  const rows=mfis.map(m=>{ const u=CORE.applyCurve(unitCurve,m); return `<tr><td>${fmt(m,1)}</td><td>${u===null?'&mdash;':fmt(u,0)}</td><td>${u===null?'&mdash;':fmt(u/fp,0)}</td></tr>`; }).join('');
+  out.innerHTML=`<div class="panel"><table><thead><tr><th>MFI</th><th>${unitType}</th><th>ABC</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+/* =====================================================================
+   TAB 3: GATING & %POSITIVE
+   ===================================================================== */
+let gatingColumns={};
+function uploadGatingCsv(evt){
+  const file=evt.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{ document.getElementById('gating-data').value=reader.result; parseGatingData(); };
+  reader.readAsText(file); evt.target.value='';
+}
+function loadGatingFromFcs(){
+  if(!fcsData){ alert('Parse an FCS file first (FCS import tab).'); return; }
+  gatingColumns={}; fcsData.params.forEach(p=>{ gatingColumns[p.name]=fcsData.byParam[p.name]; });
+  afterGatingColumns(`Loaded ${fcsData.nEvents} events, ${fcsData.params.length} channels from parsed FCS file.`);
+}
+function parseGatingData(){
+  const text=document.getElementById('gating-data').value.trim();
+  if(!text){ alert('Paste some data first.'); return; }
+  const lines=text.replace(/\r\n/g,'\n').split('\n').filter(l=>l.trim().length);
+  if(lines.length===0) return;
+  const first=splitCSVLine(lines[0]).map(s=>s.trim());
+  const headerIsText=first.some(v=>v!=='' && isNaN(Number(v)));
+  gatingColumns={};
+  if(first.length===1 && !headerIsText){
+    gatingColumns['value']=lines.map(Number).filter(v=>!isNaN(v));
+    afterGatingColumns(`Loaded ${gatingColumns['value'].length} values as a single channel "value".`);
+    return;
+  }
+  let headers, dataLines;
+  if(headerIsText){ headers=first; dataLines=lines.slice(1); }
+  else { headers=first.map((_,i)=>'C'+(i+1)); dataLines=lines; }
+  headers.forEach(h=>gatingColumns[h]=[]);
+  dataLines.forEach(l=>{ const cols=splitCSVLine(l).map(s=>Number(s.trim())); headers.forEach((h,i)=>{ if(!isNaN(cols[i])) gatingColumns[h].push(cols[i]); }); });
+  afterGatingColumns(`Loaded ${dataLines.length} events across ${headers.length} channels: ${headers.join(', ')}.`);
+}
+function afterGatingColumns(msg){
+  const names=Object.keys(gatingColumns);
+  document.getElementById('gating-cols').innerHTML=`<div class="curve-meta">${msg}</div>`;
+  const chan=document.getElementById('gating-channel'), negchan=document.getElementById('gating-negchannel');
+  chan.innerHTML=names.map(n=>`<option>${n}</option>`).join('');
+  negchan.innerHTML=names.map(n=>`<option>${n}</option>`).join('');
+  document.getElementById('gating-controls').style.display=names.length?'block':'none';
+  renderGating();
+}
+function renderGating(){
+  const names=Object.keys(gatingColumns); if(names.length===0) return;
+  const mode=document.getElementById('gating-thresh-mode').value;
+  document.getElementById('gating-manual-field').style.display=mode==='manual'?'inline-flex':'none';
+  document.getElementById('gating-negctrl-field').style.display=mode==='negctrl'?'inline-flex':'none';
+  document.getElementById('gating-k-field').style.display=mode==='negctrl'?'inline-flex':'none';
+  const ch=document.getElementById('gating-channel').value;
+  const values=gatingColumns[ch]||[];
+  let threshold, threshNote;
+  if(mode==='manual'){ threshold=parseFloat(document.getElementById('gating-threshold').value)||0; threshNote=`manual gate at ${fmt(threshold,1)}`; }
+  else{
+    const negch=document.getElementById('gating-negchannel').value;
+    const k=parseFloat(document.getElementById('gating-k').value); const kk=isNaN(k)?2:k;
+    const negVals=gatingColumns[negch]||[];
+    const negMed=CORE.median(negVals), negRSD=CORE.robustStd(negVals);
+    threshold=negMed+kk*negRSD;
+    threshNote=`negative-control gate = median(${negch}) + ${kk}&times;rSD = ${fmt(negMed,1)} + ${kk}&times;${fmt(negRSD,1)} = ${fmt(threshold,1)}`;
+  }
+  const st=CORE.channelStats(values, threshold);
+  document.getElementById('gating-out').innerHTML=`
+    <div class="curve-meta" style="margin-bottom:12px;">Channel <strong>${ch}</strong> &middot; ${threshNote}</div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="k">% positive</div><div class="v">${fmt(st.pctPositive,2)}<span class="u">%</span></div></div>
+      <div class="stat-box"><div class="k">MFI (median)</div><div class="v">${fmt(st.median,1)}</div></div>
+      <div class="stat-box"><div class="k">Geometric mean</div><div class="v">${fmt(st.geoMean,1)}</div></div>
+      <div class="stat-box"><div class="k">Arithmetic mean</div><div class="v">${fmt(st.mean,1)}</div></div>
+      <div class="stat-box"><div class="k">SD</div><div class="v">${fmt(st.sd,1)}</div></div>
+      <div class="stat-box"><div class="k">Robust SD</div><div class="v">${fmt(st.rSD,1)}</div></div>
+      <div class="stat-box"><div class="k">Events</div><div class="v">${fmt(st.n,0)}</div></div>
+    </div>`;
+}
+
+/* =====================================================================
+   TAB 4: STAIN / SEPARATION INDEX
+   ===================================================================== */
+function switchIdxMode(id, btn){
+  btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('active', b===btn));
+  document.querySelectorAll('.idx-mode').forEach(m=>m.style.display=m.id===id?'block':'none');
+}
+function indexResultHtml(r){
+  return `<div class="stat-grid">
+    <div class="stat-box"><div class="k">Stain index</div><div class="v">${fmt(r.stainIndex,2)}</div></div>
+    <div class="stat-box"><div class="k">Separation index (rSD)</div><div class="v">${fmt(r.separationIndex,2)}</div></div>
+    <div class="stat-box"><div class="k">MFI positive</div><div class="v">${fmt(r.posMFI,1)}</div></div>
+    <div class="stat-box"><div class="k">MFI negative</div><div class="v">${fmt(r.negMFI,1)}</div></div>
+    <div class="stat-box"><div class="k">SD negative</div><div class="v">${fmt(r.negSD,2)}</div></div>
+    <div class="stat-box"><div class="k">Robust SD negative</div><div class="v">${fmt(r.negRSD,2)}</div></div>
+  </div>`;
+}
+function computeIndexFromEvents(){
+  const pos=parseNumberList(document.getElementById('idx-pos').value);
+  const neg=parseNumberList(document.getElementById('idx-neg').value);
+  const out=document.getElementById('idx-events-out');
+  if(pos.length<2||neg.length<2){ out.innerHTML='<div class="results-empty">Enter at least 2 values in each population.</div>'; return; }
+  out.innerHTML=indexResultHtml(CORE.indicesFromEvents(pos,neg));
+}
+function computeIndexFromSummary(){
+  const posMFI=parseFloat(document.getElementById('s-pos').value);
+  const negMFI=parseFloat(document.getElementById('s-neg').value);
+  const negSD=parseFloat(document.getElementById('s-sd').value);
+  const negRSD=parseFloat(document.getElementById('s-rsd').value);
+  const out=document.getElementById('idx-summary-out');
+  if(isNaN(posMFI)||isNaN(negMFI)||isNaN(negSD)){ out.innerHTML='<div class="results-empty">Enter positive MFI, negative MFI, and negative SD.</div>'; return; }
+  const r={ posMFI, negMFI, negSD, negRSD:isNaN(negRSD)?negSD:negRSD,
+    stainIndex:CORE.stainIndex(posMFI,negMFI,negSD),
+    separationIndex:CORE.separationIndex(posMFI,negMFI,isNaN(negRSD)?negSD:negRSD) };
+  out.innerHTML=indexResultHtml(r);
+}
+
+/* =====================================================================
+   TAB 5: COMPENSATION
+   ===================================================================== */
+function buildCompMatrix(){
+  const n=parseInt(document.getElementById('comp-n').value,10);
+  let html='<table class="matrix"><thead><tr><th></th>';
+  for(let j=0;j<n;j++) html+=`<th>Det ${j+1}</th>`;
+  html+='</tr></thead><tbody>';
+  for(let i=0;i<n;i++){
+    html+=`<tr><th>Fluor ${i+1}</th>`;
+    for(let j=0;j<n;j++){
+      if(i===j) html+=`<td class="diag"><input type="number" id="sp-${i}-${j}" value="100" disabled></td>`;
+      else html+=`<td><input type="number" id="sp-${i}-${j}" value="0" step="0.1"></td>`;
+    }
+    html+='</tr>';
+  }
+  html+='</tbody></table>';
+  document.getElementById('comp-matrix').innerHTML=html;
+  document.getElementById('comp-inverse').innerHTML='';
+}
+function readCompPercentMatrix(){
+  const n=parseInt(document.getElementById('comp-n').value,10);
+  const pct=[];
+  for(let i=0;i<n;i++){ const row=[]; for(let j=0;j<n;j++){ row.push(i===j?100:(parseFloat(document.getElementById(`sp-${i}-${j}`).value)||0)); } pct.push(row); }
+  return pct;
+}
+function loadCompExample(){
+  document.getElementById('comp-n').value='3'; buildCompMatrix();
+  const ex=[[0,12,3],[8,0,5],[2,6,0]];
+  for(let i=0;i<3;i++) for(let j=0;j<3;j++){ if(i!==j) document.getElementById(`sp-${i}-${j}`).value=ex[i][j]; }
+}
+function showCompInverse(){
+  const S=CORE.spilloverFromPercent(readCompPercentMatrix());
+  const inv=CORE.matInvert(S);
+  const el=document.getElementById('comp-inverse');
+  if(!inv){ el.innerHTML='<span class="badge bad">matrix is singular, cannot invert</span>'; return; }
+  el.innerHTML='Compensation matrix (spillover<sup>&minus;1</sup>):<br>'+inv.map(row=>row.map(v=>v.toFixed(4)).join('&nbsp;&nbsp;')).join('<br>');
+}
+function runCompensation(){
+  const out=document.getElementById('comp-out');
+  const n=parseInt(document.getElementById('comp-n').value,10);
+  const S=CORE.spilloverFromPercent(readCompPercentMatrix());
+  const text=document.getElementById('comp-measured').value.trim();
+  if(!text){ out.innerHTML='<div class="results-empty">Enter at least one measured vector.</div>'; return; }
+  const vectors=text.replace(/\r\n/g,'\n').split('\n').map(l=>l.trim()).filter(l=>l.length).map(l=>l.split(/[,\s]+/).map(Number));
+  const bad=vectors.find(v=>v.length!==n||v.some(isNaN));
+  if(bad){ out.innerHTML=`<div class="results-empty">Each row must have exactly ${n} numbers.</div>`; return; }
+  const rows=vectors.map(v=>{
+    const comp=CORE.compensate(S,v);
+    if(!comp) return `<tr><td colspan="${2*n}">singular matrix</td></tr>`;
+    return `<tr>${v.map(x=>`<td>${fmt(x,1)}</td>`).join('')}${comp.map(x=>`<td><strong>${fmt(x,1)}</strong></td>`).join('')}</tr>`;
+  }).join('');
+  let head='<tr>'; for(let j=0;j<n;j++) head+=`<th>Meas ${j+1}</th>`; for(let j=0;j<n;j++) head+=`<th>Comp ${j+1}</th>`; head+='</tr>';
+  out.innerHTML=`<div class="panel"><table><thead>${head}</thead><tbody>${rows}</tbody></table></div>`;
+}
+
+/* =====================================================================
+   TAB 6: FCS IMPORT
+   ===================================================================== */
+let fcsData=null;
+function handleFcsFile(evt){
+  const file=evt.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      fcsData=CORE.parseFCS(reader.result);
+      const p=fcsData.params;
+      document.getElementById('fcs-summary').innerHTML=`<span class="badge good">${fcsData.version.trim()}</span> &nbsp; ${fcsData.nEvents.toLocaleString()} events &middot; ${p.length} parameters &middot; $DATATYPE ${fcsData.datatype} &middot; ${fcsData.littleEndian?'little':'big'}-endian`;
+      document.getElementById('fcs-params').innerHTML=`<div class="panel"><table><thead><tr><th>#</th><th>$PnN (name)</th><th>$PnS (label)</th><th>Bits</th><th>Range</th><th>Median</th></tr></thead><tbody>${
+        p.map(prm=>{ const col=fcsData.byParam[prm.name]; return `<tr><td>${prm.index}</td><td>${prm.name}</td><td>${prm.label||''}</td><td>${prm.bits}</td><td>${isNaN(prm.range)?'':prm.range}</td><td>${fmt(CORE.median(col),1)}</td></tr>`; }).join('')
+      }</tbody></table><div class="btnrow"><button class="small" onclick="sendFcsToGating()">Send to Gating tab</button></div></div>`;
+    }catch(e){
+      fcsData=null;
+      document.getElementById('fcs-summary').innerHTML=`<span class="badge bad">${e.message}</span>`;
+      document.getElementById('fcs-params').innerHTML='';
+    }
+  };
+  reader.readAsArrayBuffer(file); evt.target.value='';
+}
+function sendFcsToGating(){
+  loadGatingFromFcs();
+  document.querySelector('#tabbar button[data-tab="gating"]').click();
 }
 
 /* ---------- init ---------- */
 for(let i=0;i<3;i++) addBeadRow();
 for(let i=0;i<2;i++) addMeasRow();
+for(let i=0;i<4;i++) addUnitCalRow();
+buildCompMatrix();
 </script>
 </body>
 </html>

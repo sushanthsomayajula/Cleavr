@@ -19,6 +19,8 @@ Cleavr/
 │   ├── studies.html              <- index of every case study and screen
 │   ├── gnrhr.html                <- Case Study 01: full write-up + figures
 │   ├── explorer.html             <- interactive tool: pick a subtype, see expression data + a live 3D receptor structure
+│   ├── tools.html                <- Tools section: index of the open lab tools (linked from the main nav)
+│   ├── qflow.html                <- qFlow: quantitative flow cytometry workbench (6 modules, browser-local)
 │   └── README.md                 <- short note about this subfolder
 ├── code/
 │   ├── biomarker_pipeline.py   <- run this to reproduce/extend the analysis for any gene
@@ -29,6 +31,7 @@ Cleavr/
 │   ├── cross_cohort_validation.py  <- re-tests TCGA-significant genes against METABRIC
 │   ├── flow_cytometry_validation.py  <- compares protein-level (flow) signal against the RNA-level result
 │   ├── receptor_quantification.py    <- converts flow MFI into absolute receptors/cell via bead calibration
+│   ├── qflow_tool.html        <- dev copy of the qFlow workbench, kept byte-identical to website/qflow.html
 │   └── tnbc-analysis.ipynb     <- original Case Study 01 analysis as a notebook, with narration
 ├── flow_cytometry/
 │   ├── measurements.csv        <- hand-entered flow cytometry data, one row per cell line x gene x replicate
@@ -42,6 +45,11 @@ Cleavr/
 │   ├── candidate_scorecard.json    <- druggability + literature-gap scores
 │   ├── screen_results.json/.csv    <- full 15-gene screen, FDR-corrected
 │   └── cross_cohort_results.json/.csv  <- TCGA vs. METABRIC replication results
+├── test/
+│   ├── qflow_core.test.js     <- extracts qFlow's compute core and checks it (96 assertions)
+│   ├── py_parity.py           <- runs the real code/ Python functions for cross-language parity
+│   ├── test_data.json         <- shared calibration/measurement dataset for both sides
+│   └── README.md              <- how to run the suite
 ├── docs/
 │   ├── GNRHR_TNBC_Summary.txt  <- plain text write-up
 │   ├── GNRHR_TNBC_Summary.md   <- same write-up, Markdown formatted
@@ -70,7 +78,7 @@ Pass any gene symbol(s) present in the expression matrix; the cohort and subtype
 
 ## Roadmap
 
-**Done:** parameterized pipeline (`code/biomarker_pipeline.py`, any gene, not just GNRHR); systematic candidate sourcing from Open Targets (`code/source_candidates.py`); batch screening with Benjamini-Hochberg FDR correction across all genes tested together (`code/screen_candidates.py`); druggability (ChEMBL) and TNBC-specific literature-gap (PubMed) scoring per candidate (`code/candidate_scoring.py`); cross-cohort validation against METABRIC (`code/fetch_metabric.py`, `code/cross_cohort_validation.py`), 7 of 8 FDR-significant genes replicated; flow cytometry wet-lab validation path, both relative signal (`code/flow_cytometry_validation.py`) and absolute receptors-per-cell via bead calibration (`code/receptor_quantification.py`). See `docs/ROADMAP.md` for the full writeup, including honest caveats on the screen and validation.
+**Done:** parameterized pipeline (`code/biomarker_pipeline.py`, any gene, not just GNRHR); systematic candidate sourcing from Open Targets (`code/source_candidates.py`); batch screening with Benjamini-Hochberg FDR correction across all genes tested together (`code/screen_candidates.py`); druggability (ChEMBL) and TNBC-specific literature-gap (PubMed) scoring per candidate (`code/candidate_scoring.py`); cross-cohort validation against METABRIC (`code/fetch_metabric.py`, `code/cross_cohort_validation.py`), 7 of 8 FDR-significant genes replicated; flow cytometry wet-lab validation path, both relative signal (`code/flow_cytometry_validation.py`) and absolute receptors-per-cell via bead calibration (`code/receptor_quantification.py`). A public **Tools** section (`website/tools.html`, linked from the main nav) now hosts **qFlow** (`website/qflow.html`), a browser-local quantitative-flow workbench covering the receptor-quantification family: calibration/ABC, MESF/ERF/PE unit conversion, %positive gating, stain/separation index, spillover compensation, and FCS 3.0/3.1 parsing. Its compute core is checked by an automated suite (`test/`, 96 assertions) that verifies numeric parity with the Python scripts. See `docs/ROADMAP.md` for the full writeup, including honest caveats on the screen and validation.
 
 **Still open:**
 - Actually running the first real flow cytometry experiment on the top candidate (FTO): the tooling is built and tested against synthetic data, but no real measurements exist yet.
