@@ -10,77 +10,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root{
-  --bg:#FBFAF8;
-  --panel:#F5F1EC;
-  --panel-pink:#FBEFF3;
-  --line:#E4DED4;
-  --ink:#18151A;
-  --ink-muted:#726C64;
+  --bg:#0A0A0B;
+  --charcoal:#242224;
+  --charcoal-2:#3A3739;
   --pink:#E7A9C0;
-  --pink-ink:#9C2F5C;
-  --pink-ink-hover:#7A2249;
+  --pink-strong:#F2B8CE;
+  --pink-dim:#9C6E80;
+  --cream:#EDEAE6;
+  --muted:#8A8781;
+  --line:#232024;
 }
 *{ box-sizing:border-box; margin:0; padding:0; }
-html,body{ background:var(--bg); color:var(--ink); font-family:'Inter', sans-serif; }
+html,body{ background:var(--bg); color:var(--cream); font-family:'Inter', sans-serif; }
 body{ max-width:1080px; margin:0 auto; padding:0 32px 100px; line-height:1.6; font-size:15px; }
-a{ color:var(--pink-ink); text-decoration:none; }
-a:hover{ color:var(--pink-ink-hover); }
+a{ color:var(--pink); text-decoration:none; }
+a:hover{ color:var(--pink-strong); }
 
 /* nav */
-.nav{ display:flex; align-items:center; justify-content:space-between; padding:26px 0; border-bottom:0.5px solid var(--line); }
-.logo{ font-size:19px; font-weight:700; letter-spacing:-0.01em; color:var(--pink-ink); }
-.nav-links{ display:flex; align-items:center; gap:40px; font-size:14px; color:var(--ink-muted); }
-.nav-links a{ color:var(--ink-muted); }
-.nav-links a:hover{ color:var(--ink); }
-.nav-links a.current{ color:var(--ink); }
-.nav-cta{ border:0.5px solid var(--line); border-radius:100px; padding:9px 18px; font-size:13px; color:var(--ink) !important; }
+.nav{ display:flex; align-items:center; justify-content:space-between; padding:34px 0; }
+.logo{ font-size:19px; font-weight:700; letter-spacing:-0.01em; color:var(--pink); }
+.nav-links{ display:flex; align-items:center; gap:40px; font-size:14px; color:var(--muted); }
+.nav-links a{ color:var(--muted); }
+.nav-links a:hover{ color:var(--cream); }
+.nav-links a.current{ color:var(--cream); }
+.nav-cta{ border:0.5px solid var(--charcoal-2); border-radius:100px; padding:9px 18px; font-size:13px; color:var(--cream) !important; }
 
-h1{ font-size:clamp(30px,3.6vw,42px); font-weight:600; letter-spacing:-0.02em; margin-bottom:10px; color:var(--ink); }
-.subtitle{ color:var(--ink-muted); font-size:15px; margin-bottom:10px; }
-.lede{ font-size:15px; line-height:1.7; color:var(--ink-muted); max-width:720px; margin:16px 0 44px; }
+h1{ font-size:clamp(30px,3.6vw,42px); font-weight:600; letter-spacing:-0.02em; margin-bottom:10px; }
+.subtitle{ color:var(--muted); font-size:15px; margin-bottom:10px; }
+.lede{ font-size:15px; line-height:1.7; color:var(--muted); max-width:720px; margin:16px 0 44px; }
 
-h2{ font-size:12px; font-weight:600; margin:0 0 20px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-muted); display:flex; align-items:center; gap:10px; }
-h2 .idx{ color:var(--pink-ink); }
+h2{ font-size:12px; font-weight:600; margin:0 0 20px; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); display:flex; align-items:center; gap:10px; }
+h2 .idx{ color:var(--pink); }
 
 .panel{ background:var(--bg); border:0.5px solid var(--line); border-radius:16px; padding:32px 36px; margin-bottom:24px; }
 
 .picker{ display:flex; gap:12px; flex-wrap:wrap; }
 .picker button{
   flex:1; min-width:150px; padding:16px 18px;
-  border:0.5px solid var(--line); border-radius:12px;
-  background:var(--panel); color:var(--ink);
+  border:0.5px solid var(--charcoal-2); border-radius:12px;
+  background:var(--charcoal); color:var(--cream);
   cursor:pointer; text-align:left; font-size:14px; font-family:'Inter', sans-serif;
   transition:border-color .15s, background .15s;
 }
-.picker button:hover{ border-color:var(--pink); }
-.picker button.active{ border-color:var(--pink-ink); background:var(--panel-pink); }
-.picker button .code{ font-weight:700; font-size:16px; display:block; color:var(--ink); }
-.picker button.active .code{ color:var(--pink-ink); }
-.picker button .desc{ color:var(--ink-muted); font-size:12px; display:block; margin-top:4px; }
+.picker button:hover{ border-color:var(--pink-dim); }
+.picker button.active{ border-color:var(--pink); background:#241A20; }
+.picker button .code{ font-weight:700; font-size:16px; display:block; color:var(--cream); }
+.picker button.active .code{ color:var(--pink); }
+.picker button .desc{ color:var(--muted); font-size:12px; display:block; margin-top:4px; }
 
 .stats-row{ display:flex; gap:1px; flex-wrap:wrap; margin:24px 0; background:var(--line); border:0.5px solid var(--line); border-radius:12px; overflow:hidden; }
 .stat-card{ background:var(--bg); padding:16px 18px; flex:1; min-width:140px; }
-.stat-value{ font-size:20px; font-weight:600; color:var(--pink-ink); font-variant-numeric:tabular-nums; }
-.stat-label{ font-size:11px; color:var(--ink-muted); margin-top:6px; text-transform:uppercase; letter-spacing:0.06em; }
+.stat-value{ font-size:20px; font-weight:600; color:var(--pink); font-variant-numeric:tabular-nums; }
+.stat-label{ font-size:11px; color:var(--muted); margin-top:6px; text-transform:uppercase; letter-spacing:0.06em; }
 
 #stripplot{ width:100%; height:130px; }
-.plot-note{ font-size:12.5px; color:var(--ink-muted); margin-top:10px; }
+.plot-note{ font-size:12.5px; color:var(--muted); margin-top:10px; }
 
 .viewer-wrap{ display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start; }
-#viewer{ width:100%; max-width:480px; height:380px; border-radius:12px; border:0.5px solid var(--line); background:#000; }
-.viewer-info{ flex:1; min-width:260px; font-size:14.5px; color:var(--ink-muted); line-height:1.7; }
+#viewer{ width:100%; max-width:480px; height:380px; border-radius:12px; border:0.5px solid var(--charcoal-2); background:#000; }
+.viewer-info{ flex:1; min-width:260px; font-size:14.5px; color:var(--muted); line-height:1.7; }
 .viewer-info p{ margin:0 0 12px; }
-.viewer-info strong{ color:var(--ink); }
+.viewer-info strong{ color:var(--cream); }
 
-.callout{ background:var(--panel-pink); border-left:2px solid var(--pink-ink); padding:16px 20px; border-radius:0 12px 12px 0; font-size:13.5px; color:var(--ink-muted); margin-top:16px; line-height:1.7; }
-.callout strong{ color:var(--ink); }
-.legend{ display:flex; gap:20px; font-size:12.5px; color:var(--ink-muted); margin-top:14px; flex-wrap:wrap; }
+.callout{ background:var(--charcoal); border-left:2px solid var(--pink); padding:16px 20px; border-radius:0 12px 12px 0; font-size:13.5px; color:var(--muted); margin-top:16px; line-height:1.7; }
+.callout strong{ color:var(--cream); }
+.legend{ display:flex; gap:20px; font-size:12.5px; color:var(--muted); margin-top:14px; flex-wrap:wrap; }
 .legend span{ display:inline-flex; align-items:center; gap:8px; }
 .swatch{ width:11px; height:11px; border-radius:3px; display:inline-block; }
 
-footer{ margin-top:56px; font-size:13px; color:var(--ink-muted); border-top:0.5px solid var(--line); padding-top:24px; line-height:1.7; }
+footer{ margin-top:56px; font-size:13px; color:var(--muted); border-top:0.5px solid var(--line); padding-top:24px; line-height:1.7; }
 
-abbr[title]{ text-decoration:underline dotted; text-decoration-color:var(--line); cursor:help; }
+abbr[title]{ text-decoration:underline dotted; text-decoration-color:var(--charcoal-2); cursor:help; }
 
 @media (max-width:700px){
   body{ padding:0 20px 60px; }
@@ -135,10 +135,10 @@ abbr[title]{ text-decoration:underline dotted; text-decoration-color:var(--line)
         <p><strong>This structure does not change between subtypes.</strong> It is the same receptor protein regardless of which subtype is selected above; what changes is how much of it that subtype's cells make (the numbers in panel 02), not what it looks like.</p>
         <p>This is <strong>PDB entry 7BR3</strong>, the solved crystal structure of the human GNRHR, published in <em>Nature Communications</em> (Yan et al., 2020). Yellow spheres = <strong>elagolix</strong>, a small-molecule antagonist bound in the binding pocket.</p>
         <div class="callout">
-          Caveats, per the PDB file's own DBREF records: (1) elagolix is a small-molecule <em>antagonist</em>, not a peptide agonist such as triptorelin, the molecule LHRH-conjugated nanoparticle constructs use. No structure of GNRHR bound to a peptide agonist has been solved; these are substantially harder to crystallize. (2) This is an engineered fusion construct: PDB residues 1&ndash;242 and 257&ndash;328 (<span style="color:#9C2F5C; font-weight:600;">pink</span> below) are human GNRHR (UniProt P30968). PDB residues 1001&ndash;1196 (<span style="color:#9aa0a6; font-weight:600;">gray</span> below) are a bacterial (<em>Pyrococcus abyssi</em>) glycogen synthase domain, inserted to stabilize the receptor for crystallization, a standard GPCR crystallography technique, not part of the native receptor.
+          Caveats, per the PDB file's own DBREF records: (1) elagolix is a small-molecule <em>antagonist</em>, not a peptide agonist such as triptorelin, the molecule LHRH-conjugated nanoparticle constructs use. No structure of GNRHR bound to a peptide agonist has been solved; these are substantially harder to crystallize. (2) This is an engineered fusion construct: PDB residues 1&ndash;242 and 257&ndash;328 (<span style="color:#E7A9C0; font-weight:600;">pink</span> below) are human GNRHR (UniProt P30968). PDB residues 1001&ndash;1196 (<span style="color:#9aa0a6; font-weight:600;">gray</span> below) are a bacterial (<em>Pyrococcus abyssi</em>) glycogen synthase domain, inserted to stabilize the receptor for crystallization, a standard GPCR crystallography technique, not part of the native receptor.
         </div>
         <div class="legend">
-          <span><span class="swatch" style="background:#C2568A"></span>GNRHR</span>
+          <span><span class="swatch" style="background:#E7A9C0"></span>GNRHR</span>
           <span><span class="swatch" style="background:#9aa0a6"></span>GlgA fusion (not GNRHR)</span>
           <span><span class="swatch" style="background:#e0a72a"></span>Elagolix (ligand)</span>
         </div>
@@ -149,7 +149,7 @@ abbr[title]{ text-decoration:underline dotted; text-decoration-color:var(--line)
   <div class="panel">
     <h2><span class="idx">04</span>GNRHR expression vs. survival</h2>
     <div class="viewer-wrap">
-      <img src="../results/gnrhr/gnrhr_survival_km.png" alt="Kaplan-Meier survival curves, GNRHR-high vs GNRHR-low" style="max-width:480px; width:100%; border-radius:12px; border:0.5px solid var(--line); background:#fff;">
+      <img src="../results/gnrhr/gnrhr_survival_km.png" alt="Kaplan-Meier survival curves, GNRHR-high vs GNRHR-low" style="max-width:480px; width:100%; border-radius:12px; border:0.5px solid var(--charcoal-2); background:#fff;">
       <div class="viewer-info">
         <p>Patients were split into GNRHR-high (n=58) and GNRHR-low (n=57) groups at the median, independent of subtype, and compared on overall survival.</p>
         <p><strong>No detectable difference</strong> (log-rank p=0.98): the two curves sit almost exactly on top of each other.</p>
@@ -226,7 +226,7 @@ function drawStrip() {
     label.setAttribute("x", 4);
     label.setAttribute("y", y + 4);
     label.setAttribute("font-size", "11");
-    label.setAttribute("fill", s === current ? "#9C2F5C" : "#726C64");
+    label.setAttribute("fill", s === current ? "#E7A9C0" : "#8A8781");
     label.textContent = s;
     svg.appendChild(label);
 
@@ -235,7 +235,7 @@ function drawStrip() {
       c.setAttribute("cx", x(v));
       c.setAttribute("cy", y);
       c.setAttribute("r", s === current ? 4 : 2.5);
-      c.setAttribute("fill", s === current ? "#9C2F5C" : "#C9C3B8");
+      c.setAttribute("fill", s === current ? "#E7A9C0" : "#4A4748");
       c.setAttribute("opacity", s === current ? 0.9 : 0.6);
       c.style.cursor = "pointer";
       const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
@@ -251,12 +251,12 @@ function drawStrip() {
   const axis = document.createElementNS("http://www.w3.org/2000/svg", "line");
   axis.setAttribute("x1", pad); axis.setAttribute("x2", w - pad);
   axis.setAttribute("y1", h - 12); axis.setAttribute("y2", h - 12);
-  axis.setAttribute("stroke", "#E4DED4");
+  axis.setAttribute("stroke", "#232024");
   svg.appendChild(axis);
   [0, max/2, max].forEach(v => {
     const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
     t.setAttribute("x", x(v)); t.setAttribute("y", h - 2);
-    t.setAttribute("font-size", "10"); t.setAttribute("fill", "#726C64");
+    t.setAttribute("font-size", "10"); t.setAttribute("fill", "#8A8781");
     t.setAttribute("text-anchor", "middle");
     t.textContent = v.toFixed(1);
     svg.appendChild(t);
@@ -288,7 +288,7 @@ try {
       viewerStatus.innerHTML = "Couldn't load the structure from rcsb.org. Check your internet connection and reload the page.";
       return;
     }
-    viewer.setStyle({}, { cartoon: { color: "#C2568A" } });
+    viewer.setStyle({}, { cartoon: { color: "#E7A9C0" } });
     viewer.setStyle({ resi: "1001-1196" }, { cartoon: { color: "#9aa0a6" } });
     viewer.setStyle({ hetflag: true, not: { resn: "HOH" } }, { sphere: { colorscheme: "yellowCarbon", scale: 0.3 } });
     viewer.zoomTo();
