@@ -21,6 +21,9 @@ Cleavr/
 │   ├── explorer.html             <- interactive tool: pick a subtype, see expression data + a live 3D receptor structure
 │   ├── tools.html                <- Tools section: index of the open lab tools (linked from the main nav)
 │   ├── qflow.html                <- qFlow: quantitative flow cytometry workbench (6 modules, browser-local)
+│   ├── brand.html                <- brand assets page: icon, favicon, wordmark, palette, type
+│   ├── icon.svg / favicon.svg / wordmark.svg   <- logo marks
+│   ├── apple-touch-icon.png / og-image.png     <- raster icon + social share card
 │   └── README.md                 <- short note about this subfolder
 ├── code/
 │   ├── biomarker_pipeline.py   <- run this to reproduce/extend the analysis for any gene
