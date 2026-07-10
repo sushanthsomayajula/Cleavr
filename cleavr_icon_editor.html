@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cleavr icon editor</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+:root{
+  --bg:#0A0A0B; --charcoal:#1A1819; --charcoal-2:#242224; --charcoal-3:#3A3739;
+  --pink:#E7A9C0; --pink-strong:#F2B8CE; --pink-dim:#9C6E80;
+  --cream:#EDEAE6; --muted:#8A8781; --line:#232024;
+}
+*{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--cream); font-family:'Inter',sans-serif; font-size:14px; }
+.wrap{ display:flex; gap:32px; padding:32px; max-width:1200px; margin:0 auto; flex-wrap:wrap; }
+.canvas-col{ flex-shrink:0; }
+.controls-col{ flex:1; min-width:320px; }
+h1{ font-size:18px; font-weight:600; margin:0 0 6px; }
+p.hint{ color:var(--muted); font-size:13px; line-height:1.6; margin:0 0 20px; max-width:520px; }
+#stage{ background:#141213; border-radius:24px; cursor:default; }
+.handle{ cursor:grab; }
+.handle:active{ cursor:grabbing; }
+.panel{ background:var(--charcoal); border:0.5px solid var(--line); border-radius:12px; padding:16px 18px; margin-bottom:14px; }
+.panel h2{ font-size:13px; text-transform:uppercase; letter-spacing:0.06em; color:var(--pink); margin:0 0 10px; }
+.row{ display:flex; align-items:center; gap:10px; margin-bottom:8px; font-size:12.5px; }
+.row label{ width:110px; color:var(--muted); flex-shrink:0; }
+.row input[type=range]{ flex:1; }
+.row input[type=color]{ width:40px; height:24px; border:none; background:none; padding:0; }
+.row .val{ width:44px; text-align:right; color:var(--muted); font-variant-numeric:tabular-nums; }
+button{ font-family:inherit; font-size:12.5px; font-weight:600; padding:9px 16px; border-radius:100px; border:0.5px solid var(--charcoal-3); background:var(--charcoal-2); color:var(--cream); cursor:pointer; margin-right:8px; }
+button.primary{ background:var(--pink); color:#1a1114; border-color:var(--pink); }
+button:hover{ border-color:var(--pink-dim); }
+.small{ padding:4px 10px; font-size:11px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="canvas-col">
+    <h1>Cleavr icon editor</h1>
+    <p class="hint">The C is the cell, its own outline is the membrane. The nucleus lives inside it. Each receptor is a small ring, drag it until it sits flush on the C's visible edge, then it extends outward only, it never crosses into the letter. This renders the real Inter font in your browser so you can actually see the true edge. When it looks right, hit Export SVG.</p>
+    <svg id="stage" width="360" height="400" viewBox="0 0 360 400">
+      <rect x="0" y="0" width="360" height="400" fill="#0A0A0B"/>
+      <g transform="translate(20,20)">
+        <rect width="320" height="320" rx="24" fill="#141213"/>
+        <text id="cGlyph" x="160" y="245" font-family="Inter, sans-serif" font-weight="700" font-size="255" text-anchor="middle" fill="#EDEAE6">C</text>
+
+        <circle id="nucleus" class="handle" cx="160" cy="150" r="20" fill="#9C6E80"/>
+
+        <g id="receptorStubs" stroke="#E7A9C0" stroke-width="4" stroke-linecap="round"></g>
+        <g id="receptorHeads" fill="#E7A9C0"></g>
+        <g id="receptorBaseHandles"></g>
+      </g>
+    </svg>
+    <div style="margin-top:14px;">
+      <button class="primary" onclick="exportSVG()">Export SVG</button>
+      <button onclick="resetAll()">Reset</button>
+    </div>
+  </div>
+
+  <div class="controls-col">
+    <div class="panel">
+      <h2>Nucleus</h2>
+      <div class="row"><label>Radius</label><input type="range" id="nucR" min="4" max="60" value="20" oninput="updateNucleus()"><span class="val" id="nucRval">20</span></div>
+      <p class="hint" style="margin:6px 0 0;">Drag the nucleus dot directly to reposition it inside the C.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Receptors</h2>
+      <div class="row"><label>Stub length</label><input type="range" id="stubLen" min="6" max="40" value="18" oninput="rebuildReceptors()"><span class="val" id="stubLenVal">18</span></div>
+      <div class="row"><label>Snap radius</label><input type="range" id="snapR" min="20" max="160" value="95" oninput="document.getElementById('snapRVal').textContent=this.value"><span class="val" id="snapRVal">95</span></div>
+      <div class="row"><button class="small" onclick="snapAllToRadius()">Snap all to this radius</button></div>
+      <p class="hint" style="margin:10px 0 10px;">Each small ring is a receptor base, drag it to sit exactly on the C's visible edge. The stub and head extend outward automatically, away from center, so it stays outside the letter. "Snap all" is just a fast starting point before you fine-tune by hand.</p>
+      <div class="row">
+        <button class="small" onclick="addReceptor()">+ Add receptor</button>
+        <button class="small" onclick="removeReceptor()">- Remove last</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Colors</h2>
+      <div class="row"><label>Cream (C)</label><input type="color" id="colCream" value="#EDEAE6" oninput="updateColors()"></div>
+      <div class="row"><label>Pink (receptors)</label><input type="color" id="colPink" value="#E7A9C0" oninput="updateColors()"></div>
+      <div class="row"><label>Nucleus</label><input type="color" id="colNucleus" value="#9C6E80" oninput="updateColors()"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const stage = document.getElementById('stage');
+const CENTER = {x:160, y:150};
+
+// ---------- receptors ----------
+// Each receptor stores only its BASE point (where it touches the C).
+// The stub + head are always computed pointing straight outward from
+// CENTER through that base point, so they can only ever extend away
+// from the letter, never cross into it.
+let receptors = [];
+
+function angleToPoint(angleDeg, r){
+  const rad = angleDeg * Math.PI/180;
+  return { x: CENTER.x + r*Math.cos(rad), y: CENTER.y + r*Math.sin(rad) };
+}
+
+function defaultReceptors(){
+  const angles = [50,95,140,180,220,265,310];
+  return angles.map(a => ({ base: angleToPoint(a, 95) }));
+}
+receptors = defaultReceptors();
+
+function stubLength(){ return parseFloat(document.getElementById('stubLen').value); }
+
+function rebuildReceptors(){
+  document.getElementById('stubLenVal').textContent = stubLength();
+  const stubGroup = document.getElementById('receptorStubs');
+  const headGroup = document.getElementById('receptorHeads');
+  const handleGroup = document.getElementById('receptorBaseHandles');
+  stubGroup.innerHTML = '';
+  headGroup.innerHTML = '';
+  handleGroup.innerHTML = '';
+  const pink = document.getElementById('colPink').value;
+  const len = stubLength();
+
+  receptors.forEach((r, i) => {
+    const dx = r.base.x - CENTER.x, dy = r.base.y - CENTER.y;
+    const dist = Math.sqrt(dx*dx+dy*dy) || 1;
+    const ux = dx/dist, uy = dy/dist;
+    const tip = { x: r.base.x + ux*len, y: r.base.y + uy*len };
+
+    const stub = document.createElementNS(svgNS,'line');
+    stub.setAttribute('x1', r.base.x); stub.setAttribute('y1', r.base.y);
+    stub.setAttribute('x2', tip.x); stub.setAttribute('y2', tip.y);
+    stub.setAttribute('stroke', pink);
+    stubGroup.appendChild(stub);
+
+    const head = document.createElementNS(svgNS,'circle');
+    head.setAttribute('cx', tip.x); head.setAttribute('cy', tip.y);
+    head.setAttribute('r', 5);
+    head.setAttribute('fill', pink);
+    headGroup.appendChild(head);
+
+    // draggable ring marking the base point, sits ON the C's edge
+    const handle = document.createElementNS(svgNS,'circle');
+    handle.setAttribute('cx', r.base.x); handle.setAttribute('cy', r.base.y);
+    handle.setAttribute('r', 9);
+    handle.setAttribute('fill', 'none');
+    handle.setAttribute('stroke', pink);
+    handle.setAttribute('stroke-width', 2);
+    handle.setAttribute('stroke-dasharray', '3,3');
+    handle.setAttribute('class','handle');
+    handle.setAttribute('data-index', i);
+    handle.addEventListener('mousedown', startDragReceptor);
+    handleGroup.appendChild(handle);
+  });
+}
+
+function addReceptor(){
+  const usedAngles = receptors.map(r=>{
+    const dx=r.base.x-CENTER.x, dy=r.base.y-CENTER.y;
+    return Math.atan2(dy,dx)*180/Math.PI;
+  });
+  let a = 0;
+  for(let cand=0; cand<360; cand+=15){
+    if(!usedAngles.some(u=>Math.abs(u-cand)<10)){ a = cand; break; }
+  }
+  receptors.push({ base: angleToPoint(a, parseFloat(document.getElementById('snapR').value)) });
+  rebuildReceptors();
+}
+function removeReceptor(){
+  if(receptors.length>0){ receptors.pop(); rebuildReceptors(); }
+}
+function snapAllToRadius(){
+  const r = parseFloat(document.getElementById('snapR').value);
+  receptors.forEach(rec=>{
+    const dx = rec.base.x - CENTER.x, dy = rec.base.y - CENTER.y;
+    const dist = Math.sqrt(dx*dx+dy*dy) || 1;
+    const ux = dx/dist, uy = dy/dist;
+    rec.base = { x: CENTER.x + ux*r, y: CENTER.y + uy*r };
+  });
+  rebuildReceptors();
+}
+
+// ---------- dragging ----------
+let dragTarget = null; // 'receptor' | 'nucleus'
+let dragIndex = null;
+
+function svgPoint(evt){
+  const pt = stage.createSVGPoint();
+  pt.x = evt.clientX; pt.y = evt.clientY;
+  const ctm = stage.getScreenCTM().inverse();
+  const p = pt.matrixTransform(ctm);
+  return { x: p.x - 20, y: p.y - 20 };
+}
+
+function startDragReceptor(evt){
+  dragTarget = 'receptor';
+  dragIndex = parseInt(evt.currentTarget.getAttribute('data-index'));
+  evt.preventDefault();
+}
+
+document.getElementById('nucleus').addEventListener('mousedown', (evt)=>{
+  dragTarget = 'nucleus';
+  evt.preventDefault();
+});
+
+window.addEventListener('mousemove', (evt)=>{
+  if(!dragTarget) return;
+  const p = svgPoint(evt);
+  if(dragTarget === 'receptor'){
+    receptors[dragIndex].base = { x: p.x, y: p.y };
+    rebuildReceptors();
+  } else if(dragTarget === 'nucleus'){
+    document.getElementById('nucleus').setAttribute('cx', p.x);
+    document.getElementById('nucleus').setAttribute('cy', p.y);
+  }
+});
+window.addEventListener('mouseup', ()=>{ dragTarget=null; dragIndex=null; });
+
+function updateNucleus(){
+  const r = document.getElementById('nucR').value;
+  document.getElementById('nucRval').textContent = r;
+  document.getElementById('nucleus').setAttribute('r', r);
+}
+
+function updateColors(){
+  const cream = document.getElementById('colCream').value;
+  const pink = document.getElementById('colPink').value;
+  const nucleusColor = document.getElementById('colNucleus').value;
+  document.getElementById('cGlyph').setAttribute('fill', cream);
+  document.getElementById('nucleus').setAttribute('fill', nucleusColor);
+  rebuildReceptors();
+}
+
+function resetAll(){
+  document.getElementById('nucR').value = 20;
+  document.getElementById('nucleus').setAttribute('cx', 160);
+  document.getElementById('nucleus').setAttribute('cy', 150);
+  document.getElementById('stubLen').value = 18;
+  document.getElementById('snapR').value = 95;
+  document.getElementById('snapRVal').textContent = 95;
+  receptors = defaultReceptors();
+  updateNucleus();
+  rebuildReceptors();
+}
+
+function exportSVG(){
+  // drop the dashed drag-handles, they're editor-only, not part of the mark
+  document.getElementById('receptorBaseHandles').style.display = 'none';
+  const clone = stage.cloneNode(true);
+  document.getElementById('receptorBaseHandles').style.display = '';
+  clone.removeAttribute('id');
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(clone);
+  source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+  const blob = new Blob([source], {type:'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'cleavr_icon.svg';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// init
+updateNucleus();
+rebuildReceptors();
+</script>
+</body>
+</html>

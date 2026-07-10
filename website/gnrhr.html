@@ -27,7 +27,8 @@ a:hover{ color:var(--pink-strong); }
 
 /* nav */
 .nav{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:26px 56px; background:var(--bg); border-bottom:0.5px solid var(--line); }
-.logo{ font-size:19px; font-weight:700; letter-spacing:-0.01em; color:var(--pink); }
+.logo{ font-size:19px; font-weight:700; letter-spacing:-0.01em; color:var(--cream); display:inline-flex; align-items:center; }
+.logo .bar{ display:inline-block; width:3px; height:0.6em; background:var(--pink); border-radius:1px; margin:0 2px; }
 .nav-links{ display:flex; align-items:center; gap:40px; font-size:14px; color:var(--muted); }
 .nav-links a{ color:var(--muted); }
 .nav-links a:hover{ color:var(--cream); }
@@ -96,7 +97,7 @@ ol.ref-list em{ color:var(--cream); font-style:italic; }
 <body>
 
   <div class="nav">
-    <a class="logo" href="index.html">cleavr</a>
+    <a class="logo" href="index.html">cleav<span class="bar"></span>r</a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="studies.html" class="current">Studies</a>
