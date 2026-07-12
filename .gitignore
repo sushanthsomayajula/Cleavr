@@ -16,3 +16,6 @@ __pycache__/
 
 # Local transfer/operational logs
 tnbc_transfer.log
+
+# Local-only brand assets page (kept on disk, not tracked)
+website/brand.html
